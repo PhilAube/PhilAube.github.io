@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="burger.js"></script>
+    <title>Projects</title>
+</head>
+<body>
+    <nav>
+        <h1><a href = "index.html" title = "Home">Phil Aube</a></h1>
+        <ul>
+            <svg id = "burger" viewBox="0 0 100 80" width="40" height="40" fill = #EEE onclick = "burgerClick()" onmouseover= "change(this)" onmouseout= "revert(this)">
+                <rect width="100" height="20"></rect>
+                <rect y="30" width="100" height="20"></rect>
+                <rect y="60" width="100" height="20"></rect>
+            </svg>
+
+            <li class = "navitem"><a href = "https://github.com/PhilAube" title = "My GitHub Profile">GitHub</a></li>
+            <li class = "navitem"><a href = "projects.html" title = "Projects I've worked on">Projects</a></li>
+            <li class = "navitem"><a href = "contact.html" title = "Contact Page">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id = "projects">
+        <div class = "textbox">
+            <h1>PROJECTS</h1>
+            <h2>Here are some of the projects that I've worked on over the past years.
+            <br>Hover your mouse or tap!</h2>
+            <div class = "grid">
+                <div class = "griditem">
+                    <img src = "images/TimeWaster.png">
+                    <div class = "overlay" onclick = "">
+                        <p>Programming 1 Final Project:
+                            <br><strong>TimeWaster</strong>
+                            <br>My first video game, a C# console application with ASCII graphics.</p>
+                        <a href = "https://github.com/PhilAube/SchoolProjects/raw/master/Programming/TimeWaster_1.0.exe" onclick="alert('Quick little heads up: your computer might try to convince you that this download is a virus, but I promise that you can rest assured that it is not.')">Download TimeWaster (25 kB)</a>
+                    </div>
+                </div>
+
+                <div class = "griditem">
+                    <img src = "images/MyFirstJS.png">
+                    <div class = "overlay" onclick = "">
+                        <p>IT Assignment: 
+                            <br><strong>RNG Stickman</strong>
+                            <br>My first JavaScript application, with P5.JS for graphics.</p>
+                        <a href = "stickman.html">Try RNG Stickman in-browser</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class = "other textbox">
+            <h1>OTHER PROJECTS</h1>
+            <h2>This is what I do when I'm not coding!</h2>
+            <div class = "grid">
+                <div class = "griditem">
+                    <img src = "images/Solstice.png">
+                    <div class = "overlay" onclick = "">
+                        <p><strong>MUSIC</strong>
+                            <br>I play a few instruments, and enjoy writing, recording and producing music once in a while. </p>
+                            <a href = "https://www.youtube.com/channel/UC4mM1qjtCscgJ2Q1aN5hmyQ/videos" target = "blank">YouTube Channel</a>
+                    </div>
+                </div>
+
+                <div class = "griditem">
+                    <img src = "images/gallery.png">
+                    <div class = "overlay" onclick = "">
+                        <p><strong>ARTWORK</strong>
+                            <br>Every now and then, I dabble with visual arts.</p>
+                            <a href = "gallery.html">My Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>This website was designed from scratch by yours truly.</p>
+    </footer>
+</body>
+</html>

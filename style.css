@@ -1,0 +1,446 @@
+/* CSS VARIABLES */
+
+:root
+{
+    --PureBlack: #000;
+    --DarkGray: #111;
+    --Gray: #222;
+    --OffWhite: #EEE;
+    --DarkTransBlue: rgba(0, 0, 75, .5);
+    --TransBlue: rgba(0, 0, 150, .5);
+    --LightTransBlue: rgba(0, 0, 250, .5);
+    --VividBlue: rgb(100, 100, 250);
+}
+
+/* GLOBAL CSS*/
+
+* 
+{
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--PureBlack);
+    text-align: center;
+    min-width: 300px;
+}
+
+.textbox
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 2.5em;
+    color: var(--OffWhite);
+    padding: 4em 1em;
+    border: solid var(--OffWhite);
+    border-radius: 25px;
+    background-color: var(--DarkTransBlue);
+    margin: 200px 10% 100px 10%;
+}
+
+.textbox h1
+{
+    font-weight: 100;
+}
+
+#contact, #projects, #RNGStick, #gallery, #hero
+{
+    width: 100%;
+    min-height: 500px;
+    background: linear-gradient(var(--Gray), var(--PureBlack));
+}
+
+/* NAVBAR */
+
+nav
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: var(--DarkGray);
+    width: 100%;
+    box-shadow: 0px 10px 15px;
+    z-index: 9999;
+}
+
+nav h1
+{
+    padding: 25px 0;
+}
+
+nav h1 a
+{
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    text-decoration: none;
+    font-weight: 100;
+    padding: 25px 50px;
+    color: var(--OffWhite);
+}
+
+nav a 
+{
+    text-decoration: none;
+    padding: 25px 35px;
+    color: var(--OffWhite);
+}
+
+nav a:hover
+{
+    background-color: var(--Gray);
+}
+
+nav li
+{
+    padding: 25px 0;
+}
+
+nav ul
+{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+#burger
+{
+    display: none;
+    padding: 25px;
+    align-self: center;
+}
+
+/* HERO */
+
+#hero
+{
+    background-image: url("images/HeroImage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 1000px;
+}
+
+#hero .textbox p
+{
+    max-width: 500px;
+    margin: 2%
+}
+
+#hero a
+{
+    font-size: 18pt;
+    text-decoration: none;
+    margin: 20px;
+    padding: 20px;
+    border: solid var(--OffWhite);
+    border-radius: 25px;
+    color: var(--OffWhite);
+    background-color: var(--LightTransBlue);
+}
+
+#hero a:hover
+{
+    background-color: var(--TransBlue);
+}
+
+/* FOOTER */
+
+footer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: var(--PureBlack);
+    color: var(--OffWhite);
+}
+
+/* CONTACT */
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    width: 50%;
+}
+
+input, select
+{
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    padding: 5px;
+    background-color: var(--OffWhite);
+    color: var(--Gray);
+}
+
+button
+{
+    font-size: large;
+    text-transform: uppercase;
+    padding: 20px;
+    color: var(--OffWhite);
+    background-color: var(--VividBlue);
+}
+
+#radio
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form > label
+{
+    margin: 20px 0px 10px 0px;
+}
+
+textarea
+{
+    resize: none;
+    height: 200px;
+    background-color: var(--OffWhite);
+    color: var(--Gray);
+    font-size: medium;
+    padding: 1%;
+}
+
+/* PROJECTS */
+
+#projects h2
+{
+    font-weight: 100;
+    margin: 25px;
+}
+
+#projects a
+{
+    color: var(--OffWhite);
+    text-decoration: none;
+    padding: 10px;
+    border: solid var(--OffWhite);
+    border-radius: 15px;
+    background-color: var(--LightTransBlue);
+}
+
+#projects a:hover
+{
+    background-color: var(--TransBlue);
+}
+
+.other
+{
+    margin: 0 10% 100px 10%;
+}
+
+#gallery .textbox img
+{
+    max-width: 95%;
+    margin: 1% 0 5% 0;
+}
+
+/* GRIDS */
+
+.grid
+{
+    display: grid;
+    justify-content: center;
+    align-self: center;
+    gap: 25px;
+    grid: auto / auto auto;
+}
+
+.griditem 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    border: solid var(--OffWhite);
+    width: 275px;
+    height: 275px;
+    background-color: var(--TransBlue);
+    border-radius: 25px;
+}
+
+.griditem img
+{   
+    max-width: 200px;
+    margin: 3%;
+}
+
+.overlay
+{
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: var(--VividBlue);
+    border-radius: 25px;
+    padding: 15px;
+}
+
+.overlay:hover
+{
+    opacity: 1;
+}
+
+/* RNG STICKMAN */
+
+#stickmanTextbox
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 2.5em;
+    color: var(--OffWhite);
+    border: solid var(--OffWhite);
+    border-radius: 25px;
+    background-color: var(--DarkTransBlue);
+    padding: 3em 2em;
+    margin: 200px auto;
+    max-width: 400px;
+}
+
+#stickmanTextbox a
+{
+    font-weight: 1000;
+    color: var(--VividBlue);
+    text-decoration: none;
+}
+
+#stickmanCanvas
+{
+    margin: 1em 0;
+}
+
+#stickmanControls
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* TABLET */
+
+@media only screen and (max-width: 800px)
+{
+    .grid
+    {
+        grid: auto / auto;
+    }
+}
+
+/* MOBILE */
+
+@media only screen and (max-width: 500px) 
+{    
+    /* GLOBAL */
+
+    .textbox
+    {
+        margin: 200px 10% 100px 10%;
+    }
+
+    /* HERO */
+
+    #hero
+    {
+        height: 1250px;
+    }
+
+    /* CONTACT */
+
+    form
+    {
+        width: 85%;
+    }
+
+    /* NAVBAR */
+
+    nav ul
+    {
+        flex-direction: column;
+    }
+
+    #burger
+    {
+        display: block;
+    }
+
+    nav li 
+    {
+        display: none;   
+    }
+
+    /* PROJECTS */
+
+    #projects a
+    {
+        padding: 0 10px;
+    }
+
+    #projects .textbox
+    {
+        margin: 200px 5% 0px 5%;
+    }
+
+    #projects .textbox + div
+    {
+        margin: 100px 5% 0px 5%;
+    }
+
+    /* GRID */
+
+    .griditem
+    {
+        width: 225px;
+        height: 225px;
+    }
+
+    .griditem img
+    {
+        height: 175px;
+    }
+
+    .overlay
+    {
+        font-size: 0.75em;
+    }
+
+    /* RNG STICKMAN */
+
+    #stickmanTextbox
+    {
+        margin: 200px 15px;
+    }
+
+    #stickmanControls
+    {
+        flex-direction: column;
+    }
+}

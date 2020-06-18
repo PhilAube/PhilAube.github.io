@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="style.css">
+    <script src="burger.js"></script>
+    <title>Phil Aube</title>
+</head>
+<body>
+    <nav>
+        <h1><a href = "index.html" title = "Home">Phil Aube</a></h1>
+        <ul>
+            <svg id = "burger" viewBox="0 0 100 80" width="40" height="40" fill = #EEE onclick = "burgerClick()" onmouseover= "change(this)" onmouseout= "revert(this)">
+                <rect width="100" height="20"></rect>
+                <rect y="30" width="100" height="20"></rect>
+                <rect y="60" width="100" height="20"></rect>
+            </svg>
+
+            <li class = "navitem"><a href = "https://github.com/PhilAube" title = "My GitHub Profile">GitHub</a></li>
+            <li class = "navitem"><a href = "projects.html" title = "Projects I've worked on">Projects</a></li>
+            <li class = "navitem"><a href = "contact.html" title = "Contact Page">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id = "hero">
+        <div class = "textbox">
+            <h1>Hi there.</h1>
+            <p>It seems like you've stumbled upon my website. 
+            <br>But who am I?
+            <br>I'm a Computer Science student. You can call me Phil.
+            <br>I'm interested in a multitude of topics, ranging from game development to front-end, to multimedia and more!
+            <br>Would you happen to be interested in working with me?</p>
+            <a href = "contact.html" title = "Contact Page">CONTACT ME</a>
+        </div> 
+    </section>
+
+    <footer>
+        <p>This website was designed from scratch by yours truly.</p>
+    </footer>
+</body>
+</html>
