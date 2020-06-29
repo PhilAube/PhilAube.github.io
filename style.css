@@ -51,7 +51,7 @@ body
     font-weight: 100;
 }
 
-#contact, #projects, #RNGStick, #gallery, #hero
+#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody
 {
     width: 100%;
     min-height: 500px;
@@ -345,6 +345,19 @@ textarea
     justify-content: space-between;
 }
 
+/* CARD GAME */
+
+#cardgamecontainer
+{
+    margin: 5%;
+    margin-top: 200px;
+}
+
+#cardgame
+{
+    background-color: var(--OffWhite);
+}
+
 /* TABLET */
 
 @media only screen and (max-width: 800px)
@@ -352,6 +365,12 @@ textarea
     .grid
     {
         grid: auto / auto;
+    }
+
+    #cardgame
+    {
+        width: 90%;
+        height: 90%;
     }
 }
 
@@ -442,5 +461,13 @@ textarea
     #stickmanControls
     {
         flex-direction: column;
+    }
+
+    /* CARD GAME */
+
+    #cardgame
+    {
+        width: 100%;
+        height: 100%;
     }
 }
