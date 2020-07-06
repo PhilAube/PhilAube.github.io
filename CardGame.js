@@ -5,13 +5,17 @@
 const GAMECANVAS = document.getElementById("cardgame");
 const ctx = GAMECANVAS.getContext("2d");
 
+// An array for storing the canvas objects for events
+let canvasObjs = [];
+
 // General global constants
-const CANVAS_SIZE = 600;
+const DEFAULT_CANVAS_SIZE = 600;
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = 100;
+const CHIP_RADIUS = 50;
 
 // For the color changing title screen
-let RGBTitleScreen = { counter : 0, flicker: true , show: true };
+let RGBTitleScreen = { counter : 0, flicker: true, show: true, more: false };
 
 // The first domino in the whole application
 window.onload = animate;
@@ -22,7 +26,80 @@ function animate()
     if (RGBTitleScreen.show)
         titleScreen(RGBTitleScreen);
 
+    else if (RGBTitleScreen.more)
+        moreScreen();
+
     requestAnimationFrame(animate);
+}
+
+// Upon clicking the "MORE" chip on the title screen
+function moreScreen()
+{
+    const TITLE_Y = 75;
+    const LEFT = DEFAULT_CANVAS_SIZE / 3 - 50; 
+    const RIGHT = DEFAULT_CANVAS_SIZE / 3 * 2 + 50;
+    const TOP = 375;
+    const BOTTOM = 525;
+
+    ctx.beginPath();
+    ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE);
+    ctx.fillStyle = '#333'; // Gray
+    ctx.fill();
+
+    drawTitle('red', TITLE_Y);
+    ctx.fillStyle = 'white';
+    ctx.font = "15px Arial";
+    ctx.fillText("Version 0.01 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
+    ctx.fillText("This game was developed from scratch by Phil Aube.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 80);
+    ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 120);
+    ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 160);
+    ctx.fillText('Found a bug? You can report it under the CONTACT section of my website!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 200);
+ 
+    drawChip(LEFT, TOP, "BACK");
+    drawChip(RIGHT, TOP, 'WEBSITE');
+
+    ctx.font = "20px Arial";
+    ctx.fillText("INSTRUCTIONS", DEFAULT_CANVAS_SIZE / 2, BOTTOM + 5);
+
+    drawChip(LEFT, BOTTOM, "BLACKJACK");
+    drawChip(RIGHT, BOTTOM, "POKER");
+
+    createMoreScreenEvents();
+
+    // Creates the objects of each menu item for events
+    function createMoreScreenEvents()
+    {
+        canvasObjs[0] = new CanvasObject(LEFT, TOP, 0, 0, CHIP_RADIUS); // Back chip
+        canvasObjs[0].clickCallback = function()
+        {
+            RGBTitleScreen.show = true;
+            RGBTitleScreen.more = false;
+    
+            // REMOVE ALL CURRENT CANVAS OBJECTS
+            while (canvasObjs.length > 0)
+            {
+                canvasObjs.pop();
+            }
+        }
+
+        canvasObjs[1] = new CanvasObject(RIGHT, TOP, 0, 0, CHIP_RADIUS); // Website chip
+        canvasObjs[1].clickCallback = function()
+        {
+            window.open("http://philaube.github.io");
+        }
+
+        canvasObjs[2] = new CanvasObject(LEFT, BOTTOM, 0, 0, CHIP_RADIUS); // Blackjack chip
+        canvasObjs[2].clickCallback = function()
+        {
+            alert('Clicked the BLACKJACK INSTRUCTIONS chip');
+        }
+
+        canvasObjs[3] = new CanvasObject(RIGHT, BOTTOM, 0, 0, CHIP_RADIUS); // Poker chip
+        canvasObjs[3].clickCallback = function()
+        {
+            alert('Clicked the POKER INSTRUCTIONS chip');
+        }
+    }
 }
 
 // The main title screen for the Casino game
@@ -34,6 +111,8 @@ function titleScreen(RGBTitleScreen)
     const SETTINGS_CHIP_Y = 280;
     const MORE_CHIP_Y = 420;
     const TITLE_Y = 175;
+
+    CreateTitleScreenEvents(canvasObjs);
 
     cycleRGB(RGBTitleScreen);
 
@@ -47,9 +126,44 @@ function titleScreen(RGBTitleScreen)
 
     drawFaceDown(POKER_X, CARD_Y);
 
-    drawChip(CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS');
+    drawChip(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS');
 
-    drawChip(CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE');
+    drawChip(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE');
+
+    // Creates the objects of each menu item for events
+    function CreateTitleScreenEvents(canvasObjs)
+    {
+        canvasObjs[0] = new CanvasObject(BLACKJACK_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
+        canvasObjs[0].clickCallback = function()
+        {
+            alert('Clicked the Blackjack card');
+        }
+        
+        canvasObjs[1] = new CanvasObject(POKER_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
+        canvasObjs[1].clickCallback = function()
+        {
+            alert('Clicked the Poker card');
+        }
+
+        canvasObjs[2] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 0, 0, CHIP_RADIUS);
+        canvasObjs[2].clickCallback = function()
+        {
+            alert('Clicked the SETTINGS chip');
+        }
+
+        canvasObjs[3] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 0, 0, CHIP_RADIUS);
+        canvasObjs[3].clickCallback = function()
+        {
+            RGBTitleScreen.show = false;
+            RGBTitleScreen.more = true;
+
+            // REMOVE ALL CURRENT CANVAS OBJECTS
+            while (canvasObjs.length > 0)
+            {
+                canvasObjs.pop();
+            }
+        }
+    }
 
     // Handles color and circle animation cycle
     function cycleRGB(RGBTitleScreen)
@@ -86,25 +200,15 @@ function titleScreen(RGBTitleScreen)
         const DISCLAIMER_Y = 530;
 
         ctx.beginPath();
-        ctx.rect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE);
         ctx.fillStyle = '#333'; // Gray
         ctx.fill();
 
         ctx.font = "10px Arial";
         ctx.fillStyle = 'white';
-        ctx.fillText("DISCLAIMER", CANVAS_SIZE / 2, DISCLAIMER_Y);
-        ctx.fillText("This game is just for fun.", CANVAS_SIZE / 2, DISCLAIMER_Y + 20);
-        ctx.fillText("The developer is not responsible for your gambling addiction.", CANVAS_SIZE / 2, DISCLAIMER_Y + 40);
-    }
-
-    // Draws only the title
-    function drawTitle(color, title_Y)
-    {
-        ctx.font = "50px Arial";
-        ctx.textAlign = "center";
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
-        ctx.strokeText("CASINO", CANVAS_SIZE / 2, title_Y);
+        ctx.fillText("DISCLAIMER", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y);
+        ctx.fillText("This game is just for fun.", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y + 20);
+        ctx.fillText("The developer is not responsible for your gambling addiction.", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y + 40);
     }
 
     // Flickers back and forth between to circle positions to create and LED animation effect
@@ -179,6 +283,16 @@ function titleScreen(RGBTitleScreen)
             }
         }
     }
+}
+
+// Draws only the title
+function drawTitle(color, title_Y)
+{
+    ctx.font = "50px Arial";
+    ctx.textAlign = "center";
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.strokeText("CASINO", DEFAULT_CANVAS_SIZE / 2, title_Y);
 }
 
 // Draw a face down card
@@ -260,7 +374,6 @@ function drawFaceDown(x, y)
 // Draw a casino chip with optional text
 function drawChip(x, y, text = ' ')
 {
-    const CHIP_RADIUS = 50;
     const GAP = 10;
     const SECTORS = 16;
 
