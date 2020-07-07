@@ -1,7 +1,7 @@
 const TABLET_BRKPNT = 800;
 const MOBILE_BRKPNT = 500;
 
-// This class defines a rectangular or circular canvas object that is clickable.
+// This class defines a rectangular or circular canvas object that is clickable/hoverable.
 class CanvasObject
 {
     constructor(x, y, width, height, radius)
@@ -13,8 +13,10 @@ class CanvasObject
         this.radius = radius;
         
         this.isHovered = false;
+
         // To be defined for each object
         this.clickCallback = null;
+        this.hoverCallback = null;
 
         this.CheckRectHover = function(mouseX, mouseY)
         {
@@ -40,8 +42,6 @@ class CanvasObject
                 this.isHovered = false;
             }
         }
-
-
     }
 }
 
@@ -66,30 +66,63 @@ function adjustMeasurements()
     return dynamicCanvasSize;
 }
 
-// Event listener for 'click' events.
-GAMECANVAS.addEventListener('click', function(event) 
+// Returns the mouse coordinate scaled based on the window size
+function getModifiedMousePosition(event)
 {
     let currentCanvasSize = adjustMeasurements();
 
     let ratio = DEFAULT_CANVAS_SIZE / currentCanvasSize;
 
-    let mouseX = (event.pageX - GAMECANVAS.offsetLeft) * ratio,
-        mouseY = (event.pageY - GAMECANVAS.offsetTop) * ratio;
+    let mouse = 
+    {
+        x: (event.pageX - GAMECANVAS.offsetLeft) * ratio,
+        y: (event.pageY - GAMECANVAS.offsetTop) * ratio
+    };
+
+    return mouse;
+}
+
+// Event listener for 'click' events.
+GAMECANVAS.addEventListener('click', function(event) 
+{
+    let mouse = getModifiedMousePosition(event);
         
-    // Just for debugging mouse coordinates
-    console.log("Modified mouse coordinate: " + mouseX, mouseY);
-    
     for (let index = 0; index < canvasObjs.length; index++)
     {
-        canvasObjs[index].CheckRectHover(mouseX, mouseY);
+        canvasObjs[index].CheckRectHover(mouse.x, mouse.y);
         if (!canvasObjs[index].isHovered)
         {
-            canvasObjs[index].checkRoundHover(mouseX, mouseY);
+            canvasObjs[index].checkRoundHover(mouse.x, mouse.y);
         }
 
         if (canvasObjs[index].isHovered)
         {
             canvasObjs[index].clickCallback();
+            break;
+        }
+    }
+});
+
+// Event listener for 'hover' events.
+GAMECANVAS.addEventListener('mousemove', function(evt)
+{
+    let mouse = getModifiedMousePosition(event);
+
+    // Just for debugging mouse coordinates
+    console.log("Modified mouse coordinate: " + mouse.x, mouse.y);
+
+    for (let index = 0; index < canvasObjs.length; index++)
+    {
+        canvasObjs[index].CheckRectHover(mouse.x, mouse.y);
+        if (!canvasObjs[index].isHovered)
+        {
+            canvasObjs[index].checkRoundHover(mouse.x, mouse.y);
+        }
+
+        if (canvasObjs[index].isHovered)
+        {
+            canvasObjs[index].hoverCallback();
+            break;
         }
     }
 });
