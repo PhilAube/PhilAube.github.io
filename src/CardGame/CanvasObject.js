@@ -98,7 +98,6 @@ GAMECANVAS.addEventListener('click', function(event)
         if (canvasObjs[index].isHovered)
         {
             canvasObjs[index].clickCallback();
-            break;
         }
     }
 });
@@ -122,7 +121,6 @@ GAMECANVAS.addEventListener('mousemove', function(evt)
         if (canvasObjs[index].isHovered)
         {
             canvasObjs[index].hoverCallback();
-            break;
         }
     }
 });

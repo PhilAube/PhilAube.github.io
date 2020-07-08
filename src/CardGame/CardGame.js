@@ -5,17 +5,23 @@
 const GAMECANVAS = document.getElementById("cardgame");
 const ctx = GAMECANVAS.getContext("2d");
 
-// An array for storing the canvas objects for events
-let canvasObjs = [];
-
 // General global constants
 const DEFAULT_CANVAS_SIZE = 600;
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = 100;
 const CHIP_RADIUS = 50;
 
-// For the color changing title screen
-let RGBTitleScreen = { cycleCounter : 0, flicker: true, show: true, more: false, counter: 0 };
+// An array for storing the canvas objects for events
+let canvasObjs = [];
+
+// Game Object manages colors, object/event creation for each screen based on context
+let Game = 
+{
+    RGBTitleScreen : { cycleCounter : 0, flicker: true },
+    counter: 0,
+    context: 'TitleScreen',
+    tableColor: '#00AA00'
+};
 
 // The first domino in the whole application
 window.onload = animate;
@@ -23,13 +29,187 @@ window.onload = animate;
 // The main animation loop
 function animate()
 {
-    if (RGBTitleScreen.show)
-        titleScreen(RGBTitleScreen);
-
-    else if (RGBTitleScreen.more)
-        moreScreen();
+    switch (Game.context)
+    {
+        case 'TitleScreen':
+            titleScreen();
+            break;
+        case 'MoreScreen':
+            moreScreen();
+            break;
+        case 'SettingsScreen':
+            settingsScreen();
+            break;
+        case 'BJInstructions':
+            blackjackInstructions();
+            break;
+        case 'PokerInstructions':
+            pokerInstructions();
+    }
 
     requestAnimationFrame(animate);
+}
+
+// Upon clicking the "POKER" option on the MORE screen
+function pokerInstructions()
+{
+    const INSTRUCTIONS_Y = 100;
+
+    // Will only create the object array once upon loading
+    if (Game.counter === 0)
+    {
+        createPokerInstructionsEvents();
+        Game.counter++;
+    }
+
+    drawBG();
+
+    ctx.fillStyle = 'white';
+    ctx.font = "30px Arial";
+    ctx.fillText("POKER INSTRUCTIONS", DEFAULT_CANVAS_SIZE / 2, INSTRUCTIONS_Y);
+
+    drawBackChip();
+
+    function drawBackChip()
+    {
+        if (canvasObjs[0].isHovered)
+        {
+            canvasObjs[0].hoverCallback();
+        }
+        else
+        {
+            drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#AA0000');
+        }
+    }
+
+    // Creates the objects of each "SETTINGS" menu item, defining their click and hover callback functions.
+    function createPokerInstructionsEvents()
+    {
+        backChip();
+
+        function backChip()
+        {
+            canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, 0, 0, CHIP_RADIUS);
+            canvasObjs[0].clickCallback = function()
+            {
+                Game.context = 'MoreScreen';
+        
+                resetArray();
+            }
+            canvasObjs[0].hoverCallback = function()
+            {
+                drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#0000AA');
+            }
+        }
+    }
+}
+
+// Upon clicking the "BLACKJACK" option on the MORE screen
+function blackjackInstructions()
+{
+    const INSTRUCTIONS_Y = 100;
+
+    // Will only create the object array once upon loading
+    if (Game.counter === 0)
+    {
+        createBJInstructionsEvents();
+        Game.counter++;
+    }
+
+    drawBG();
+
+    ctx.fillStyle = 'white';
+    ctx.font = "30px Arial";
+    ctx.fillText("BLACKJACK INSTRUCTIONS", DEFAULT_CANVAS_SIZE / 2, INSTRUCTIONS_Y);
+
+    drawBackChip();
+
+    function drawBackChip()
+    {
+        if (canvasObjs[0].isHovered)
+        {
+            canvasObjs[0].hoverCallback();
+        }
+        else
+        {
+            drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#AA0000');
+        }
+    }
+
+    // Creates the objects of each "SETTINGS" menu item, defining their click and hover callback functions.
+    function createBJInstructionsEvents()
+    {
+        backChip();
+
+        function backChip()
+        {
+            canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, 0, 0, CHIP_RADIUS);
+            canvasObjs[0].clickCallback = function()
+            {
+                Game.context = 'MoreScreen';
+        
+                resetArray();
+            }
+            canvasObjs[0].hoverCallback = function()
+            {
+                drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#0000AA');
+            }
+        }
+    }
+}
+
+// Upon clicking the "SETTINGS" option on the title screen
+function settingsScreen()
+{
+    const SETTINGS_Y = 100;
+
+    // Will only create the object array once upon loading
+    if (Game.counter === 0)
+    {
+        createSettingsScreenEvents();
+        Game.counter++;
+    }
+
+    drawBG();
+
+    ctx.fillStyle = 'white';
+    ctx.font = "30px Arial";
+    ctx.fillText("SETTINGS", DEFAULT_CANVAS_SIZE / 2, SETTINGS_Y);
+
+    drawBackChip();
+
+    function drawBackChip()
+    {
+        if (canvasObjs[0].isHovered)
+        {
+            canvasObjs[0].hoverCallback();
+        }
+        else
+        {
+            drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#AA0000');
+        }
+    }
+
+    // Creates the objects of each "SETTINGS" menu item, defining their click and hover callback functions.
+    function createSettingsScreenEvents()
+    {
+        backChip();
+
+        function backChip()
+        {
+            canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, 0, 0, CHIP_RADIUS);
+            canvasObjs[0].clickCallback = function()
+            {
+                Game.context = 'TitleScreen';
+            
+                resetArray();
+            }
+            canvasObjs[0].hoverCallback = function()
+            {
+                drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE / 2, "BACK", '#0000AA');
+            }
+        }
+    }
 }
 
 // Upon clicking the "MORE" chip on the title screen
@@ -42,12 +222,11 @@ function moreScreen()
     const BOTTOM = 525;
 
     // Will only create the object array once upon loading
-    if (RGBTitleScreen.counter === 0)
+    if (Game.counter === 0)
     {
         createMoreScreenEvents();
+        Game.counter++;
     }
-
-    RGBTitleScreen.counter++;
 
     drawBG();
 
@@ -66,7 +245,7 @@ function moreScreen()
         }
         else
         {
-            drawChip(LEFT, TOP, "BACK", '#AA0000');
+            drawChip(LEFT, TOP, "BACK", '#AA0000'); // Red
         }
     
         if (canvasObjs[1].isHovered) // Contact
@@ -75,7 +254,7 @@ function moreScreen()
         }
         else
         {
-            drawChip(RIGHT, TOP, 'CONTACT', '#AA0000');
+            drawChip(RIGHT, TOP, 'CONTACT', '#AA0000'); // Red
         }
     
         ctx.font = "20px Arial";
@@ -87,7 +266,7 @@ function moreScreen()
         }
         else
         {
-            drawChip(LEFT, BOTTOM, "BLACKJACK", '#AA0000');
+            drawChip(LEFT, BOTTOM, "BLACKJACK", '#AA0000'); // Red
         }
     
         if (canvasObjs[3].isHovered) // Poker instructions
@@ -96,7 +275,7 @@ function moreScreen()
         }
         else
         {
-            drawChip(RIGHT, BOTTOM, "POKER", '#AA0000');
+            drawChip(RIGHT, BOTTOM, "POKER", '#AA0000'); // Red
         }
     }
 
@@ -105,20 +284,11 @@ function moreScreen()
     {
         ctx.fillStyle = 'white';
         ctx.font = "15px Arial";
-        ctx.fillText("Version 0.02 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
+        ctx.fillText("Version 0.03 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
         ctx.fillText("This game was developed from scratch by Phil Aube.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 80);
         ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 120);
         ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 160);
         ctx.fillText('Found a bug? You can report it under the CONTACT section of my GitHub Pages!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 200);
-    }
-
-    // Simply draws the background color
-    function drawBG()
-    {
-        ctx.beginPath();
-        ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE);
-        ctx.fillStyle = '#333'; // Gray
-        ctx.fill();
     }
 
     // Creates the objects of each "MORE" menu item, defining their click and hover callback functions.
@@ -137,20 +307,13 @@ function moreScreen()
             canvasObjs[0] = new CanvasObject(LEFT, TOP, 0, 0, CHIP_RADIUS);
             canvasObjs[0].clickCallback = function()
             {
-                RGBTitleScreen.show = true;
-                RGBTitleScreen.more = false;
+                Game.context = 'TitleScreen';
         
-                // REMOVE ALL CURRENT CANVAS OBJECTS
-                while (canvasObjs.length > 0)
-                {
-                    canvasObjs.pop();
-                }
-
-                RGBTitleScreen.counter = 0;
+                resetArray();
             }
             canvasObjs[0].hoverCallback = function()
             {
-                drawChip(LEFT, TOP, "BACK", '#0000AA');
+                drawChip(LEFT, TOP, "BACK", '#0000AA'); // Blue
             }
         }
 
@@ -163,7 +326,7 @@ function moreScreen()
             }
             canvasObjs[1].hoverCallback = function()
             {
-                drawChip(RIGHT, TOP, 'CONTACT', '#0000AA');
+                drawChip(RIGHT, TOP, 'CONTACT', '#0000AA'); // Blue
             }
         }
 
@@ -172,11 +335,13 @@ function moreScreen()
             canvasObjs[2] = new CanvasObject(LEFT, BOTTOM, 0, 0, CHIP_RADIUS);
             canvasObjs[2].clickCallback = function()
             {
-                alert('Clicked the BLACKJACK INSTRUCTIONS chip');
+                Game.context = 'BJInstructions';
+
+                resetArray();
             }
             canvasObjs[2].hoverCallback = function()
             {
-                drawChip(LEFT, BOTTOM, "BLACKJACK", '#0000AA');
+                drawChip(LEFT, BOTTOM, "BLACKJACK", '#0000AA'); // BLue
             }
         }
 
@@ -185,18 +350,31 @@ function moreScreen()
             canvasObjs[3] = new CanvasObject(RIGHT, BOTTOM, 0, 0, CHIP_RADIUS);
             canvasObjs[3].clickCallback = function()
             {
-                alert('Clicked the POKER INSTRUCTIONS chip');
+                Game.context = 'PokerInstructions';
+
+                resetArray();
             }
             canvasObjs[3].hoverCallback = function()
             {
-                drawChip(RIGHT, BOTTOM, "POKER", '#0000AA');
+                drawChip(RIGHT, BOTTOM, "POKER", '#0000AA'); // Blue
             }
         }
     }
 }
 
+// Removes all canvas objects from array
+function resetArray()
+{
+    while (canvasObjs.length > 0)
+    {
+        canvasObjs.pop();
+    }
+
+    Game.counter = 0;
+}
+
 // The main title screen for the Casino game
-function titleScreen(RGBTitleScreen)
+function titleScreen()
 {
     const BLACKJACK_X = 100;
     const POKER_X = 400;
@@ -206,20 +384,19 @@ function titleScreen(RGBTitleScreen)
     const TITLE_Y = 175;
 
     // Will only create the object array once upon loading
-    if (RGBTitleScreen.counter === 0)
+    if (Game.counter === 0)
     {
-        createTitleScreenEvents(canvasObjs);
+        createTitleScreenEvents(canvasObjs); 
+        Game.counter++;
     }
 
-    RGBTitleScreen.counter++;
+    cycleRGB();
 
-    cycleRGB(RGBTitleScreen);
-
-    drawBG();
+    drawTitleBG();
 
     drawTitle(color, TITLE_Y);
 
-    drawLEDCircles(RGBTitleScreen);
+    drawLEDCircles();
 
     drawCards();
 
@@ -234,7 +411,7 @@ function titleScreen(RGBTitleScreen)
         }
         else
         {
-            drawChip(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000');
+            drawChip(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000'); // Red
         }
     
         if (canvasObjs[3].isHovered) // More
@@ -243,7 +420,7 @@ function titleScreen(RGBTitleScreen)
         }
         else
         {
-            drawChip(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE', '#AA0000');
+            drawChip(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE', '#AA0000'); // Red
         }
     }
 
@@ -285,11 +462,11 @@ function titleScreen(RGBTitleScreen)
             canvasObjs[0] = new CanvasObject(BLACKJACK_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[0].clickCallback = function()
             {
-                alert('Clicked the Blackjack card');
+                alert('BLACKJACK: UNDER CONSTRUCTION');
             }
             canvasObjs[0].hoverCallback = function()
             {
-                drawFaceDown(BLACKJACK_X, CARD_Y, 'gray');
+                drawFaceDown(BLACKJACK_X, CARD_Y, '#333'); // Gray
                 ctx.font = '20px Arial';
                 ctx.fillStyle = 'white';
                 ctx.fillText("BLACK", BLACKJACK_X + (CARD_WIDTH / 2), CARD_Y + (CARD_HEIGHT / 2) - 15);
@@ -302,11 +479,11 @@ function titleScreen(RGBTitleScreen)
             canvasObjs[1] = new CanvasObject(POKER_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[1].clickCallback = function()
             {
-                alert('Clicked the Poker card');
+                alert('POKER: UNDER CONSTRUCTION');
             }
             canvasObjs[1].hoverCallback = function()
             {
-                drawFaceDown(POKER_X, CARD_Y, 'gray');
+                drawFaceDown(POKER_X, CARD_Y, '#333'); // Gray
                 ctx.font = '20px Arial';
                 ctx.fillStyle = 'white';
                 ctx.fillText("POKER", POKER_X + (CARD_WIDTH / 2), CARD_Y + (CARD_HEIGHT / 2));
@@ -318,7 +495,15 @@ function titleScreen(RGBTitleScreen)
             canvasObjs[2] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 0, 0, CHIP_RADIUS);
             canvasObjs[2].clickCallback = function()
             {
-                alert('Clicked the SETTINGS chip');
+                Game.context = 'SettingsScreen';
+    
+                // REMOVE ALL CURRENT CANVAS OBJECTS
+                while (canvasObjs.length > 0)
+                {
+                    canvasObjs.pop();
+                }
+
+                Game.counter = 0;
             }
             canvasObjs[2].hoverCallback = function()
             {
@@ -331,8 +516,7 @@ function titleScreen(RGBTitleScreen)
             canvasObjs[3] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 0, 0, CHIP_RADIUS);
             canvasObjs[3].clickCallback = function()
             {
-                RGBTitleScreen.show = false;
-                RGBTitleScreen.more = true;
+                Game.context = 'MoreScreen';
     
                 // REMOVE ALL CURRENT CANVAS OBJECTS
                 while (canvasObjs.length > 0)
@@ -340,7 +524,7 @@ function titleScreen(RGBTitleScreen)
                     canvasObjs.pop();
                 }
 
-                RGBTitleScreen.counter = 0;
+                Game.counter = 0;
             }
             canvasObjs[3].hoverCallback = function()
             {
@@ -350,43 +534,40 @@ function titleScreen(RGBTitleScreen)
     }
 
     // Handles color and circle animation cycle
-    function cycleRGB(RGBTitleScreen)
+    function cycleRGB()
     {
-        switch (RGBTitleScreen.cycleCounter)
+        switch (Game.RGBTitleScreen.cycleCounter)
         {
             case 0:
                 color = '#FF0000'; // Red
-                RGBTitleScreen.flicker = !RGBTitleScreen.flicker;
+                Game.RGBTitleScreen.flicker = !Game.RGBTitleScreen.flicker;
                 break;
             case 50:
                 color = '#00FF00'; // Green
-                RGBTitleScreen.flicker = !RGBTitleScreen.flicker;
+                Game.RGBTitleScreen.flicker = !Game.RGBTitleScreen.flicker;
                 break;
             case 100: 
                 color = '#0000FF'; // Blue
-                RGBTitleScreen.flicker = !RGBTitleScreen.flicker;
+                Game.RGBTitleScreen.flicker = !Game.RGBTitleScreen.flicker;
                 break;
             case 150:
                 color = '#FF0000'; // Reset
-                RGBTitleScreen.cycleCounter = 0;
-                RGBTitleScreen.flicker = !RGBTitleScreen.flicker;
+                Game.RGBTitleScreen.cycleCounter = 0;
+                Game.RGBTitleScreen.flicker = !Game.RGBTitleScreen.flicker;
                 break;
             default:
                 break;
         }
     
-        RGBTitleScreen.cycleCounter++;
+        Game.RGBTitleScreen.cycleCounter++;
     }
 
     // Draws Title screen background color with disclaimer
-    function drawBG()
+    function drawTitleBG()
     {
         const DISCLAIMER_Y = 530;
 
-        ctx.beginPath();
-        ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE);
-        ctx.fillStyle = '#333'; // Gray
-        ctx.fill();
+        drawBG();
 
         ctx.font = "10px Arial";
         ctx.fillStyle = 'white';
@@ -396,7 +577,7 @@ function titleScreen(RGBTitleScreen)
     }
 
     // Flickers back and forth between to circle positions to create and LED animation effect
-    function drawLEDCircles(RGBTitleScreen)
+    function drawLEDCircles()
     {
         const TOP = 100;
         const BOTTOM = 500;
@@ -410,7 +591,7 @@ function titleScreen(RGBTitleScreen)
         const CIRCLE_GAP = RADIUS * 4;
         const OFFSET = 10;
 
-        if (RGBTitleScreen.flicker) // Default position
+        if (Game.RGBTitleScreen.flicker) // Default position
         {   
             // Top and bottom
             for (let y = TOP; y <= BOTTOM; y += HEIGHT)
@@ -479,6 +660,15 @@ function drawTitle(color, title_Y)
     ctx.strokeText("CASINO", DEFAULT_CANVAS_SIZE / 2, title_Y);
 }
 
+// Simply draws the background color
+function drawBG()
+{
+    ctx.beginPath();
+    ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE);
+    ctx.fillStyle = '#333'; // Gray
+    ctx.fill();
+}
+
 // Draw a face down card
 function drawFaceDown(x, y, color)
 {
@@ -488,7 +678,7 @@ function drawFaceDown(x, y, color)
     // Draw card background
     ctx.beginPath();
     ctx.rect(x, y, CARD_WIDTH, CARD_HEIGHT);
-    ctx.fillStyle = color;
+    ctx.fillStyle = color; // Default is white, hovered is gray
     ctx.fill();
 
     // Draw Lines
@@ -564,7 +754,7 @@ function drawChip(x, y, text = ' ', chipColor)
     // Background
     ctx.beginPath();
     ctx.arc(x, y, CHIP_RADIUS, 0, 2 * Math.PI);
-    ctx.fillStyle = chipColor; // Red
+    ctx.fillStyle = chipColor; // Red by default, blue on hover
     ctx.fill();
 
     // Draw lines
