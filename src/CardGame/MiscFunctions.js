@@ -1,4 +1,4 @@
-// * This file contains general functions used throughout the game, mostly drawing. * //
+// * This file contains general code used throughout the game, mostly drawing. * //
 
 // Removes all canvas objects from array when loading a new page.
 function resetArray()
@@ -10,6 +10,9 @@ function resetArray()
 
     Game.counter = 0;
 }
+
+// X values for 5 cards evenly spread across the canvas
+let xValues = [ 10, 130, 250, 370, 490 ];
 
 // * DRAWING FUNCTIONS * //
 

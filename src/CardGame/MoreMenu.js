@@ -71,7 +71,7 @@ function moreScreen()
     {
         ctx.fillStyle = 'white';
         ctx.font = "15px Arial";
-        ctx.fillText("Version 0.04 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
+        ctx.fillText("Version 0.05 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
         ctx.fillText("This game was developed from scratch by Phil Aube.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 80);
         ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 120);
         ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 160);
