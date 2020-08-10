@@ -1,34 +1,8 @@
 // * This file defines the Card and Deck classes, and its related code. * //
 
-let suits = 
-[
-    Diamonds = '♦',
-    Hearts = '♥',
-    Spades = '♠',
-    Clubs = '♣'
-];
-
-class Ranks
-{
-    constructor(name, value)
-    {
-        this.name = name;
-        this.value = value;
-    }
-}
+let suits = [ Diamonds = '♦', Hearts = '♥', Spades = '♠', Clubs = '♣'];
 
 let ranks = [ "A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K" ];
-
-createRanks();
-
-// Gives each rank their appropriate value.
-function createRanks()
-{
-    for (let i = 0; i < ranks.length; i++)
-    {
-        ranks[i].value = i;
-    }
-}
 
 class Card
 {
@@ -59,14 +33,6 @@ class Card
             ctx.fill();
         }
 
-        function drawCardOutline()
-        {
-            ctx.beginPath();
-            ctx.rect(x, y, CARD_WIDTH, CARD_HEIGHT);
-            ctx.strokeStyle = 'black';
-            ctx.stroke();
-        }
-
         // Picks the right card color based on suit.
         function colorSuit(suit)
         {
@@ -91,11 +57,11 @@ class Card
         // Draws the card based on the rank and suit
         function drawCardPattern(rank, suit, x, y)
         {
-            const CENTER_Y = y + (CARD_HEIGHT / 7) * 5;
+            const CENTER_Y = y + (CARD_HEIGHT / 3) * 2;
             const LEFT = x + (CARD_WIDTH / 10) + 5;
             const RIGHT = x + (CARD_WIDTH / 10) * 9 - 5;
 
-            ctx.font = "100px Verdana";
+            ctx.font = "75px Verdana";
             ctx.fillText(suit, x + (CARD_WIDTH / 2), CENTER_Y);
             
             ctx.font = "17px Verdana";
@@ -109,6 +75,13 @@ class Card
             ctx.fillText(suit, RIGHT, y + CARD_HEIGHT - 30);
         }
 
+        function drawCardOutline()
+        {
+            ctx.beginPath();
+            ctx.rect(x, y, CARD_WIDTH, CARD_HEIGHT);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+        }
     }
 }
 

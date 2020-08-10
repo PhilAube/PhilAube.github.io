@@ -37,7 +37,7 @@ function titleScreen()
         }
         else
         {
-            drawChip(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000'); // Red
+            drawChip(MID_CANVAS, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000'); // Red
         }
     
         if (canvasObjs[3].isHovered) // More
@@ -46,7 +46,7 @@ function titleScreen()
         }
         else
         {
-            drawChip(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE', '#AA0000'); // Red
+            drawChip(MID_CANVAS, MORE_CHIP_Y, 'MORE', '#AA0000'); // Red
         }
     }
 
@@ -118,7 +118,7 @@ function titleScreen()
 
         function settingsChip()
         {
-            canvasObjs[2] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 0, 0, CHIP_RADIUS);
+            canvasObjs[2] = new CanvasObject(MID_CANVAS, SETTINGS_CHIP_Y, 0, 0, CHIP_RADIUS);
             canvasObjs[2].clickCallback = function()
             {
                 Game.context = 'SettingsScreen';
@@ -133,13 +133,13 @@ function titleScreen()
             }
             canvasObjs[2].hoverCallback = function()
             {
-                drawChip(DEFAULT_CANVAS_SIZE / 2, SETTINGS_CHIP_Y, 'SETTINGS', '#0000AA');
+                drawChip(MID_CANVAS, SETTINGS_CHIP_Y, 'SETTINGS', '#0000AA');
             }
         }
 
         function moreChip()
         {
-            canvasObjs[3] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 0, 0, CHIP_RADIUS);
+            canvasObjs[3] = new CanvasObject(MID_CANVAS, MORE_CHIP_Y, 0, 0, CHIP_RADIUS);
             canvasObjs[3].clickCallback = function()
             {
                 Game.context = 'MoreScreen';
@@ -154,7 +154,7 @@ function titleScreen()
             }
             canvasObjs[3].hoverCallback = function()
             {
-                drawChip(DEFAULT_CANVAS_SIZE / 2, MORE_CHIP_Y, 'MORE', '#0000AA');
+                drawChip(MID_CANVAS, MORE_CHIP_Y, 'MORE', '#0000AA');
             }
         }
     }
@@ -197,9 +197,9 @@ function titleScreen()
 
         ctx.font = "10px Arial";
         ctx.fillStyle = 'white';
-        ctx.fillText("DISCLAIMER", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y);
-        ctx.fillText("This game is just for fun.", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y + 20);
-        ctx.fillText("The developer is not responsible for your gambling addiction.", DEFAULT_CANVAS_SIZE / 2, DISCLAIMER_Y + 40);
+        ctx.fillText("DISCLAIMER", MID_CANVAS, DISCLAIMER_Y);
+        ctx.fillText("This game is just for fun.", MID_CANVAS, DISCLAIMER_Y + 20);
+        ctx.fillText("The developer is not responsible for your gambling addiction.", MID_CANVAS, DISCLAIMER_Y + 40);
     }
 
     // Flickers back and forth between to circle positions to create and LED animation effect.

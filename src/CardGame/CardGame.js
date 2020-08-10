@@ -7,6 +7,7 @@ const ctx = GAMECANVAS.getContext("2d");
 
 // General global constants
 const DEFAULT_CANVAS_SIZE = 600;
+const MID_CANVAS = DEFAULT_CANVAS_SIZE / 2;
 const CARD_HEIGHT = 150;
 const CARD_WIDTH = 100;
 const CHIP_RADIUS = 50;

@@ -11,9 +11,6 @@ function resetArray()
     Game.counter = 0;
 }
 
-// X values for 5 cards evenly spread across the canvas
-let xValues = [ 10, 130, 250, 370, 490 ];
-
 // * DRAWING FUNCTIONS * //
 
 // Draws the game's title.
@@ -23,7 +20,7 @@ function drawTitle(color, title_Y)
     ctx.textAlign = "center";
     ctx.strokeStyle = color;
     ctx.lineWidth = 3;
-    ctx.strokeText("CASINO", DEFAULT_CANVAS_SIZE / 2, title_Y);
+    ctx.strokeText("CASINO", MID_CANVAS, title_Y);
 }
 
 // Simply draws the menu's background color.
@@ -146,4 +143,16 @@ function drawChip(x, y, text = ' ', chipColor)
     ctx.font = '15px Arial';
     ctx.fillStyle = 'white';
     ctx.fillText(text, x, y + 5, (CHIP_RADIUS * 2) - (GAP * 2));
+}
+
+// For drawing a 5 card hand nicely spread out accross the canvas.
+function drawHand(hand, y)
+{
+    // X values for 5 cards evenly spread across the canvas
+    let xValues = [ 10, 130, 250, 370, 490 ];
+
+    for (let i = 0; i < hand.length; i++)
+    {
+        hand[i].drawCard(xValues[i], y);
+    }
 }

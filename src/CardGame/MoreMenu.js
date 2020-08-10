@@ -45,7 +45,7 @@ function moreScreen()
         }
     
         ctx.font = "20px Arial";
-        ctx.fillText("INSTRUCTIONS", DEFAULT_CANVAS_SIZE / 2, BOTTOM + 5);
+        ctx.fillText("INSTRUCTIONS", MID_CANVAS, BOTTOM + 5);
     
         if (canvasObjs[2].isHovered) // Blackjack instructions
         {
@@ -71,11 +71,11 @@ function moreScreen()
     {
         ctx.fillStyle = 'white';
         ctx.font = "15px Arial";
-        ctx.fillText("Version 0.05 © 2020", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 40);
-        ctx.fillText("This game was developed from scratch by Phil Aube.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 80);
-        ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 120);
-        ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 160);
-        ctx.fillText('Found a bug? You can report it under the CONTACT section of my GitHub Pages!', DEFAULT_CANVAS_SIZE / 2, TITLE_Y + 200);
+        ctx.fillText("Version 0.06 © 2020", MID_CANVAS, TITLE_Y + 40);
+        ctx.fillText("This game was developed from scratch by Phil Aube.", MID_CANVAS, TITLE_Y + 80);
+        ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", MID_CANVAS, TITLE_Y + 120);
+        ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', MID_CANVAS, TITLE_Y + 160);
+        ctx.fillText('Found a bug? You can report it under the CONTACT section of my GitHub Pages!', MID_CANVAS, TITLE_Y + 200);
     }
 
     // Creates the objects of each "MORE" menu item, defining their click and hover callback functions.

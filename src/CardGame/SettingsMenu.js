@@ -15,7 +15,7 @@ function settingsScreen()
 
     ctx.fillStyle = 'white';
     ctx.font = "30px Arial";
-    ctx.fillText("SETTINGS", DEFAULT_CANVAS_SIZE / 2, SETTINGS_Y);
+    ctx.fillText("SETTINGS", MID_CANVAS, SETTINGS_Y);
 
     drawBackChip();
 
@@ -27,7 +27,7 @@ function settingsScreen()
         }
         else
         {
-            drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE - 100, "BACK", '#AA0000');
+            drawChip(MID_CANVAS, DEFAULT_CANVAS_SIZE - 100, "BACK", '#AA0000');
         }
     }
 
@@ -38,7 +38,7 @@ function settingsScreen()
 
         function backChip()
         {
-            canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE - 100, 0, 0, CHIP_RADIUS);
+            canvasObjs[0] = new CanvasObject(MID_CANVAS, DEFAULT_CANVAS_SIZE - 100, 0, 0, CHIP_RADIUS);
             canvasObjs[0].clickCallback = function()
             {
                 Game.context = 'TitleScreen';
@@ -47,7 +47,7 @@ function settingsScreen()
             }
             canvasObjs[0].hoverCallback = function()
             {
-                drawChip(DEFAULT_CANVAS_SIZE / 2, DEFAULT_CANVAS_SIZE - 100, "BACK", '#0000AA');
+                drawChip(MID_CANVAS, DEFAULT_CANVAS_SIZE - 100, "BACK", '#0000AA');
             }
         }
     }
