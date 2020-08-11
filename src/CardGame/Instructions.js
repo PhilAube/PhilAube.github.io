@@ -14,25 +14,199 @@ function pokerInstructions()
     // This array defines the functions to call depending on which instruction page you're on.
     outputInstructionPages = 
     [
-        function()
+        function() // Page 1 explains all the rules, while the rest explains the winning hands.
         {
             ctx.fillStyle = 'white';
+            ctx.font = "25px Arial";
+            ctx.fillText("THE OBJECTIVE", MID_CANVAS, MID_CANVAS - 140);
+
             ctx.font = "15px Arial";
-            ctx.fillText("PAGE 1", MID_CANVAS, MID_CANVAS);
+            ctx.fillText("The point of this game is to get one of the winning hand combinations.", MID_CANVAS, MID_CANVAS - 100);
+            ctx.fillText("The details about all the winning hands and their payouts start on the next page.", MID_CANVAS, MID_CANVAS - 80);
+
+            ctx.font = "25px Arial";
+            ctx.fillText("THE PLAY", MID_CANVAS, MID_CANVAS - 20);
+
+            ctx.font = "15px Arial";
+            ctx.fillText("Once you place your bet, you're given a 5-card hand.", MID_CANVAS, MID_CANVAS + 20);
+            ctx.fillText("You have the choice to discard up to 4 cards, if you'd like to.", MID_CANVAS, MID_CANVAS + 40);
+
+            ctx.font = "25px Arial";
+            ctx.fillText("WIN / LOSS / PAYOUT", MID_CANVAS, MID_CANVAS + 100);
+
+            ctx.font = "15px Arial";
+            ctx.fillText("If you get anything other than a winning hand, then you lose your bet.", MID_CANVAS, MID_CANVAS + 140);
         },
 
         function()
         {
             ctx.fillStyle = 'white';
             ctx.font = "15px Arial";
-            ctx.fillText("PAGE 2", MID_CANVAS, MID_CANVAS);
+            ctx.fillText("ROYAL FLUSH : 250 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Ace, King, Queen, Jack, Ten all of the same suit.", MID_CANVAS, MID_CANVAS + 120);
+
+            let royalFlush = 
+            [
+                new Card(suits[2], ranks[9]),
+                new Card(suits[2], ranks[10]),
+                new Card(suits[2], ranks[11]),
+                new Card(suits[2], ranks[12]),
+                new Card(suits[2], ranks[0]),
+            ];
+
+            drawHand(royalFlush, MID_CANVAS - 120);
         },
 
         function()
         {
             ctx.fillStyle = 'white';
             ctx.font = "15px Arial";
-            ctx.fillText("PAGE 3", MID_CANVAS, MID_CANVAS);
+            ctx.fillText("STRAIGHT FLUSH : 50 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Any five card sequence in the same suit.", MID_CANVAS, MID_CANVAS + 120);
+
+            let straightFlush = 
+            [
+                new Card(suits[0], ranks[3]),
+                new Card(suits[0], ranks[4]),
+                new Card(suits[0], ranks[5]),
+                new Card(suits[0], ranks[6]),
+                new Card(suits[0], ranks[7]),
+            ];
+
+            drawHand(straightFlush, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("FOUR OF A KIND : 25 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("All four cards of the same index.", MID_CANVAS, MID_CANVAS + 120);
+
+            let fourOfAKind = 
+            [
+                new Card(suits[2], ranks[10]),
+                new Card(suits[1], ranks[10]),
+                new Card(suits[0], ranks[10]),
+                new Card(suits[3], ranks[10]),
+                new Card(suits[1], ranks[2]),
+            ];
+
+            drawHand(fourOfAKind, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("FULL HOUSE : 9 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Three of a kind combined with a pair.", MID_CANVAS, MID_CANVAS + 120);
+
+            let fullHouse = 
+            [
+                new Card(suits[3], ranks[11]),
+                new Card(suits[2], ranks[11]),
+                new Card(suits[1], ranks[11]),
+                new Card(suits[0], ranks[5]),
+                new Card(suits[1], ranks[5]),
+            ];
+
+            drawHand(fullHouse, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("FLUSH : 6 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Any five cards of the same suit, but not in sequence.", MID_CANVAS, MID_CANVAS + 120);
+
+            let flush = 
+            [
+                new Card(suits[0], ranks[2]),
+                new Card(suits[0], ranks[10]),
+                new Card(suits[0], ranks[8]),
+                new Card(suits[0], ranks[5]),
+                new Card(suits[0], ranks[1]),
+            ];
+
+            drawHand(flush, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("STRAIGHT : 4 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Five cards in sequence, but not in the same suit.", MID_CANVAS, MID_CANVAS + 120);
+
+            let straight = 
+            [
+                new Card(suits[0], ranks[0]),
+                new Card(suits[1], ranks[1]),
+                new Card(suits[2], ranks[2]),
+                new Card(suits[3], ranks[3]),
+                new Card(suits[0], ranks[4]),
+            ];
+
+            drawHand(straight, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("THREE OF A KIND : 3 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Three cards of the same index.", MID_CANVAS, MID_CANVAS + 120);
+
+            let threeOfAKind = 
+            [
+                new Card(suits[3], ranks[7]),
+                new Card(suits[1], ranks[7]),
+                new Card(suits[2], ranks[7]),
+                new Card(suits[0], ranks[6]),
+                new Card(suits[0], ranks[9]),
+            ];
+
+            drawHand(threeOfAKind, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("TWO PAIR : 2 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Two separate pairs.", MID_CANVAS, MID_CANVAS + 120);
+
+            let twoPair = 
+            [
+                new Card(suits[0], ranks[11]),
+                new Card(suits[1], ranks[11]),
+                new Card(suits[2], ranks[6]),
+                new Card(suits[3], ranks[6]),
+                new Card(suits[0], ranks[0]),
+            ];
+
+            drawHand(twoPair, MID_CANVAS - 120);
+        },
+
+        function()
+        {
+            ctx.fillStyle = 'white';
+            ctx.font = "15px Arial";
+            ctx.fillText("PAIR : 1 to 1", MID_CANVAS, MID_CANVAS + 80);
+            ctx.fillText("Two cards of the same index.", MID_CANVAS, MID_CANVAS + 120);
+
+            let pair = 
+            [
+                new Card(suits[0], ranks[9]),
+                new Card(suits[1], ranks[9]),
+                new Card(suits[2], ranks[2]),
+                new Card(suits[3], ranks[4]),
+                new Card(suits[0], ranks[1]),
+            ];
+
+            drawHand(pair, MID_CANVAS - 120);
         },
     ];
 
@@ -55,7 +229,7 @@ function pokerInstructions()
     {
         ctx.fillStyle = 'white';
         ctx.font = "30px Arial";
-        ctx.fillText("POKER INSTRUCTIONS", MID_CANVAS, INSTRUCTIONS_Y);
+        ctx.fillText("POKER INSTRUCTIONS (" + (pageIndex + 1) + " / " + outputInstructionPages.length + ")", MID_CANVAS, INSTRUCTIONS_Y);
     }
 }
 
@@ -201,7 +375,7 @@ function blackjackInstructions()
     {
         ctx.fillStyle = 'white';
         ctx.font = "30px Arial";
-        ctx.fillText("BLACKJACK INSTRUCTIONS", MID_CANVAS, INSTRUCTIONS_Y);
+        ctx.fillText("BLACKJACK INSTRUCTIONS (" + (pageIndex + 1) + " / " + outputInstructionPages.length + ")", MID_CANVAS, INSTRUCTIONS_Y);
     }
 }
 
@@ -269,16 +443,6 @@ function createInstructionsEvents(demoDeck)
     
             resetArray();
 
-            while (outputInstructionPages.length > 0) // Removes instruction pages from memory.
-            {
-                outputInstructionPages.pop();
-            }
-
-            while (demoDeck.length > 0) // Removes demo deck from memory.
-            {
-                demoDeck.pop();
-            }
-
             pageIndex = 0;
         }
         canvasObjs[0].hoverCallback = function()
@@ -296,6 +460,12 @@ function createInstructionsEvents(demoDeck)
             {
                 pageIndex--;
             }
+            else if (pageIndex === 0)
+            {
+                pageIndex = outputInstructionPages.length - 1;
+            }
+
+            resetArray();
         }
         canvasObjs[1].hoverCallback = function()
         {
@@ -312,6 +482,12 @@ function createInstructionsEvents(demoDeck)
             {
                 pageIndex++;
             }
+            else if (pageIndex === outputInstructionPages.length - 1)
+            {
+                pageIndex = 0;
+            }
+            
+            resetArray();
         }
         canvasObjs[2].hoverCallback = function()
         {

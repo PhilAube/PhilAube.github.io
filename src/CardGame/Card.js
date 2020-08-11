@@ -61,7 +61,7 @@ class Card
             const LEFT = x + (CARD_WIDTH / 10) + 5;
             const RIGHT = x + (CARD_WIDTH / 10) * 9 - 5;
 
-            ctx.font = "75px Verdana";
+            ctx.font = "60px Verdana";
             ctx.fillText(suit, x + (CARD_WIDTH / 2), CENTER_Y);
             
             ctx.font = "17px Verdana";
