@@ -390,38 +390,17 @@ function drawInstructionsChips()
 
     function drawMenuChip()
     {
-        if (canvasObjs[0].isHovered)
-        {
-            canvasObjs[0].hoverCallback();
-        }
-        else
-        {
-            drawChip(MID_CANVAS, INSTRUCTION_CHIP_Y, "MENU", '#AA0000');
-        }
+        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawChip(MID_CANVAS, INSTRUCTION_CHIP_Y, "MENU", '#AA0000');
     }
 
     function drawPreviousChip()
     {
-        if (canvasObjs[1].isHovered)
-        {
-            canvasObjs[1].hoverCallback();
-        }
-        else
-        {
-            drawChip(DEFAULT_CANVAS_SIZE / 4, INSTRUCTION_CHIP_Y, "PREVIOUS", '#AA0000');
-        }
+        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(DEFAULT_CANVAS_SIZE / 4, INSTRUCTION_CHIP_Y, "PREVIOUS", '#AA0000');
     }
 
     function drawNextChip()
     {
-        if (canvasObjs[2].isHovered)
-        {
-            canvasObjs[2].hoverCallback();
-        }
-        else
-        {
-            drawChip((DEFAULT_CANVAS_SIZE / 4) * 3, INSTRUCTION_CHIP_Y, "NEXT", '#AA0000');
-        }
+        canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip((DEFAULT_CANVAS_SIZE / 4) * 3, INSTRUCTION_CHIP_Y, "NEXT", '#AA0000');
     }
 }
 

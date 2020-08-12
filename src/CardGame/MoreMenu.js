@@ -23,55 +23,27 @@ function moreScreen()
 
     drawMenuChips();
 
-    // Draws the menu item chips for the "MORE" menu
+    // Draws the menu item chips for the "MORE" menu.
     function drawMenuChips()
     {
-        if (canvasObjs[0].isHovered) // Back
-        {
-            canvasObjs[0].hoverCallback();
-        }
-        else
-        {
-            drawChip(LEFT, TOP, "BACK", '#AA0000'); // Red
-        }
+        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawChip(LEFT, TOP, "BACK", '#AA0000'); // Red
     
-        if (canvasObjs[1].isHovered) // Contact
-        {
-            canvasObjs[1].hoverCallback();
-        }
-        else
-        {
-            drawChip(RIGHT, TOP, 'CONTACT', '#AA0000'); // Red
-        }
+        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(RIGHT, TOP, 'CONTACT', '#AA0000'); // Red
     
         ctx.font = "20px Arial";
         ctx.fillText("INSTRUCTIONS", MID_CANVAS, BOTTOM + 5);
     
-        if (canvasObjs[2].isHovered) // Blackjack instructions
-        {
-            canvasObjs[2].hoverCallback();
-        }
-        else
-        {
-            drawChip(LEFT, BOTTOM, "BLACKJACK", '#AA0000'); // Red
-        }
-    
-        if (canvasObjs[3].isHovered) // Poker instructions
-        {
-            canvasObjs[3].hoverCallback();
-        }
-        else
-        {
-            drawChip(RIGHT, BOTTOM, "POKER", '#AA0000'); // Red
-        }
+        canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(LEFT, BOTTOM, "BLACKJACK", '#AA0000'); // Red
+
+        canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : drawChip(RIGHT, BOTTOM, "POKER", '#AA0000'); // Red
     }
 
-    // Writes the additional info in the "MORE" menu
+    // Writes the additional info in the "MORE" menu.
     function drawInfo()
     {
         ctx.fillStyle = 'white';
         ctx.font = "15px Arial";
-        ctx.fillText("Version 0.07 © 2020", MID_CANVAS, TITLE_Y + 40);
+        ctx.fillText("Version 0.08 © 2020", MID_CANVAS, TITLE_Y + 40);
         ctx.fillText("This game was developed from scratch by Phil Aube.", MID_CANVAS, TITLE_Y + 80);
         ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", MID_CANVAS, TITLE_Y + 120);
         ctx.fillText('This game is currently a work in progress. Thanks for trying it out!', MID_CANVAS, TITLE_Y + 160);

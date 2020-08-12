@@ -31,45 +31,17 @@ function titleScreen()
     // Draws the two chips in the title screen based on whether or not they're hovered.
     function drawChips()
     {
-        if (canvasObjs[2].isHovered) // Settings
-        {
-            canvasObjs[2].hoverCallback();
-        }
-        else
-        {
-            drawChip(MID_CANVAS, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000'); // Red
-        }
-    
-        if (canvasObjs[3].isHovered) // More
-        {
-            canvasObjs[3].hoverCallback();
-        }
-        else
-        {
-            drawChip(MID_CANVAS, MORE_CHIP_Y, 'MORE', '#AA0000'); // Red
-        }
+        canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(MID_CANVAS, SETTINGS_CHIP_Y, 'SETTINGS', '#AA0000'); // Red
+
+        canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : drawChip(MID_CANVAS, MORE_CHIP_Y, 'MORE', '#AA0000'); // Red
     }
 
     // Draws the two cards in the title screen based on whether or not they're hovered.
     function drawCards()
     {
-        if (canvasObjs[0].isHovered) // Blackjack
-        {
-            canvasObjs[0].hoverCallback();
-        }
-        else
-        {
-            drawFaceDown(BLACKJACK_X, CARD_Y, 'white');
-        }
+        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawFaceDown(BLACKJACK_X, CARD_Y, 'white');
 
-        if (canvasObjs[1].isHovered) // Poker
-        {
-            canvasObjs[1].hoverCallback();
-        }
-        else
-        {
-            drawFaceDown(POKER_X, CARD_Y, 'white');
-        }
+        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawFaceDown(POKER_X, CARD_Y, 'white');
     }
 
     // Creates the canvas event objects of each menu item for the Title Screen, defining their click and hover callback functions.
@@ -88,7 +60,9 @@ function titleScreen()
             canvasObjs[0] = new CanvasObject(BLACKJACK_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[0].clickCallback = function()
             {
-                alert('BLACKJACK: UNDER CONSTRUCTION');
+                Game.context = 'Blackjack';
+    
+                resetArray();
             }
             canvasObjs[0].hoverCallback = function()
             {
@@ -105,7 +79,9 @@ function titleScreen()
             canvasObjs[1] = new CanvasObject(POKER_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[1].clickCallback = function()
             {
-                alert('POKER: UNDER CONSTRUCTION');
+                Game.context = 'Poker';
+    
+                resetArray();
             }
             canvasObjs[1].hoverCallback = function()
             {
@@ -123,13 +99,7 @@ function titleScreen()
             {
                 Game.context = 'SettingsScreen';
     
-                // REMOVE ALL CURRENT CANVAS OBJECTS
-                while (canvasObjs.length > 0)
-                {
-                    canvasObjs.pop();
-                }
-
-                Game.counter = 0;
+                resetArray();
             }
             canvasObjs[2].hoverCallback = function()
             {
@@ -144,13 +114,7 @@ function titleScreen()
             {
                 Game.context = 'MoreScreen';
     
-                // REMOVE ALL CURRENT CANVAS OBJECTS
-                while (canvasObjs.length > 0)
-                {
-                    canvasObjs.pop();
-                }
-
-                Game.counter = 0;
+                resetArray();
             }
             canvasObjs[3].hoverCallback = function()
             {

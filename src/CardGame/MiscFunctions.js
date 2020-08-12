@@ -11,6 +11,20 @@ function resetArray()
     Game.counter = 0;
 }
 
+// Checks if there is a preferred table color and sets the default if there is none.
+function getTableColor()
+{
+    if (!localStorage.getItem('tableColor'))
+    {
+        localStorage.setItem('tableColor', 0);
+        return localStorage.getItem('tableColor');
+    }
+    else
+    {
+        return localStorage.getItem('tableColor');
+    }
+}
+
 // * DRAWING FUNCTIONS * //
 
 // Draws the game's title.

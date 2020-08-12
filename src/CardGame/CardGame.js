@@ -16,6 +16,9 @@ const CHIP_RADIUS = 50;
 const TABLET_BRKPNT = 800;
 const MOBILE_BRKPNT = 500;
 
+// Custom color array
+const colors = [ '#00AA00', '#33FF33','#AA0000', '#FF3333', '#0000AA', '#3333FF', '#222', '#999'];
+
 // An array for storing the canvas objects for events.
 let canvasObjs = [];
 
@@ -25,7 +28,7 @@ let Game =
     RGBTitleScreen : { cycleCounter : 0, flicker: true },
     counter: 0,
     context: 'TitleScreen',
-    tableColor: '#00AA00'
+    tableColor: getTableColor()
 };
 
 // The first domino in the whole application.
@@ -50,6 +53,12 @@ function animate()
             break;
         case 'PokerInstructions':
             pokerInstructions();
+            break
+        case 'Blackjack':
+            Blackjack();
+            break;
+        case 'Poker':
+            Poker();
     }
 
     requestAnimationFrame(animate);
