@@ -11,7 +11,7 @@ function resetArray()
     Game.counter = 0;
 }
 
-// Checks if there is a preferred table color and sets the default if there is none.
+// Checks if there is a preferred table color and sets the default (green) if there is none.
 function getTableColor()
 {
     if (!localStorage.getItem('tableColor'))
@@ -25,7 +25,95 @@ function getTableColor()
     }
 }
 
+// Checks if the user has a bank, and sets the default (100) if there is none.
+function getBank()
+{
+    if (!localStorage.getItem('bank'))
+    {
+        localStorage.setItem('bank', 100);
+        return localStorage.getItem('bank');
+    }
+    else
+    {
+        return localStorage.getItem('bank');
+    }
+}
+
 // * DRAWING FUNCTIONS * //
+
+// Draws the game table with the name and bank.
+function drawTable(gameName)
+{
+    drawBG();
+    
+    ctx.fillStyle = colors[Game.tableColor];
+    ctx.beginPath();
+    ctx.rect(0, 0, DEFAULT_CANVAS_SIZE, DEFAULT_CANVAS_SIZE - 150);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(0, DEFAULT_CANVAS_SIZE - 150, DEFAULT_CANVAS_SIZE, 150);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE - 150);
+    ctx.lineTo(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE);
+    ctx.stroke();
+
+    ctx.fillStyle = 'white';
+    ctx.font = "20px Arial";
+    ctx.fillText(gameName, DEFAULT_CANVAS_SIZE / 8 * 7, DEFAULT_CANVAS_SIZE - 125);
+
+    ctx.fillStyle = 'white';
+    ctx.font = "15px Arial";
+    ctx.fillText("BANK", DEFAULT_CANVAS_SIZE / 8 * 7, DEFAULT_CANVAS_SIZE - 100);
+    ctx.fillText(Game.bank, DEFAULT_CANVAS_SIZE / 8 * 7, DEFAULT_CANVAS_SIZE - 75, DEFAULT_CANVAS_SIZE / 4);
+}
+
+// Draws the Menu Button.
+function drawMenu()
+{
+    ctx.fillStyle = '#CCC';
+    ctx.beginPath();
+    ctx.rect(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE - 65, DEFAULT_CANVAS_SIZE / 4, 65);
+    ctx.fill();
+    
+    ctx.fillStyle = '#111';
+    ctx.font = "20px Arial";
+    ctx.fillText("MENU", DEFAULT_CANVAS_SIZE / 8 * 7, DEFAULT_CANVAS_SIZE - 25);
+}
+
+// For colorPicker and wager.
+function drawLeftArrow(color, x, y)
+{
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.rect(x, y, 50, 50);
+    ctx.fill();
+
+    ctx.fillStyle = '#111';
+    ctx.beginPath();
+    ctx.moveTo(x + 30, y + 35);
+    ctx.lineTo(x + 20, y + 25);
+    ctx.lineTo(x + 30, y + 15);
+    ctx.fill();
+}
+
+// For colorPicker and wager.
+function drawRightArrow(color, x, y)
+{
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.rect(x, y, 50, 50);
+    ctx.fill();
+
+    ctx.fillStyle = '#111';
+    ctx.beginPath();
+    ctx.moveTo(x + 20, y + 35);
+    ctx.lineTo(x + 30, y + 25);
+    ctx.lineTo(x + 20, y + 15);
+    ctx.fill();
+}
 
 // Draws the game's title.
 function drawTitle(color, title_Y)

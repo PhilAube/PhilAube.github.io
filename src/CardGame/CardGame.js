@@ -12,29 +12,32 @@ const CARD_HEIGHT = 150;
 const CARD_WIDTH = 100;
 const CHIP_RADIUS = 50;
 
+// Color array for custom table color
+const colors = [ '#00AA00', '#33FF33','#AA0000', '#FF3333', '#0000AA', '#3333FF', '#222', '#999'];
+
 // Specific to philaube.github.io
 const TABLET_BRKPNT = 800;
 const MOBILE_BRKPNT = 500;
 
-// Custom color array
-const colors = [ '#00AA00', '#33FF33','#AA0000', '#FF3333', '#0000AA', '#3333FF', '#222', '#999'];
-
 // An array for storing the canvas objects for events.
 let canvasObjs = [];
 
-// This Game Object manages colors, object/event creation for each screen based on context.
+// This Game Object manages colors, object/event creation for each screen based on context and saved information.
 let Game = 
 {
     RGBTitleScreen : { cycleCounter : 0, flicker: true },
     counter: 0,
     context: 'TitleScreen',
-    tableColor: getTableColor()
+    tableColor: getTableColor(),
+    bet : 0,
+    bank : getBank(),
+    betIncrement : 10
 };
 
 // The first domino in the whole application.
 window.onload = animate;
 
-// The main animation loop
+// The main animation loop.
 function animate()
 {
     switch (Game.context)
@@ -109,7 +112,7 @@ GAMECANVAS.addEventListener('mousemove', function(evt)
     }
 });
 
-// Returns the mouse coordinate scaled based on the window size
+// Returns the mouse coordinate scaled based on the window size.
 function getModifiedMousePosition(event)
 {
     let currentCanvasSize = adjustMeasurements();
@@ -125,7 +128,7 @@ function getModifiedMousePosition(event)
     return mouse;
 }
 
-// Ensures that click and hover events have proper coordinates based on screen size
+// Ensures that click and hover events have proper coordinates based on screen size.
 function adjustMeasurements()
 {
     var dynamicCanvasSize = 0;
