@@ -92,13 +92,13 @@ class Deck
     {
         this.cards = [];
 
-        let cardIndex = 0;
-
         createSuits(this.cards);
 
         // Loops through each rank to create a suit of cards
         function createSuits(cards)
         {
+            let cardIndex = 0;
+            
             for (let s = 0; s < suits.length; s++)
             {
                 for (let r = 0; r < ranks.length; r++)
@@ -106,6 +106,27 @@ class Deck
                     cards[cardIndex] = new Card(suits[s], ranks[r]);
                     cardIndex++;
                 }
+            }
+        }
+
+        // Shuffles the deck.
+        this.Shuffle = function()
+        {
+            for (let index = 0; index < 52; index++)
+            {
+                let randomIndex = null;
+
+                do 
+                {
+                    randomIndex = (Math.floor(Math.random() * 52));
+                } while (randomIndex === index);
+                
+                let tempCard = {};
+                
+                Object.assign(tempCard, this.cards[index]);
+
+                Object.assign(this.cards[index], this.cards[randomIndex]);
+                Object.assign(this.cards[randomIndex], tempCard);
             }
         }
     }

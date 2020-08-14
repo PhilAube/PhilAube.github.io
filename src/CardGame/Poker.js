@@ -19,18 +19,29 @@ function Poker()
         
         case 2:
             deleteBettingEvents();
-            createPokerEvents();
+            Game.deck.Shuffle();
+            Game.counter++;
             break;
 
-        case 3:             
+        case 3:          
+            createPokerEvents();   
+            break;
+
+        case 4:
             drawTable("POKER");
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+            break;
+
+        case 69: // Are you sure you want to quit menu
+
             break;
     }
 
     // Creates the events for the Poker game.
     function createPokerEvents()
     {
-        // canvasObjs[0] (Back chip) is still there so start from 1
+        // canvasObjs[0] (Menu button) is still there so start from 1
+
+        Game.counter++;
     }
 }

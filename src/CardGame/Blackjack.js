@@ -19,12 +19,21 @@ function Blackjack()
 
         case 2:
             deleteBettingEvents();
-            createBJEvents();
+            Game.deck.Shuffle();
+            Game.counter++;
             break;
 
         case 3:
+            createBJEvents();
+            break;
+        
+        case 4:
             drawTable("BLACKJACK");
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+            break;
+
+        case 69: // Are you sure you want to quit menu
+
             break;
     }
 
@@ -32,5 +41,7 @@ function Blackjack()
     function createBJEvents()
     {
         // canvasObjs[0] (Menu button) is still there so start from 1
+        
+        Game.counter++;
     }
 }

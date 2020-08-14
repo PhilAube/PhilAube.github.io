@@ -31,7 +31,8 @@ let Game =
     tableColor: getTableColor(),
     bet : 0,
     bank : getBank(),
-    betIncrement : 10
+    betIncrement : 10,
+    deck : new Deck()
 };
 
 // The first domino in the whole application.

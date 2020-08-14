@@ -53,6 +53,7 @@ function drawTable(gameName)
 
     ctx.beginPath();
     ctx.rect(0, DEFAULT_CANVAS_SIZE - 150, DEFAULT_CANVAS_SIZE, 150);
+    ctx.strokeStyle = 'white';
     ctx.stroke();
 
     ctx.beginPath();
@@ -224,7 +225,7 @@ function drawChip(x, y, text = ' ', chipColor)
 
     // Draw lines
     ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
 
     for (let i = 0; i <= SECTORS; i++)
     {
