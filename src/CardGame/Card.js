@@ -92,6 +92,8 @@ class Deck
     {
         this.cards = [];
 
+        this.topCard = 0;
+
         createSuits(this.cards);
 
         // Loops through each rank to create a suit of cards
@@ -128,6 +130,46 @@ class Deck
                 Object.assign(this.cards[index], this.cards[randomIndex]);
                 Object.assign(this.cards[randomIndex], tempCard);
             }
+        }
+    }
+}
+
+// A class defining a hand with a method for accumulating the value.
+class Hand
+{
+    constructor()
+    {
+        this.cards = [];
+
+        this.getBJValue = function() // TODO: Ranks come in as a string. Make them integers.
+        {
+            let acc = 0;
+            let aceCount = 0;
+
+            for (let i = 0; i < this.cards.length; i++)
+            {
+                if (this.cards[i].rank === 'A') // If Ace
+                {
+                    aceCount++;
+                    acc +=11;
+                }
+                else if (this.cards[i].rank == 'K' || this.cards[i].rank == 'Q' || this.cards[i].rank == 'J') // If face card
+                {
+                    acc += 10;
+                }
+                else
+                {
+                    acc += ranks.indexOf(this.cards[i].rank) + 1;
+                }
+            }
+
+            while (acc > 21 & aceCount > 0)
+            {
+                acc -= 10;
+                aceCount--;
+            }
+
+            return acc;
         }
     }
 }

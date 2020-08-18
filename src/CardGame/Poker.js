@@ -24,12 +24,13 @@ function Poker()
             break;
 
         case 3:          
-            createPokerEvents();   
+            createPokerEvents();
+            Game.counter++;
             break;
 
         case 4:
             drawTable("POKER");
-            canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+            drawEvents();
             break;
 
         case 69: // Are you sure you want to quit menu
@@ -42,6 +43,30 @@ function Poker()
     {
         // canvasObjs[0] (Menu button) is still there so start from 1
 
-        Game.counter++;
+        canvasObjs[1] = new CanvasObject(75, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
+        canvasObjs[1].clickCallback = function()
+        {
+            alert("DISCARD");
+        }
+        canvasObjs[1].hoverCallback = function()
+        {
+            drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'DISCARD', '#0000AA');
+        }
+        canvasObjs[2] = new CanvasObject(200, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
+        canvasObjs[2].clickCallback = function()
+        {
+            alert("PLAY");
+        }
+        canvasObjs[2].hoverCallback = function()
+        {
+            drawChip(200, DEFAULT_CANVAS_SIZE - 75, 'PLAY', '#0000AA');
+        }
+    }
+
+    function drawEvents()
+    {
+        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'DISCARD', '#AA0000');
+        canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(200, DEFAULT_CANVAS_SIZE - 75, 'PLAY', '#AA0000');
     }
 }

@@ -348,7 +348,7 @@ function blackjackInstructions()
             ctx.fillText("If you get a higher count than the dealer without going over 21, you win!", MID_CANVAS, MID_CANVAS - 60);
             ctx.fillText("You will get your bet back, and your profit will be 100% equal to your bet.", MID_CANVAS, MID_CANVAS - 40);
             ctx.fillText("If you're dealt an Ace and a card worth 10, this is known as a BLACKJACK.", MID_CANVAS, MID_CANVAS); 
-            ctx.fillText("This will earn you 150% of profits instead of the normal 100%.", MID_CANVAS, MID_CANVAS + 20);
+            ctx.fillText("This will earn you 200% of profits instead of the normal 100%.", MID_CANVAS, MID_CANVAS + 20);
             ctx.fillText("If the player has the same total as the dealer, ", MID_CANVAS, MID_CANVAS + 60);
             ctx.fillText('this is known as a "standoff" and your bet is simply returned with no profit.', MID_CANVAS, MID_CANVAS + 80);
             ctx.fillText("An Ace's default value is 11, but if at any point you exceed 21", MID_CANVAS, MID_CANVAS + 120);

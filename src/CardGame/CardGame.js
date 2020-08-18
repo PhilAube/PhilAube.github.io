@@ -32,7 +32,12 @@ let Game =
     bet : 0,
     bank : getBank(),
     betIncrement : 10,
-    deck : new Deck()
+    deck : new Deck(),
+    frameCounter : 0,
+    lastTimedEvent : 0,
+    CPUHand : new Hand(),
+    userHand : new Hand(),
+    handValue : 0
 };
 
 // The first domino in the whole application.
@@ -65,6 +70,7 @@ function animate()
             Poker();
     }
 
+    Game.frameCounter++;
     requestAnimationFrame(animate);
 }
 

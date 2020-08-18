@@ -91,6 +91,16 @@ function createBettingEvents()
             Game.context = 'TitleScreen';
         
             resetArray();
+
+            while (Game.CPUHand.cards.length > 0)
+            {
+                Game.CPUHand.cards.pop();
+            }
+
+            while (Game.userHand.cards.length > 0)
+            {
+                Game.userHand.cards.pop();
+            }
         }
         canvasObjs[0].hoverCallback = function()
         {
