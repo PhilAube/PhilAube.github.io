@@ -67,12 +67,12 @@ class Card
             ctx.font = "17px Verdana";
             ctx.fillText(rank, LEFT, y + 20);
             ctx.font = "20px Verdana";
-            ctx.fillText(suit, LEFT, y + 40);
+            ctx.fillText(suit, LEFT, y + 45);
 
             ctx.font = "17px Verdana";
             ctx.fillText(rank, RIGHT, y + CARD_HEIGHT - 10);
             ctx.font = "20px Verdana";
-            ctx.fillText(suit, RIGHT, y + CARD_HEIGHT - 30);
+            ctx.fillText(suit, RIGHT, y + CARD_HEIGHT - 35);
         }
 
         function drawCardOutline()

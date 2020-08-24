@@ -2,7 +2,7 @@
 
 function wager()
 {
-    drawBox();
+    drawBox("PLACE YOUR BET");
 
     if (Game.bet > Game.bank)
     {
@@ -35,23 +35,6 @@ function wager()
             drawIncrementBox(MID_CANVAS + 50, '#777', 1000);
             break;
     }
-
-    // Draws the outline and background of the Betting box.
-    function drawBox()
-    {
-        ctx.beginPath();
-        ctx.rect(150, 100, 300, 275);
-        ctx.fillStyle = '#333';
-        ctx.fill();
-    
-        ctx.beginPath();
-        ctx.strokeStyle = 'white';
-        ctx.rect(150, 100, 300, 275);
-        ctx.stroke();
-    
-        ctx.fillStyle = 'white';
-        ctx.fillText("PLACE YOUR BET", MID_CANVAS, 150);
-    }
 }
 
 // Creates events for the wager.
@@ -71,36 +54,18 @@ function createBettingEvents()
 
     thousandBox();
 
-    function menuButton()
+    function menuButton() // Bottom right button to bring you back to Title screen.
     {
         canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE - 65, DEFAULT_CANVAS_SIZE / 4, 65);
         canvasObjs[0].clickCallback = function()
         {
-            // TO DO
-            // Save Game.counter somewhere (savedGameContext)
-            // Game.counter = 69
-            // remove events without using resetArray()
-
-            // Game.counter 69 = 
-            // Draw box / create yes and no events
-            // Are you sure you want to quit? You will lose any chips that you have bet.
-            // yes = Game.context = 'TitleScreen'
-            // no = Game.counter = savedGameContext (-1)*
-            // * MAKE SURE THE EVENTS ARE RE-MADE AS WELL
-
             Game.context = 'TitleScreen';
         
             resetArray();
 
-            while (Game.CPUHand.cards.length > 0)
-            {
-                Game.CPUHand.cards.pop();
-            }
+            resetHand(Game.CPUHand);
 
-            while (Game.userHand.cards.length > 0)
-            {
-                Game.userHand.cards.pop();
-            }
+            resetHand(Game.userHand);
         }
         canvasObjs[0].hoverCallback = function()
         {

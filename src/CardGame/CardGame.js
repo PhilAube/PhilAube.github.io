@@ -13,7 +13,7 @@ const CARD_WIDTH = 100;
 const CHIP_RADIUS = 50;
 
 // Color array for custom table color
-const colors = [ '#00AA00', '#33FF33','#AA0000', '#FF3333', '#0000AA', '#3333FF', '#222', '#999'];
+const colors = [ '#008800', '#30fc3e','#AA0000', '#ff3d3d', '#0404e0', '#66ccff', '#222', '#999', '#ff14d4', '#b700ff' ];
 
 // Specific to philaube.github.io
 const TABLET_BRKPNT = 800;

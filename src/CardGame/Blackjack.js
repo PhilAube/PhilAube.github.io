@@ -2,12 +2,14 @@
 
 function Blackjack()
 {
-    const BACK_CHIP_XY = DEFAULT_CANVAS_SIZE - 75;
+    const CHIP_Y = DEFAULT_CANVAS_SIZE - 75;
+    const CPU_HAND_Y = 50;
+    const USER_HAND_Y = 250;
 
     switch(Game.counter)
     {
         case 0: // Add Betting events, make sure everything is reset
-            createBettingEvents(BACK_CHIP_XY);
+            createBettingEvents();
             Game.counter++;
             Game.deck.topCard = 0;
             Game.lastTimedEvent = 0;
@@ -28,12 +30,12 @@ function Blackjack()
         case 3: // Begin distributing cards, CPU card
             drawTable("BLACKJACK");
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
-            distributeCards(50, 75, Game.CPUHand, false);
+            distributeCards(50, CPU_HAND_Y, Game.CPUHand, false);
             break;
         
         case 4: // User's first card
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
-            distributeCards(50, 275, Game.userHand, false);
+            distributeCards(50, USER_HAND_Y, Game.userHand, false);
             break;
 
         case 5: // Facedown CPU card
@@ -42,7 +44,7 @@ function Blackjack()
             if (Game.frameCounter === Game.lastTimedEvent + 60)
             {
                 Game.CPUHand.cards[1] = Game.deck.cards[Game.deck.topCard];
-                drawFaceDown(100, 75, 'white');
+                drawFaceDown(100, CPU_HAND_Y, 'white');
                 Game.lastTimedEvent = Game.frameCounter;
                 Game.deck.topCard++;
                 Game.counter++;
@@ -51,7 +53,7 @@ function Blackjack()
 
         case 6: // User's second card
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
-            distributeCards(100, 275, Game.userHand, false);
+            distributeCards(100, USER_HAND_Y, Game.userHand, false);
             break;
 
         case 7: // Create events for user Blackjack options
@@ -83,10 +85,7 @@ function Blackjack()
             break;
 
         case 11: // When the user stands
-            while (canvasObjs.length > 1)
-            {
-                canvasObjs.pop();
-            }
+            deleteChipEvents();
 
             drawTable("BLACKJACK");
             drawCPUHand();
@@ -121,7 +120,7 @@ function Blackjack()
                 }
                 else
                 {
-                    distributeCards(50 + (Game.CPUHand.cards.length * 50), 75, Game.CPUHand, true);
+                    distributeCards(50 + (Game.CPUHand.cards.length * 50), CPU_HAND_Y, Game.CPUHand, true);
                 }
             }
             else
@@ -139,7 +138,7 @@ function Blackjack()
 
             if (myHand === pcHand)
             {
-                alert("STANDOFF");
+                Game.handValue = "STANDOFF!";
                 
                 Game.bank += Game.bet;
                 localStorage.setItem('bank', Game.bank);
@@ -157,7 +156,7 @@ function Blackjack()
             break;
 
         case 14: // You lose
-            alert("YOU LOSE");
+            Game.handValue = "YOU LOSE!";
             Game.counter = 16;
             break;
 
@@ -165,14 +164,14 @@ function Blackjack()
             checkHandValue(Game.userHand, true);
             if (Game.userHand.cards.length === 2 & Game.handValue === 21) // If they got a Blackjack
             {
-                alert("YOU WIN WITH BLACKJACK");
+                Game.handValue = "YOU WIN WITH BLACKJACK!";
                 Game.bank += Game.bet * 3;
                 localStorage.setItem('bank', Game.bank);
                 Game.counter = 16;
             }
             else if (Game.handValue <= 21) // Verify the hand isn't over 21.
             {
-                alert("YOU WIN");
+                Game.handValue = "YOU WIN!";
                 Game.bank += Game.bet * 2;
                 localStorage.setItem('bank', Game.bank);
                 Game.counter = 16;
@@ -182,7 +181,6 @@ function Blackjack()
                 Game.counter = 14;
             }
 
-
             break;
 
         case 16: // Play again
@@ -190,19 +188,87 @@ function Blackjack()
             drawEvents();
             drawCPUHand();
             drawUserHand();
-            // alert("Play again?");
-            Game.counter++;
+            deleteChipEvents();
+            createPlayAgainEvents();
+            Game.counter = 17;
             break;
 
         case 17:
             drawCPUHand();
             drawUserHand();
             drawEvents();
-            break;
+            drawBox(Game.handValue);
+            ctx.fillText("PLAY AGAIN?", MID_CANVAS, 200);
 
-        case 69: // Are you sure you want to quit menu
-
+            canvasObjs[1].isHovered ? drawYNBox("YES", 200, '#CCC') : drawYNBox("YES", 200, 'white');
+            canvasObjs[2].isHovered ? drawYNBox("NO", 320, '#CCC') : drawYNBox("NO", 320, 'white');
             break;
+    }
+
+    // Draws the Yes or No box for the event.
+    function drawYNBox(YN, x, color)
+    {
+        ctx.beginPath();
+        ctx.rect(x, 250, 80, 80);
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        ctx.fillStyle = 'black';
+        ctx.fillText(YN, x + 40, 300);
+    }
+
+    // Creates the events for the Play Again dialog box.
+    function createPlayAgainEvents()
+    {
+        yesButton();
+
+        noButton();
+
+        function yesButton()
+        {
+            canvasObjs[1] = new CanvasObject(200, 250, 80, 80);
+            canvasObjs[1].clickCallback = function()
+            {
+                Game.counter = 0;
+                resetArray();
+                Game.lastTimedEvent = 0;
+                resetHand(Game.CPUHand);
+                resetHand(Game.userHand);
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                ctx.beginPath();
+                ctx.rect(200, 250, 80, 80);
+                ctx.fillStyle = '#CCC';
+                ctx.fill();
+        
+                ctx.fillStyle = 'black';
+                ctx.fillText("YES", 240, 300);
+            }
+        }
+
+        function noButton()
+        {
+            canvasObjs[2] = new CanvasObject(320, 250, 80, 80);
+            canvasObjs[2].clickCallback = function()
+            {
+                Game.context = 'TitleScreen';
+                resetArray();
+                Game.lastTimedEvent = 0;
+                resetHand(Game.CPUHand);
+                resetHand(Game.userHand);
+            }
+            canvasObjs[2].hoverCallback = function()
+            {
+                ctx.beginPath();
+                ctx.rect(320, 250, 80, 80);
+                ctx.fillStyle = '#CCC';
+                ctx.fill();
+        
+                ctx.fillStyle = 'black';
+                ctx.fillText("NO", 360, 300);
+            }
+        }
     }
 
     // Creates the events for the Blackjack game.
@@ -210,58 +276,75 @@ function Blackjack()
     {
         // canvasObjs[0] (Menu button) is still there so start from 1
 
-        canvasObjs[1] = new CanvasObject(75, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
-        canvasObjs[1].clickCallback = function() // HIT
-        {
-            Game.userHand.cards[Game.userHand.cards.length] = Game.deck.cards[Game.deck.topCard];
-            Game.deck.topCard++;
-            Game.userHand.cards[Game.userHand.cards.length - 1].drawCard(50 + ((Game.userHand.cards.length - 1) * 50), 275);
+        hitChip();
 
-            if (Game.counter === 8) // If it's the user's third card
+        standChip();
+
+        doubleDownChip();
+
+        function hitChip()
+        {
+            canvasObjs[1] = new CanvasObject(75, CHIP_Y, 0, 0, CHIP_RADIUS);
+            canvasObjs[1].clickCallback = function() // HIT
             {
-                Game.counter++;
-            }
-        }
-        canvasObjs[1].hoverCallback = function()
-        {
-            drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'HIT', '#0000AA');
-        }
-        canvasObjs[2] = new CanvasObject(200, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
-        canvasObjs[2].clickCallback = function() // STAND
-        {
-            if (Game.counter === 8)
-            {
-                canvasObjs.pop(); // Remove double down
-            }
-
-            Game.counter = 11;
-        }
-        canvasObjs[2].hoverCallback = function()
-        {
-            drawChip(200, DEFAULT_CANVAS_SIZE - 75, 'STAND', '#0000AA');
-        }
-        canvasObjs[3] = new CanvasObject(325, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
-        canvasObjs[3].clickCallback = function() // DOUBLE DOWN
-        {
-            if (Game.bank - Game.bet >= 0) // If the user has enough chips
-            {
-                Game.bank -= Game.bet;
-                localStorage.setItem('bank', Game.bank);
-
-                Game.bet *= 2;   
-                Game.counter = 11;
-
                 Game.userHand.cards[Game.userHand.cards.length] = Game.deck.cards[Game.deck.topCard];
                 Game.deck.topCard++;
+                Game.userHand.cards[Game.userHand.cards.length - 1].drawCard(50 + ((Game.userHand.cards.length - 1) * 50), USER_HAND_Y);
+    
+                if (Game.counter === 8) // If it's the user's third card
+                {
+                    Game.counter++;
+                }
             }
-            else
+            canvasObjs[1].hoverCallback = function()
             {
-                alert("You don't have enough chips to double down.");
+                drawChip(75, CHIP_Y, 'HIT', '#0000AA');
             }
         }
-        canvasObjs[3].hoverCallback = function()
+
+        function standChip()
         {
-            drawChip(325, DEFAULT_CANVAS_SIZE - 75, 'DOUBLE DOWN', '#0000AA');
+            canvasObjs[2] = new CanvasObject(200, CHIP_Y, 0, 0, CHIP_RADIUS);
+            canvasObjs[2].clickCallback = function() // STAND
+            {
+                if (Game.counter === 8)
+                {
+                    canvasObjs.pop(); // Remove double down
+                }
+    
+                Game.counter = 11;
+            }
+            canvasObjs[2].hoverCallback = function()
+            {
+                drawChip(200, CHIP_Y, 'STAND', '#0000AA');
+            }
+        }
+
+        function doubleDownChip()
+        {
+            canvasObjs[3] = new CanvasObject(325, CHIP_Y, 0, 0, CHIP_RADIUS);
+            canvasObjs[3].clickCallback = function() // DOUBLE DOWN
+            {
+                if (Game.bank - Game.bet >= 0) // If the user has enough chips
+                {
+                    Game.bank -= Game.bet;
+                    localStorage.setItem('bank', Game.bank);
+    
+                    Game.bet *= 2;   
+                    Game.counter = 11;
+    
+                    Game.userHand.cards[Game.userHand.cards.length] = Game.deck.cards[Game.deck.topCard];
+                    Game.deck.topCard++;
+                }
+                else
+                {
+                    alert("You don't have enough chips to double down.");
+                }
+            }
+            canvasObjs[3].hoverCallback = function()
+            {
+                drawChip(325, CHIP_Y, 'DOUBLE DOWN', '#0000AA');
+            }
         }
     }
 
@@ -272,12 +355,12 @@ function Blackjack()
 
         if (Game.counter < 12)
         {
-            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'HIT', '#AA0000');
-            canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(200, DEFAULT_CANVAS_SIZE - 75, 'STAND', '#AA0000');
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, CHIP_Y, 'HIT', '#AA0000');
+            canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(200, CHIP_Y, 'STAND', '#AA0000');
     
             if (Game.userHand.cards.length <= 2)
             {
-                canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : drawChip(325, DEFAULT_CANVAS_SIZE - 75, 'DOUBLE DOWN', '#AA0000');
+                canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : drawChip(325, CHIP_Y, 'DOUBLE DOWN', '#AA0000');
             }
         }
     }
@@ -309,7 +392,7 @@ function Blackjack()
     {
         for (let i = 0; i < Game.userHand.cards.length; i++)
         {
-            Game.userHand.cards[i].drawCard(50 + (i * 50), 275);
+            Game.userHand.cards[i].drawCard(50 + (i * 50), USER_HAND_Y);
         }
     }
 
@@ -318,14 +401,14 @@ function Blackjack()
     {
         if (Game.counter < 11)
         {
-            Game.CPUHand.cards[0].drawCard(50, 75);
-            drawFaceDown(100, 75, 'white');
+            Game.CPUHand.cards[0].drawCard(50, CPU_HAND_Y);
+            drawFaceDown(100, CPU_HAND_Y, 'white');
         }
         else
         {
             for (let i = 0; i < Game.CPUHand.cards.length; i++)
             {
-                Game.CPUHand.cards[i].drawCard(50 + (i * 50), 75);
+                Game.CPUHand.cards[i].drawCard(50 + (i * 50), CPU_HAND_Y);
             }
         }
     }
@@ -340,10 +423,7 @@ function Blackjack()
             if (Game.handValue > 21)
             {
                 Game.counter = 14;
-                while (canvasObjs.length > 1)
-                {
-                    canvasObjs.pop();
-                }
+                deleteChipEvents();
             }
             else if (Game.handValue === 21)
             {
@@ -353,6 +433,15 @@ function Blackjack()
                     canvasObjs.pop();
                 }
             }
+        }
+    }
+
+    // Deletes all events except 0, which is for the menu.
+    function deleteChipEvents()
+    {
+        while (canvasObjs.length > 1)
+        {
+            canvasObjs.pop();
         }
     }
     

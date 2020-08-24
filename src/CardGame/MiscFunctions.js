@@ -11,6 +11,15 @@ function resetArray()
     Game.counter = 0;
 }
 
+// For resetting the hands.
+function resetHand(hand)
+{
+    while (hand.cards.length > 0)
+    {
+        hand.cards.pop();
+    }
+}
+
 // Checks if there is a preferred table color and sets the default (green) if there is none.
 function getTableColor()
 {
@@ -40,6 +49,23 @@ function getBank()
 }
 
 // * DRAWING FUNCTIONS * //
+
+// Draws the outline and background of the Betting box.
+function drawBox(text)
+{
+    ctx.beginPath();
+    ctx.rect(150, 100, 300, 275);
+    ctx.fillStyle = '#333';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'white';
+    ctx.rect(150, 100, 300, 275);
+    ctx.stroke();
+
+    ctx.fillStyle = 'white';
+    ctx.fillText(text, MID_CANVAS, 150);
+}
 
 // Draws the game table with the name and bank.
 function drawTable(gameName)
