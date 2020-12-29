@@ -51,7 +51,7 @@ body
     font-weight: 100;
 }
 
-#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody
+#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody, #timewasterbody
 {
     width: 100%;
     min-height: 500px;
@@ -132,6 +132,12 @@ nav ul
     align-items: center;
     height: 1000px;
 }
+
+#hero .textbox
+{
+    margin-top: 250px;
+}
+
 
 #hero .textbox p
 {
@@ -358,6 +364,19 @@ textarea
     background-color: var(--OffWhite);
 }
 
+/* TIMEWASTER 2 */
+
+#timewastercontainer
+{
+    margin: 5%;
+    margin-top: 200px;
+}
+
+#timewaster
+{
+    background-color: var(--PureBlack);
+}
+
 /* TABLET */
 
 @media only screen and (max-width: 800px)
@@ -367,7 +386,18 @@ textarea
         grid: auto / auto;
     }
 
+    #hero
+    {
+        height: 1100px;
+    }
+
     #cardgame
+    {
+        width: 90%;
+        height: 90%;
+    }
+
+    #timewaster
     {
         width: 90%;
         height: 90%;
@@ -389,7 +419,7 @@ textarea
 
     #hero
     {
-        height: 1250px;
+        height: 1300px;
     }
 
     /* CONTACT */
@@ -443,7 +473,7 @@ textarea
 
     .griditem img
     {
-        height: 175px;
+        width: 175px;
     }
 
     .overlay
@@ -466,6 +496,14 @@ textarea
     /* CARD GAME */
 
     #cardgame
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* TIMEWASTER 2 */
+
+    #timewaster
     {
         width: 100%;
         height: 100%;
