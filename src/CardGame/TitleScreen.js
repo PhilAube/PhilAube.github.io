@@ -79,9 +79,12 @@ function titleScreen()
             canvasObjs[1] = new CanvasObject(POKER_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[1].clickCallback = function()
             {
-                Game.context = 'Poker';
-    
-                resetArray();
+                // TEMPORARY CODE
+                alert("Sorry, this section is still under construction!");
+
+                // OLD CODE
+                // Game.context = 'Poker';
+                // resetArray();
             }
             canvasObjs[1].hoverCallback = function()
             {
