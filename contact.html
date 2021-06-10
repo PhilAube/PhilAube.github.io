@@ -6,7 +6,7 @@
     <link rel = "stylesheet" href="style.css">
     <script src="src/burger.js"></script>
     <script>
-        function foo()
+        function beUserFriendly()
         {
             let body = document.getElementById("emailMessage").value;
         
@@ -26,7 +26,7 @@
             alert(msg);
 
             let mailTo = "mailto:phil-aube@hotmail.com?body=" + body;
-            window.location.href = mailTo;
+            window.open(mailTo);
         }
     </script>
     <title>Contact</title>
@@ -87,7 +87,7 @@
                 <textarea name="message" id="emailMessage"></textarea>
 
                 <br>
-                <button onclick="foo()">Submit</button>
+                <button onclick="beUserFriendly()">Submit</button>
               </form>
         </div>
     </div>
