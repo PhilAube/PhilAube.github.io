@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href="style.css">
     <script src="src/burger.js"></script>
+    <script>
+        function foo()
+        {
+            let body = document.getElementById("emailMessage").value;
+        
+            let msg = "Hey there! \n\n" + 
+            "This is a just a dummy form meant to show off my graphic design skills (or lack thereof, if you reckon so). ";
+
+            if (body !== "") 
+            {
+                msg += "If you are genuinely interested in contacting me, I'll open up your email client for you, " +
+                "and I'll even paste your message into the text box to save you the trouble of copy-pasting."
+            }
+            else 
+            {
+                msg += "If you are genuinely interested in contacting me, I'll open up your email client for you.";
+            }
+
+            alert(msg);
+
+            let mailTo = "mailto:phil-aube@hotmail.com?body=" + body;
+            window.location.href = mailTo;
+        }
+    </script>
     <title>Contact</title>
 </head>
 <body>
@@ -31,7 +55,7 @@
                 <input type="text" name="name">
 
                 <label for="email">E-Mail Address</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email">
 
                 <label for="phone">Phone</label>
                 <input type="tel" name="phone">
@@ -60,10 +84,10 @@
                 </select>
 
                 <label for="message">Message</label>
-                <textarea name="message" required></textarea>
+                <textarea name="message" id="emailMessage"></textarea>
 
                 <br>
-                <button onclick="alert('Hey there! \n\nThis is a just a dummy form meant to show off my graphic design skills (or lack thereof, if you reckon so). If you are genuinely interested in contacting or working with me, please send an e-mail to this address: \n\nphil-aube@hotmail.com')">Submit</button>
+                <button onclick="foo()">Submit</button>
               </form>
         </div>
     </div>
