@@ -26,6 +26,7 @@
 
     <div id = "timewasterbody">
         <div id = "timewastercontainer">
+            <div>You have wasted <b id="time">00:00:00</b> while playing this game.</div> <br> <br>
             <canvas id = "timewaster"  height="500" width="500">Your browser does not support the HTML5 canvas tag.</canvas>
         </div>
     </div>
@@ -45,3 +46,51 @@
 <script src="src/TimeWaster 2/instructionScreen.js"></script>
 <script src="src/TimeWaster 2/titleScreen.js"></script>
 <script src="src/TimeWaster 2/main.js"></script>
+
+<script>
+    setInterval(updateTimer, 1000);
+
+    function updateTimer()
+    {
+        let timeElement = document.getElementById("time");
+
+        let splitty = timeElement.innerText.split(":");
+
+        let h = new Number(splitty[0]);
+        let m = new Number(splitty[1]);
+        let s = new Number(splitty[2]);
+
+        if (h == 24 && m == 0 && s == 0)
+        {
+            alert("You've been playing for 24 hours now. I think it's time to get some help.");   
+        } 
+
+        if (s < 59)
+        {
+            if (m < 59)
+            {
+                s += 1;
+            }
+        }
+        else
+        {
+            s = 0;
+
+            if (m < 59)
+            {
+                m += 1;
+            }
+            else
+            {
+                m = 0;
+                h += 1;
+            }
+        }
+        
+        if (s < 10) s = new String("0" + s);
+        if (m < 10) m = new String("0" + m);
+        if (h < 10) h = new String("0" + h);
+
+        timeElement.innerText = h + ":" + m + ":" + s;
+    }
+</script>
