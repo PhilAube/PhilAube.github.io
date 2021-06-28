@@ -117,7 +117,7 @@ function settingsScreen()
                     Game.tableColor--;
                     localStorage.setItem('tableColor', Game.tableColor);
                 }
-                else if (Game.tableColor === 0)
+                else if (Game.tableColor == 0)
                 {
                     Game.tableColor = colors.length - 1;
                 }

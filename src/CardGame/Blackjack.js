@@ -295,6 +295,8 @@ function Blackjack()
                 {
                     Game.counter++;
                 }
+
+                canvasObjs[1].isHovered = false;
             }
             canvasObjs[1].hoverCallback = function()
             {
