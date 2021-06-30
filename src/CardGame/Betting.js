@@ -59,8 +59,15 @@ function createBettingEvents()
         canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE - 65, DEFAULT_CANVAS_SIZE / 4, 65);
         canvasObjs[0].clickCallback = function()
         {
-            let result = confirm("Are you sure you want to return to the menu? \nIf you already placed a bet, you will lose your chips!")
-
+            let result = true;
+            
+            // Only ask if they placed a bet 
+            if (Game.counter > 2)
+            {
+               result = confirm("Are you sure you want to return to the menu? \n" +
+               "If you already placed a bet, you will lose your chips!");
+            }
+            
             if (result)
             {
                 Game.context = 'TitleScreen';

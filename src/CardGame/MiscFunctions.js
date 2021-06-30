@@ -275,6 +275,7 @@ function drawChip(x, y, text = ' ', chipColor)
 }
 
 // For drawing a 5 card hand nicely spread out accross the canvas.
+// Used in the instructions.
 function drawHand(hand, y)
 {
     // X values for 5 cards evenly spread across the canvas

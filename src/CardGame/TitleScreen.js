@@ -80,11 +80,11 @@ function titleScreen()
             canvasObjs[1].clickCallback = function()
             {
                 // TEMPORARY CODE
-                alert("Sorry, this section is still under construction!");
+                alert("This section is currently in development.\n" +
+                "However, feel free to have a look at the progress so far!");
 
-                // OLD CODE
-                // Game.context = 'Poker';
-                // resetArray();
+                Game.context = 'Poker';
+                resetArray();
             }
             canvasObjs[1].hoverCallback = function()
             {

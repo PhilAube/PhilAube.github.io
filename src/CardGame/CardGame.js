@@ -68,6 +68,7 @@ function animate()
             break;
         case 'Poker':
             Poker();
+            break;
     }
 
     Game.frameCounter++;

@@ -15,9 +15,9 @@ class Card
     }
 
     // Draws the given card in a certain position based on suit and rank.
-    drawCard(x, y)
+    drawCard(x, y, highlighted)
     {
-        drawCardBG();
+        drawCardBG(highlighted);
 
         colorSuit(this.suit);
 
@@ -25,11 +25,12 @@ class Card
 
         drawCardOutline();
 
-        function drawCardBG()
+        function drawCardBG(highlighted)
         {
             ctx.beginPath();
             ctx.rect(x, y, CARD_WIDTH, CARD_HEIGHT);
-            ctx.fillStyle = 'white';
+            if (highlighted) { ctx.fillStyle = 'gray'; }
+            else { ctx.fillStyle = 'white'; }
             ctx.fill();
         }
 
@@ -82,6 +83,11 @@ class Card
             ctx.strokeStyle = 'black';
             ctx.stroke();
         }
+    }
+
+    drawFD(x, y, color)
+    {
+        drawFaceDown(x, y, color);
     }
 }
 
