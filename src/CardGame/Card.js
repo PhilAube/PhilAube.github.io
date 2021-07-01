@@ -12,18 +12,27 @@ class Card
         this.rank = rank;
         this.x = x;
         this.y = y;
+        this.selected = false;
     }
 
     // Draws the given card in a certain position based on suit and rank.
     drawCard(x, y, highlighted)
     {
-        drawCardBG(highlighted);
+        if (this.selected)
+        {
+            if (highlighted) drawFaceDown(x, y, 'gray');
+            else drawFaceDown(x, y, 'white');
+        }
+        else
+        {
+            drawCardBG(highlighted);
 
-        colorSuit(this.suit);
-
-        drawCardPattern(this.rank, this.suit, x, y);
-
-        drawCardOutline();
+            colorSuit(this.suit);
+    
+            drawCardPattern(this.rank, this.suit, x, y);
+    
+            drawCardOutline();
+        }
 
         function drawCardBG(highlighted)
         {
