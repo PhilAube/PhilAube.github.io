@@ -131,17 +131,67 @@ function Poker()
 
         // Determine payout
         case 13:
-            alert("PAYOUT: In development! You get your chips back.");
+            // Temporary: Give the user their chips back.
             Game.bank += Game.bet;
             localStorage.setItem('bank', Game.bank);
-            // Game.counter++;
-            // Temporarily restart for easy testing
-            Game.counter = 0;
+            Game.counter++;
             break;
         
+        // Display result and ask to play again
         case 14:
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+            createPlayAgainEvents();
+            Game.counter++;
             break;
+
+        case 15:
+            canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+            showPlayAgain();
+            break;
+    }
+
+    function showPlayAgain()
+    {
+        drawTable("POKER");
+        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
+        drawNormalHand();
+
+        ctx.fillStyle = 'white';
+        ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 65);
+        
+        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');
+        canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#AA0000');
+    }
+
+    function createPlayAgainEvents()
+    {
+        // canvasObjs[0] already in use
+
+        // Yes chip
+        canvasObjs[1] = new CanvasObject(250, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
+        canvasObjs[1].clickCallback = function()
+        {
+            Game.counter = 0;
+        }
+        canvasObjs[1].hoverCallback = function()
+        {
+            drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#0000AA');
+        }
+
+        // No chip
+        canvasObjs[2] = new CanvasObject(375, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
+        canvasObjs[2].clickCallback = function()
+        {
+            Game.context = 'TitleScreen';
+            resetArray();
+            resetHand(Game.userHand);
+            Game.deck.cards.forEach(card => { card.selected = false; });
+            Game.lastTimedEvent = 0;
+        }
+        canvasObjs[2].hoverCallback = function()
+        {
+            drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#0000AA');
+        }
     }
 
     // Creates the events for the Poker game.

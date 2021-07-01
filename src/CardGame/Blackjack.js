@@ -197,11 +197,13 @@ function Blackjack()
             drawCPUHand();
             drawUserHand();
             drawEvents();
-            drawBox(Game.handValue);
-            ctx.fillText("PLAY AGAIN?", MID_CANVAS, 200);
 
-            canvasObjs[1].isHovered ? drawYNBox("YES", 200, '#CCC') : drawYNBox("YES", 200, 'white');
-            canvasObjs[2].isHovered ? drawYNBox("NO", 320, '#CCC') : drawYNBox("NO", 320, 'white');
+            ctx.fillStyle = 'white';
+            ctx.fillText(Game.handValue, 100, DEFAULT_CANVAS_SIZE - 80);
+            ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 50);
+
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');
+            canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#AA0000');
             break;
     }
 
@@ -226,7 +228,7 @@ function Blackjack()
 
         function yesButton()
         {
-            canvasObjs[1] = new CanvasObject(200, 250, 80, 80);
+            canvasObjs[1] = new CanvasObject(250, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
             canvasObjs[1].clickCallback = function()
             {
                 Game.counter = 0;
@@ -237,19 +239,13 @@ function Blackjack()
             }
             canvasObjs[1].hoverCallback = function()
             {
-                ctx.beginPath();
-                ctx.rect(200, 250, 80, 80);
-                ctx.fillStyle = '#CCC';
-                ctx.fill();
-        
-                ctx.fillStyle = 'black';
-                ctx.fillText("YES", 240, 300);
+                drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#0000AA');
             }
         }
 
         function noButton()
         {
-            canvasObjs[2] = new CanvasObject(320, 250, 80, 80);
+            canvasObjs[2] = new CanvasObject(375, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
             canvasObjs[2].clickCallback = function()
             {
                 Game.context = 'TitleScreen';
@@ -260,13 +256,7 @@ function Blackjack()
             }
             canvasObjs[2].hoverCallback = function()
             {
-                ctx.beginPath();
-                ctx.rect(320, 250, 80, 80);
-                ctx.fillStyle = '#CCC';
-                ctx.fill();
-        
-                ctx.fillStyle = 'black';
-                ctx.fillText("NO", 360, 300);
+                drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#0000AA');
             }
         }
     }
