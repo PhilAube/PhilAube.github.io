@@ -4,22 +4,49 @@ function settingsScreen()
 {
     const SETTINGS_Y = 75;
 
-    // Will only create the object array once upon loading
-    if (Game.counter === 0)
+    switch (Game.counter)
     {
-        createSettingsScreenEvents();
-        Game.counter++;
+        case 0:
+            createSettingsScreenEvents();
+            Game.counter++;
+            break;
+
+        case 1:
+            drawBG();
+            drawTitle();
+            colorPicker();
+            canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : begForChips('#CCC');
+            drawBackChip();
+            break;
+
+        case 2:
+            while (canvasObjs.length > 1)
+            {
+                canvasObjs.pop();
+            }
+            
+            // OK Button
+            canvasObjs[1] = new CanvasObject(MID_CANVAS - 40, MID_CANVAS - 50, 80, 60);
+            canvasObjs[1].clickCallback = function()
+            {
+                canvasObjs.pop();
+                Game.counter = 0;
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                drawYNBox("OK", MID_CANVAS - 40, '#FFF');
+            }
+
+            Game.counter++;
+            break;
+        
+        case 3:
+            drawBackChip();
+            drawBox("");
+            ctx.fillText(Game.handValue, MID_CANVAS, MID_CANVAS - 100);
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("OK", MID_CANVAS - 40, '#CCC');
+            break;
     }
-
-    drawBG();
-    
-    drawTitle();
-
-    colorPicker();
-
-    canvasObjs[3].isHovered ? canvasObjs[3].hoverCallback() : begForChips('#CCC');
-
-    drawBackChip();
 
     function drawTitle()
     {
@@ -98,7 +125,7 @@ function settingsScreen()
             canvasObjs[0].clickCallback = function()
             {
                 Game.context = 'TitleScreen';
-            
+                Game.handValue = 0;
                 resetArray();
             }
             canvasObjs[0].hoverCallback = function()
@@ -157,13 +184,15 @@ function settingsScreen()
             {
                 if (Game.bank == 0)
                 {
-                    alert("You get 100 chips out of pity.");
+                    Game.counter = 2;
+                    Game.handValue = "You get 100 chips out of sheer pity.";
                     Game.bank = 100;
                     localStorage.setItem('bank', 100);
                 }
                 else
                 {
-                    alert("Are you hiding some chips behind your back?");
+                    Game.counter = 2;
+                    Game.handValue = "I know you have chips, you can't fool me.";
                 }
             }
             canvasObjs[3].hoverCallback = function()

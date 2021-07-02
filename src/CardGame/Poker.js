@@ -148,6 +148,50 @@ function Poker()
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
             showPlayAgain();
             break;
+
+        case 69:
+            while (canvasObjs.length > 1)
+            {
+                canvasObjs.pop();
+            }
+
+            canvasObjs[1] = new CanvasObject(MID_CANVAS - 40, MID_CANVAS - 50, 80, 60);
+            canvasObjs[1].clickCallback = function()
+            {
+                canvasObjs.pop();
+                Game.err = undefined;
+                Game.counter = 0;                
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                drawYNBox("OK", MID_CANVAS - 40, '#FFF');
+            }
+
+            Game.counter++;
+            break;
+    
+        case 70:
+            drawBox("");
+            ctx.font = '15px Arial';
+
+            switch (Game.err)
+            {
+                case 2:
+                    ctx.fillText("You can't play without betting chips!", MID_CANVAS, MID_CANVAS - 130);
+                    ctx.fillText("You can beg for more in the SETTINGS.", MID_CANVAS, MID_CANVAS - 90);
+                    break;
+
+                case 3:
+                    ctx.fillText("You can't play without betting!", MID_CANVAS, MID_CANVAS - 100);
+                    break;
+
+                case 4:
+                    ctx.fillText("You can't bet more chips than you have!", MID_CANVAS, MID_CANVAS - 100);
+                    break;
+            }
+            
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("OK", MID_CANVAS - 40, '#CCC');
+            break;
     }
 
     function showPlayAgain()

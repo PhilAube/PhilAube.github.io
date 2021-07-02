@@ -151,16 +151,22 @@ function createBettingEvents()
             {
                 if (Game.bank == 0)
                 {
-                    alert("You can't play without betting! \nIf you're out of chips, you can beg for some in the SETTINGS.");
+                    // No chips
+                    Game.counter = 69;
+                    Game.err = 2;
                 }
                 else
                 {
-                    alert("You can't play without betting!");
+                    // Yes chips, no bet
+                    Game.counter = 69;
+                    Game.err = 3;
                 }
             }
             else if (Game.bet > Game.bank)
             {
-                alert("You can't bet more chips than you have!");
+                // Bet more than chips
+                Game.counter = 69;
+                Game.err = 4;
             }
             else
             {
@@ -197,7 +203,7 @@ function createBettingEvents()
         canvasObjs[5] = new CanvasObject(MID_CANVAS - 25, MID_CANVAS, 50, 50);
         canvasObjs[5].clickCallback = function()
         {
-            Game.betIncrement = 100;
+            if (Game.bank >= 100) Game.betIncrement = 100;
         }
         canvasObjs[5].hoverCallback = function()
         {
@@ -211,7 +217,7 @@ function createBettingEvents()
         canvasObjs[6] = new CanvasObject(MID_CANVAS + 50, MID_CANVAS, 50, 50);
         canvasObjs[6].clickCallback = function()
         {
-            Game.betIncrement = 1000;
+            if (Game.bank >= 1000) Game.betIncrement = 1000;
         }
         canvasObjs[6].hoverCallback = function()
         {

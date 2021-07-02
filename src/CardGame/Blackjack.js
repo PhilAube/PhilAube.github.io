@@ -63,6 +63,7 @@ function Blackjack()
             break;
 
         case 8: // Player's first play
+            drawTable("BLACKJACK");
             drawEvents();
             drawUserHand();
             drawCPUHand();
@@ -205,18 +206,61 @@ function Blackjack()
             canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');
             canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#AA0000');
             break;
-    }
 
-    // Draws the Yes or No box for the event.
-    function drawYNBox(YN, x, color)
-    {
-        ctx.beginPath();
-        ctx.rect(x, 250, 80, 80);
-        ctx.fillStyle = color;
-        ctx.fill();
+        case 69:
+            while (canvasObjs.length > 1)
+            {
+                canvasObjs.pop();
+            }
 
-        ctx.fillStyle = 'black';
-        ctx.fillText(YN, x + 40, 300);
+            hideChip(20, CHIP_Y - 60);
+            hideChip(145, CHIP_Y - 60);
+            hideChip(270, DEFAULT_CANVAS_SIZE - 135);
+
+            canvasObjs[1] = new CanvasObject(MID_CANVAS - 40, MID_CANVAS - 50, 80, 60);
+            canvasObjs[1].clickCallback = function()
+            {
+                canvasObjs.pop();
+
+                if (Game.err == 1) Game.counter = 7;
+                else Game.counter = 0;
+
+                Game.err = undefined;
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                drawYNBox("OK", MID_CANVAS - 40, '#FFF');
+            }
+
+            Game.counter++;
+            break;
+    
+        case 70:
+            drawBox("");
+            ctx.font = '15px Arial';
+
+            switch (Game.err)
+            {
+                case 1:
+                    ctx.fillText("Insufficient chips to double down.", MID_CANVAS, MID_CANVAS - 100);
+                    break;
+
+                case 2:
+                    ctx.fillText("You can't play without betting chips!", MID_CANVAS, MID_CANVAS - 130);
+                    ctx.fillText("You can beg for more in the SETTINGS.", MID_CANVAS, MID_CANVAS - 90);
+                    break;
+
+                case 3:
+                    ctx.fillText("You can't play without betting!", MID_CANVAS, MID_CANVAS - 100);
+                    break;
+
+                case 4:
+                    ctx.fillText("You can't bet more chips than you have!", MID_CANVAS, MID_CANVAS - 100);
+                    break;
+            }
+            
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("OK", MID_CANVAS - 40, '#CCC');
+            break;
     }
 
     // Creates the events for the Play Again dialog box.
@@ -330,7 +374,8 @@ function Blackjack()
                 }
                 else
                 {
-                    alert("You don't have enough chips to double down.");
+                    Game.counter = 69;
+                    Game.err = 1;
                 }
             }
             canvasObjs[3].hoverCallback = function()

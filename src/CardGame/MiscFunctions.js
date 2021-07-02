@@ -50,12 +50,24 @@ function getBank()
 
 // * DRAWING FUNCTIONS * //
 
+// Draws the Yes or No box for the event.
+function drawYNBox(text, x, color)
+{
+    ctx.beginPath();
+    ctx.rect(x, 250, 80, 60);
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    ctx.fillStyle = 'black';
+    ctx.fillText(text, x + 40, 285);
+}
+
 // Draws the outline and background of the Betting box.
 function drawBox(text)
 {
     ctx.beginPath();
     ctx.rect(150, 100, 300, 275);
-    ctx.fillStyle = '#333';
+    ctx.fillStyle = '#222';
     ctx.fill();
 
     ctx.beginPath();

@@ -79,10 +79,6 @@ function titleScreen()
             canvasObjs[1] = new CanvasObject(POKER_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
             canvasObjs[1].clickCallback = function()
             {
-                // TEMPORARY CODE
-                alert("This section is currently in development.\n" +
-                "However, feel free to have a look at the progress so far!");
-
                 Game.context = 'Poker';
                 resetArray();
             }
