@@ -64,8 +64,23 @@ function createBettingEvents()
             // Only ask if they placed a bet 
             if (Game.counter > 2)
             {
-               result = confirm("Are you sure you want to return to the menu? \n" +
-               "If you already placed a bet, you will lose your chips!");
+                // If they already got their payout, don't ask
+                if (Game.context == "Blackjack")
+                {
+                    if (Game.counter < 16)
+                    {
+                        result = confirm("Are you sure you want to return to the menu? \n" +
+                        "If you already placed a bet, you will lose your chips!");
+                    }
+                }
+                else if (Game.context == "Poker")
+                {
+                    if (Game.counter < 14)
+                    {
+                        result = confirm("Are you sure you want to return to the menu? \n" +
+                        "If you already placed a bet, you will lose your chips!");
+                    }
+                }
             }
             
             if (result)

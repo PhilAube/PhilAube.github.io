@@ -157,6 +157,8 @@ function Poker()
         drawNormalHand();
 
         ctx.fillStyle = 'white';
+        ctx.fillText("The poker payout is still in development!", DEFAULT_CANVAS_SIZE / 2, 350);
+        ctx.fillText("In the meantime, you can have your chips back.", DEFAULT_CANVAS_SIZE / 2, 400);
         ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 65);
         
         canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');

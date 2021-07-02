@@ -164,7 +164,7 @@ function Blackjack()
             checkHandValue(Game.userHand, true);
             if (Game.userHand.cards.length === 2 & Game.handValue === 21) // If they got a Blackjack
             {
-                Game.handValue = "YOU WIN WITH BLACKJACK!";
+                Game.handValue = "BLACKJACK!";
                 Game.bank += Game.bet * 3;
                 localStorage.setItem('bank', Game.bank);
                 Game.counter = 16;
@@ -424,6 +424,9 @@ function Blackjack()
                 {
                     canvasObjs.pop();
                 }
+
+                hideChip(20, CHIP_Y - 60);
+                hideChip(145, CHIP_Y - 60);
             }
         }
     }
