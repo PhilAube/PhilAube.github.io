@@ -131,8 +131,9 @@ function Poker()
 
         // Determine payout
         case 13:
-            // Temporary: Give the user their chips back.
-            Game.bank += Game.bet;
+            let multiplier = determinePokerPayout();
+            Game.handValue = multiplier;
+            Game.bank += Game.bet * multiplier;
             localStorage.setItem('bank', Game.bank);
             Game.counter++;
             break;
@@ -201,8 +202,47 @@ function Poker()
         drawNormalHand();
 
         ctx.fillStyle = 'white';
-        ctx.fillText("The poker payout is still in development!", DEFAULT_CANVAS_SIZE / 2, 350);
-        ctx.fillText("In the meantime, you can have your chips back.", DEFAULT_CANVAS_SIZE / 2, 400);
+
+        let string;
+
+        switch (Game.handValue)
+        {
+            case 250:
+                string = "ROYAL FLUSH: 250X";
+                break;
+            case 50:
+                string = "STRAIGHT FLUSH: 50X";
+                break;
+            case 25:
+                string = "FOUR OF A KIND: 25X";
+                break;
+            case 9:
+                string = "FULL HOUSE: 9X";
+                break;
+            case 6:
+                string = "FLUSH: 6X";
+                break;
+            case 4:
+                string = "STAIGHT: 4X";
+                break;
+            case 3:
+                string = "THREE OF A KIND: 3X";
+                break;
+            case 2:
+                string = "TWO PAIR: 2X";
+                break;
+            case 1:
+                string = "PAIR: 1X";
+                break;
+            case 0:
+                string = "YOU LOST!";
+                break;
+            default:
+                string = "UHH WTF?";
+                break;
+        }
+
+        ctx.fillText(string, DEFAULT_CANVAS_SIZE / 2, 375);
         ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 65);
         
         canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');
@@ -231,6 +271,7 @@ function Poker()
             Game.context = 'TitleScreen';
             resetArray();
             resetHand(Game.userHand);
+            resetHand(Game.CPUHand);
             Game.deck.cards.forEach(card => { card.selected = false; });
             Game.lastTimedEvent = 0;
         }
@@ -450,5 +491,202 @@ function Poker()
         ctx.fillStyle = '#333'
         ctx.rect(x, y, 110, 130);
         ctx.fill();
+    }
+
+    function determinePokerPayout()
+    {
+        Game.CPUHand.cards = Array.from(Game.userHand.cards);
+        
+        Game.CPUHand.cards = sortHand(Game.CPUHand.cards);
+
+        let hand = Game.CPUHand.cards;
+
+        // Default: 0 chips because loss
+        let result = 0;
+
+        // Rule out the special case before checking the rest.
+        // ROYAL FLUSH 10 J Q K A where A is greater K
+
+        if (isRoyalFlush(hand))
+        {
+            return 250;
+        }
+        else if (detectSequence(hand))
+        {
+            // Any 5 card sequence is a STRAIGHT.
+            result = 4;
+
+            if (detectSameSuit())
+            {
+                // 5 card sequence all in same suit is STRAIGHT FLUSH
+                return 50;
+            }
+        }
+        else
+        {
+            let tmp = detectCopies(hand);
+
+            if (tmp > result) result = tmp;
+
+            tmp = detectSameSuit(hand);
+
+            if (tmp && result < 6)
+            {
+                result = 6;
+            }
+        }
+
+        return result;
+    }
+
+    // INSERTION SORT
+    function sortHand(hand)
+    {
+        let ranks = [ "A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K" ];
+
+        for (let i = 1; i < hand.length; i++)
+        {
+            for (j = i; j > 0; j--)
+            {
+                let currentCard = hand[j];
+                let currentCardValue = ranks.indexOf(currentCard.rank);
+    
+                let prevCard = hand[j - 1];
+                let prevCardValue = ranks.indexOf(prevCard.rank);
+    
+                if (prevCardValue > currentCardValue)
+                {
+                    // SWAP
+                    let tmp = hand[j];
+                    hand[j] = hand[j - 1];
+                    hand[j - 1] = tmp;
+                }
+            }
+        }
+
+        return hand;
+    }
+
+    // Returns true if all 5 cards are in sequence, example 8 9 10 J Q
+    function detectSequence(hand)
+    {
+        let ranks = [ "A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K" ];
+
+        const firstVal = ranks.indexOf(hand[0].rank);
+
+        for (let i = 1; i < hand.length; i++)
+        {
+            let currentVal = ranks.indexOf(hand[i].rank);
+
+            if (currentVal !== firstVal + i)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // Returns true if a royal flush is detected.
+    function isRoyalFlush(hand)
+    {
+        if (hand[0].rank === "A")
+        {
+            if (hand[1].rank === 10)
+            {
+                if (hand[2].rank === "J")
+                {
+                    if (hand[3].rank === "Q")
+                    {
+                        if (hand[4].rank === "K")
+                        {
+                            const suit = hand[0].suit;
+
+                            for (let i = 1; i < hand.length; i++)
+                            {
+                                if (hand[i].suit !== suit)
+                                {
+                                    return false
+                                }
+                            }
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // Returns true if all cards are in the same suit.
+    function detectSameSuit(hand)
+    {
+        const suit = hand[0];
+
+        for (let i = 1; i < hand.length; i++)
+        {
+            if (hand[i].suit !== suit)
+            {
+                return false
+            }
+        }
+
+        return true;
+    }
+
+    function detectCopies(hand)
+    {
+        let payout = 0;
+
+        for (let i = 1; i < hand.length; i++)
+        {
+            if (hand[i].rank === hand[i - 1].rank) // PAIR
+            {
+                if (payout < 1) payout = 1;
+
+                // CHECK FOR TWO PAIR 
+                if (i + 2 < hand.length)
+                {
+                    if (hand[i + 1].rank === hand[i + 2].rank)
+                    {
+                        if (payout < 2) payout = 2;
+    
+                        if (i + 3 < hand.length)
+                        {
+                            // CHECK FOR FULL HOUSE (Is this second pair actually a trio?)
+                            if (hand[i + 2].rank === hand[i + 3].rank)
+                            {
+                                if (payout < 9) return 9;
+                            }
+                        }
+                    }
+                }
+
+                if (i + 1 < hand.length)
+                {
+                    if (hand[i].rank === hand[i + 1].rank) // THREE OF A KIND
+                    {
+                        if (payout < 3) payout = 3;
+    
+                        if (i + 2 < hand.length)
+                        {
+                            // CHECK FOR FULL HOUSE (Pair with this 3 of a kind?)
+                            if (hand[i + 1].rank === hand[i + 2].rank)
+                            {
+                                if (payout < 9) payout = 9;
+                            }
+                            if (hand[i + 1].rank === hand[i + 2].rank) // FOUR OF A KIND
+                            {
+                                if (payout < 25) return 25;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return payout;
     }
 }
