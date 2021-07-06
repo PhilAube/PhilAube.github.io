@@ -25,7 +25,7 @@ let canvasObjs = [];
 // This Game Object manages colors, object/event creation for each screen based on context and saved information.
 let Game = 
 {
-    RGBTitleScreen : { cycleCounter : 0, flicker: true },
+    RGBTitleScreen : { cycleCounter : 0, flicker: true, mobile: window.mobileAndTabletCheck() },
     counter: 0,
     context: 'TitleScreen',
     tableColor: getTableColor(),

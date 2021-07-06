@@ -39,9 +39,17 @@ function titleScreen()
     // Draws the two cards in the title screen based on whether or not they're hovered.
     function drawCards()
     {
-        canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawFaceDown(BLACKJACK_X, CARD_Y, 'white');
+        if (Game.RGBTitleScreen.mobile)
+        {
+            canvasObjs[0].hoverCallback();
+            canvasObjs[1].hoverCallback();
+        }
+        else
+        {
+            canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawFaceDown(BLACKJACK_X, CARD_Y, 'white');
 
-        canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawFaceDown(POKER_X, CARD_Y, 'white');
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawFaceDown(POKER_X, CARD_Y, 'white');
+        }
     }
 
     // Creates the canvas event objects of each menu item for the Title Screen, defining their click and hover callback functions.
