@@ -63,6 +63,8 @@ function Poker()
         case 8:
             Game.lastTimedEvent = 0;
             createPokerEvents();
+            ctx.fillStyle = 'white';
+            ctx.fillText("YOU MAY NOW DISCARD UP TO 4 CARDS", DEFAULT_CANVAS_SIZE / 2, 375);
             Game.counter++;
             break;
         
@@ -223,7 +225,7 @@ function Poker()
                 string = "FLUSH: 6X";
                 break;
             case 4:
-                string = "STAIGHT: 4X";
+                string = "STRAIGHT: 4X";
                 break;
             case 3:
                 string = "THREE OF A KIND: 3X";
@@ -238,7 +240,7 @@ function Poker()
                 string = "YOU LOST!";
                 break;
             default:
-                string = "UHH WTF?";
+                string = "It's not a bug, it's an easter egg!";
                 break;
         }
 
@@ -411,7 +413,6 @@ function Poker()
         {
             canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'PLAY', '#AA0000');
         }
-
     }
 
     // Distributes new cards all at once for discard.
@@ -507,19 +508,17 @@ function Poker()
         // Rule out the special case before checking the rest.
         // ROYAL FLUSH 10 J Q K A where A is greater K
 
-        if (isRoyalFlush(hand))
-        {
-            return 250;
-        }
-        else if (detectSequence(hand))
+        result = checkRoyalOrStraightFlush(hand);
+
+        if (detectSequence(hand))
         {
             // Any 5 card sequence is a STRAIGHT.
-            result = 4;
+            if (result < 4) result = 4;
 
-            if (detectSameSuit())
+            if (detectSameSuit(hand))
             {
                 // 5 card sequence all in same suit is STRAIGHT FLUSH
-                return 50;
+                if (result < 50) return 50;
             }
         }
         else
@@ -587,8 +586,8 @@ function Poker()
         return true;
     }
 
-    // Returns true if a royal flush is detected.
-    function isRoyalFlush(hand)
+    // Detects royal or straight flush.
+    function checkRoyalOrStraightFlush(hand)
     {
         if (hand[0].rank === "A")
         {
@@ -602,34 +601,54 @@ function Poker()
                         {
                             const suit = hand[0].suit;
 
-                            for (let i = 1; i < hand.length; i++)
+                            // If all same suit, it's royal flush, else STRAIGHT
+                            if (detectSameSuit(hand))
                             {
-                                if (hand[i].suit !== suit)
-                                {
-                                    return false
-                                }
+                                return 250;
                             }
+                            else return 4;
+                        }
+                    }
+                }
+            }
+        }
+        else if (hand[0].rank === "A")
+        {
+            if (hand[1].rank === 2)
+            {
+                if (hand[2].rank === 3)
+                {
+                    if (hand[3].rank === 4)
+                    {
+                        if (hand[4].rank === 5)
+                        {
+                            const suit = hand[0].suit;
 
-                            return true;
+                            // If all same suit, it's royal flush, else STRAIGHT
+                            if (detectSameSuit(hand))
+                            {
+                                return 250;
+                            }
+                            else return 4;
                         }
                     }
                 }
             }
         }
 
-        return false;
+        return 0;
     }
 
     // Returns true if all cards are in the same suit.
     function detectSameSuit(hand)
     {
-        const suit = hand[0];
+        const suit = hand[0].suit;
 
         for (let i = 1; i < hand.length; i++)
         {
             if (hand[i].suit !== suit)
             {
-                return false
+                return false;
             }
         }
 
@@ -660,6 +679,13 @@ function Poker()
                             {
                                 if (payout < 9) return 9;
                             }
+                        }
+                    }
+                    else if (i + 3 < hand.length)
+                    {
+                        if (hand[i + 2].rank === hand[i + 3].rank)
+                        {
+                            if (payout < 2) payout = 2;
                         }
                     }
                 }
