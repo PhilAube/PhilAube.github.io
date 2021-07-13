@@ -59,9 +59,9 @@ function createBettingEvents()
         canvasObjs[0] = new CanvasObject(DEFAULT_CANVAS_SIZE / 4 * 3, DEFAULT_CANVAS_SIZE - 65, DEFAULT_CANVAS_SIZE / 4, 65);
         canvasObjs[0].clickCallback = function()
         {
-            let result = true;
-            
-            // Only ask if they placed a bet 
+            let titleScreen = true;
+
+            // Only ask if they placed a bet or got their payout
             if (Game.counter > 2)
             {
                 // If they already got their payout, don't ask
@@ -69,21 +69,31 @@ function createBettingEvents()
                 {
                     if (Game.counter < 16)
                     {
-                        result = confirm("Are you sure you want to return to the menu? \n" +
-                        "If you already placed a bet, you will lose your chips!");
+                        /*result = confirm("Are you sure you want to return to the menu? \n" +
+                        "If you already placed a bet, you will lose your chips!");*/
+
+                        Game.prevCounter = Game.counter;
+                        Game.counter = 420;
+                        titleScreen = false;
                     }
+                    else if (Game.counter == 421) titleScreen = false;
                 }
                 else if (Game.context == "Poker")
                 {
                     if (Game.counter < 14)
                     {
-                        result = confirm("Are you sure you want to return to the menu? \n" +
+                        titleScreen = confirm("Are you sure you want to return to the menu? \n" +
                         "If you already placed a bet, you will lose your chips!");
+
+                        /*Game.prevCounter = Game.counter;
+                        Game.counter = 420;
+                        titleScreen = false;*/
                     }
+                    else if (Game.counter === 421) titleScreen = false;
                 }
             }
             
-            if (result)
+            if (titleScreen)
             {
                 Game.context = 'TitleScreen';
         

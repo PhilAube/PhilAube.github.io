@@ -13,7 +13,7 @@ const CARD_WIDTH = 100;
 const CHIP_RADIUS = 50;
 
 // Color array for custom table color
-const colors = [ '#008800', '#30fc3e','#AA0000', '#ff3d3d', '#0404e0', '#66ccff', '#111', '#888', '#ff14d4', '#b700ff' ];
+const colors = [ '#008800', '#30fc3e','#AA0000', '#ff3d3d', /*'#F60', '#FD0',*/ '#0404e0', '#66ccff', '#111', '#888', '#ff14d4', '#b700ff' ];
 
 // Specific to philaube.github.io
 const TABLET_BRKPNT = 800;
@@ -37,7 +37,8 @@ let Game =
     lastTimedEvent : 0,
     CPUHand : new Hand(),
     userHand : new Hand(),
-    handValue : 0
+    handValue : 0,
+    prevCounter: null
 };
 
 // The first domino in the whole application.

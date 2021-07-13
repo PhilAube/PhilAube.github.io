@@ -41,6 +41,11 @@ function Blackjack()
         case 5: // Facedown CPU card
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
 
+            if (Game.lastTimedEvent === 0)
+            {
+                Game.lastTimedEvent = Game.frameCounter;
+            }
+
             if (Game.frameCounter === Game.lastTimedEvent + 60)
             {
                 Game.CPUHand.cards[1] = Game.deck.cards[Game.deck.topCard];
@@ -59,6 +64,10 @@ function Blackjack()
         case 7: // Create events for user Blackjack options
             Game.lastTimedEvent = 0;
             createBJEvents();
+            drawTable("BLACKJACK");
+            drawEvents();
+            drawUserHand();
+            drawCPUHand();
             Game.counter++;
             break;
 
@@ -78,9 +87,10 @@ function Blackjack()
             break;
 
         case 10: // If the user wants to draw more than one card
-            drawCPUHand();
-            drawUserHand();
+            drawTable("BLACKJACK");
             drawEvents();
+            drawUserHand();
+            drawCPUHand();
 
             checkHandValue(Game.userHand, true);
             break;
@@ -261,6 +271,131 @@ function Blackjack()
             
             canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("OK", MID_CANVAS - 40, '#CCC');
             break;
+
+        case 420:
+            drawBox("Are you sure?");
+            ctx.fillText("You will lose your chips!", DEFAULT_CANVAS_SIZE / 2, 200);
+            drawYNBox("YES", 200, 'white');
+            drawYNBox("NO", 320, 'white');
+
+            while (canvasObjs.length > 1)
+            {
+                canvasObjs.pop();
+            }
+
+            // Create are you sure events
+            yesButton();
+            noButton();
+
+            Game.counter++;
+            break;
+
+        case 421:
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("YES", 200, 'white');
+            canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawYNBox("NO", 320, 'white');
+            drawEvents();
+            break;
+
+        function yesButton()
+        {
+            canvasObjs[1] = new CanvasObject(200, 250, 80, 60);
+            canvasObjs[1].clickCallback = function()
+            {
+                Game.context = 'TitleScreen';
+        
+                resetArray();
+    
+                resetHand(Game.CPUHand);
+    
+                resetHand(Game.userHand);
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                drawYNBox("YES", 200, '#AAA');
+            }
+        }
+
+        function noButton()
+        {
+            canvasObjs[2] = new CanvasObject(320, 250, 80, 60);
+            canvasObjs[2].clickCallback = function()
+            {
+                // Remove yes/no button events
+                while (canvasObjs.length > 1)
+                {
+                    canvasObjs.pop();
+                }
+
+                drawTable("BLACKJACK");
+                drawMenu();
+
+                determineAction();
+            }
+            canvasObjs[2].hoverCallback = function()
+            {
+                drawYNBox("NO", 320, '#AAA');
+            }
+        }
+    }
+
+    // For no button, determines where to go back to.
+    function determineAction()
+    {
+        Game.lastTimedEvent = 0;
+
+        switch (Game.prevCounter)
+        {
+            // Case 0 and 1 is pointless since user hasn't placed a bet.
+
+            case 2:
+                Game.counter = 2;
+                break;
+            
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                Game.lastTimedEvent = 0;
+                drawCPUHand();
+                drawUserHand();
+                Game.counter = Game.prevCounter;
+                break;
+
+            case 7:
+            case 8:
+                Game.counter = 7;
+                break;
+
+            case 9:
+            case 10:
+                createBJEvents(); // Won't create Double Down
+                drawCPUHand();
+                drawUserHand();
+                Game.counter = 10;
+                break;
+
+            case 11:
+                drawMenu();
+                drawCPUHand();
+                drawUserHand();
+                Game.counter = Game.prevCounter;
+                break;
+
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                Game.counter = Game.prevCounter;
+                break;
+
+            case 16:
+            case 17:
+                Game.counter = 16;
+                break;
+
+            default: 
+                alert("It's not a bug, it's an easter egg.");
+        }
     }
 
     // Creates the events for the Play Again dialog box.
@@ -297,6 +432,7 @@ function Blackjack()
                 Game.lastTimedEvent = 0;
                 resetHand(Game.CPUHand);
                 resetHand(Game.userHand);
+                Game.prevCounter = null;
             }
             canvasObjs[2].hoverCallback = function()
             {
@@ -314,7 +450,10 @@ function Blackjack()
 
         standChip();
 
-        doubleDownChip();
+        if (Game.counter < 9)
+        {
+            doubleDownChip();
+        }
 
         function hitChip()
         {
@@ -414,7 +553,7 @@ function Blackjack()
         {
             hand.cards[hand.cards.length] = Game.deck.cards[Game.deck.topCard];
             Game.deck.cards[Game.deck.topCard].drawCard(x, y);
-            Game.lastTimedEvent = Game.frameCounter;
+            Game.lastTimedEvent = 0;
             Game.deck.topCard++;
 
             if (!nope)
@@ -429,23 +568,40 @@ function Blackjack()
     {
         for (let i = 0; i < Game.userHand.cards.length; i++)
         {
-            Game.userHand.cards[i].drawCard(50 + (i * 50), USER_HAND_Y);
+            let card = Game.userHand.cards[i];
+            
+            if (card != null)
+            {
+                card.drawCard(50 + (i * 50), USER_HAND_Y);
+            }
         }
     }
 
     // Draws the CPU hand, with face down card if necessary.
     function drawCPUHand()
     {
-        if (Game.counter < 11)
+        if (Game.counter < 11 || Game.counter == 421)
         {
-            Game.CPUHand.cards[0].drawCard(50, CPU_HAND_Y);
-            drawFaceDown(100, CPU_HAND_Y, 'white');
+            if (Game.CPUHand.cards[0] != null)
+            {
+                Game.CPUHand.cards[0].drawCard(50, CPU_HAND_Y);
+
+                if (Game.CPUHand.cards[1] != null)
+                {
+                    drawFaceDown(100, CPU_HAND_Y, 'white');
+                }
+            }
         }
         else
         {
             for (let i = 0; i < Game.CPUHand.cards.length; i++)
             {
-                Game.CPUHand.cards[i].drawCard(50 + (i * 50), CPU_HAND_Y);
+                let card = Game.CPUHand.cards[i];
+
+                if (card != null)
+                {
+                    card.drawCard(50 + (i * 50), CPU_HAND_Y);
+                }
             }
         }
     }
