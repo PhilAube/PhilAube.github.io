@@ -142,12 +142,14 @@ function settingsScreen()
                 if (Game.tableColor > 0)
                 {
                     Game.tableColor--;
-                    localStorage.setItem('tableColor', Game.tableColor);
                 }
                 else if (Game.tableColor == 0)
                 {
                     Game.tableColor = colors.length - 1;
                 }
+
+                localStorage.setItem('tableColor', Game.tableColor);
+                if (Game.RGBTitleScreen.mobile) canvasObjs[1].isHovered = false;
             }
             canvasObjs[1].hoverCallback = function()
             {
@@ -170,6 +172,8 @@ function settingsScreen()
                 }
 
                 localStorage.setItem('tableColor', Game.tableColor);
+                if (Game.RGBTitleScreen.mobile) canvasObjs[2].isHovered = false;
+                
             }
             canvasObjs[2].hoverCallback = function()
             {

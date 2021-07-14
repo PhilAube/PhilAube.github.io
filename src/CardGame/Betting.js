@@ -69,9 +69,6 @@ function createBettingEvents()
                 {
                     if (Game.counter < 16)
                     {
-                        /*result = confirm("Are you sure you want to return to the menu? \n" +
-                        "If you already placed a bet, you will lose your chips!");*/
-
                         Game.prevCounter = Game.counter;
                         Game.counter = 420;
                         titleScreen = false;
@@ -82,9 +79,6 @@ function createBettingEvents()
                 {
                     if (Game.counter < 14)
                     {
-                        /*titleScreen = confirm("Are you sure you want to return to the menu? \n" +
-                        "If you already placed a bet, you will lose your chips!");*/
-
                         Game.prevCounter = Game.counter;
                         Game.counter = 420;
                         titleScreen = false;
@@ -92,6 +86,8 @@ function createBettingEvents()
                     else if (Game.counter === 421) titleScreen = false;
                 }
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[0].isHovered = false;
             
             if (titleScreen)
             {
@@ -127,6 +123,8 @@ function createBettingEvents()
             {
                 Game.bet -= Game.betIncrement;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[1].isHovered = false;
         }
         canvasObjs[1].hoverCallback = function()
         {
@@ -144,6 +142,8 @@ function createBettingEvents()
             {
                 Game.bet += Game.betIncrement;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[2].isHovered = false;
         }
         canvasObjs[2].hoverCallback = function()
         {
