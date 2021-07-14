@@ -201,6 +201,11 @@ function Blackjack()
             drawUserHand();
             deleteChipEvents();
             createPlayAgainEvents();
+
+            ctx.fillStyle = 'white';
+            ctx.fillText(Game.handValue, 100, DEFAULT_CANVAS_SIZE - 80);
+            ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 50);
+
             Game.counter = 17;
             break;
 
@@ -208,10 +213,6 @@ function Blackjack()
             drawCPUHand();
             drawUserHand();
             drawEvents();
-
-            ctx.fillStyle = 'white';
-            ctx.fillText(Game.handValue, 100, DEFAULT_CANVAS_SIZE - 80);
-            ctx.fillText("PLAY AGAIN?", 100, DEFAULT_CANVAS_SIZE - 50);
 
             canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(250, DEFAULT_CANVAS_SIZE - 75, 'YES', '#AA0000');
             canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawChip(375, DEFAULT_CANVAS_SIZE - 75, 'NO', '#AA0000');

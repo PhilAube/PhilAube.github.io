@@ -439,6 +439,8 @@ function Poker()
                 Game.handValue++;
                 card.selected = true;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[2].isHovered = false;
         }
         canvasObjs[2].hoverCallback = function()
         {
@@ -458,6 +460,8 @@ function Poker()
                 Game.handValue++;
                 card.selected = true;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[3].isHovered = false;
         }
         canvasObjs[3].hoverCallback = function()
         {
@@ -477,6 +481,8 @@ function Poker()
                 Game.handValue++;
                 card.selected = true;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[4].isHovered = false;
         }
         canvasObjs[4].hoverCallback = function()
         {
@@ -496,6 +502,8 @@ function Poker()
                 Game.handValue++;
                 card.selected = true;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[5].isHovered = false;
         }
         canvasObjs[5].hoverCallback = function()
         {
@@ -515,6 +523,8 @@ function Poker()
                 Game.handValue++;
                 card.selected = true;
             }
+
+            if (Game.RGBTitleScreen.mobile) canvasObjs[6].isHovered = false;
         }
         canvasObjs[6].hoverCallback = function()
         {
