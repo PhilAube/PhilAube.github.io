@@ -395,6 +395,7 @@ function Blackjack()
 
             default: 
                 alert("It's not a bug, it's an easter egg.");
+                break;
         }
     }
 

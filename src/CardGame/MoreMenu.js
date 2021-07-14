@@ -43,7 +43,7 @@ function moreScreen()
     {
         ctx.fillStyle = 'white';
         ctx.font = "15px Arial";
-        ctx.fillText("Version 0.23 © 2020-2021", MID_CANVAS, TITLE_Y + 40);
+        ctx.fillText("Version 0.24 © 2020-2021", MID_CANVAS, TITLE_Y + 40);
         ctx.fillText("This game was developed from scratch by Phil Aube.", MID_CANVAS, TITLE_Y + 80);
         ctx.fillText("Created with HTML canvas and JavaScript without external libraries.", MID_CANVAS, TITLE_Y + 120);
         ctx.fillText("If you like this game, I made some other ones which are available on my website!", MID_CANVAS, TITLE_Y + 160);

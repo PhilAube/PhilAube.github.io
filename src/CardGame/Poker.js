@@ -16,22 +16,21 @@ function Poker()
             Game.counter++;
             break;
             
-        case 1: 
+        case 1: // Draw betting window and table, shuffles while user bets
             drawTable("POKER");
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
             wager();
+            Game.deck.Shuffle();
             break;
         
         case 2:
             deleteBettingEvents();
-            drawTable("POKER");
-            canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
-            Game.deck.Shuffle();
             Game.counter++;
             break;
 
         // Distribute 5 cards to the player: Card 1
         case 3:          
+            drawTable("POKER");
             canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
             distributeCards(100, 150, Game.userHand, false);
             break;
@@ -63,6 +62,8 @@ function Poker()
         case 8:
             Game.lastTimedEvent = 0;
             createPokerEvents();
+            drawEvents();
+            drawNormalHand();
             ctx.fillStyle = 'white';
             ctx.fillText("YOU MAY NOW DISCARD UP TO 4 CARDS", DEFAULT_CANVAS_SIZE / 2, 375);
             Game.counter++;
@@ -92,6 +93,8 @@ function Poker()
             {
                 canvasObjs.pop();
             }
+
+            drawNormalHand();
             hideChip(20, DEFAULT_CANVAS_SIZE - 140);
 
             if (Game.handValue > 0)
@@ -117,6 +120,7 @@ function Poker()
                 if (Game.userHand.cards[i].selected)
                 {
                     Game.userHand.cards[i] = Game.deck.cards[Game.deck.topCard];
+                    Game.userHand.cards[i].selected = true;
                     Game.deck.topCard++;
                 }
             }
@@ -195,6 +199,121 @@ function Poker()
             
             canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("OK", MID_CANVAS - 40, '#CCC');
             break;
+
+        case 420:
+            drawBox("Are you sure?");
+            ctx.fillText("You will lose your chips!", DEFAULT_CANVAS_SIZE / 2, 200);
+            drawYNBox("YES", 200, 'white');
+            drawYNBox("NO", 320, 'white');
+
+            while (canvasObjs.length > 1)
+            {
+                canvasObjs.pop();
+            }
+
+            // Create are you sure events
+            yesButton();
+            noButton();
+
+            Game.counter++;
+            break;
+
+        case 421:
+            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawYNBox("YES", 200, 'white');
+            canvasObjs[2].isHovered ? canvasObjs[2].hoverCallback() : drawYNBox("NO", 320, 'white');
+            drawEvents();
+            break;
+
+        function yesButton()
+        {
+            canvasObjs[1] = new CanvasObject(200, 250, 80, 60);
+            canvasObjs[1].clickCallback = function()
+            {
+                Game.context = 'TitleScreen';
+        
+                resetArray();
+    
+                resetHand(Game.CPUHand);
+    
+                resetHand(Game.userHand);
+            }
+            canvasObjs[1].hoverCallback = function()
+            {
+                drawYNBox("YES", 200, '#AAA');
+            }
+        }
+
+        function noButton()
+        {
+            canvasObjs[2] = new CanvasObject(320, 250, 80, 60);
+            canvasObjs[2].clickCallback = function()
+            {
+                // Remove yes/no button events
+                while (canvasObjs.length > 1)
+                {
+                    canvasObjs.pop();
+                }
+
+                drawTable("POKER");
+                drawMenu();
+
+                determineAction();
+            }
+            canvasObjs[2].hoverCallback = function()
+            {
+                drawYNBox("NO", 320, '#AAA');
+            }
+        }
+    }
+
+    // For no button, determines where to go back to.
+    function determineAction()
+    {
+        Game.lastTimedEvent = 0;
+
+        switch (Game.prevCounter)
+        {
+            // Case 0 and 1 is pointless since user hasn't placed a bet.
+
+            case 2:
+                Game.counter = 2;
+                break;
+
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                Game.lastTimedEvent = 0;
+                drawNormalHand(false);
+                Game.counter = Game.prevCounter;
+                break;
+            
+            case 8:
+            case 9:
+                Game.counter = 8;
+                break;
+                
+            case 10:
+            case 11:
+                Game.counter = Game.prevCounter;
+                break;
+
+            case 12:
+                Game.counter = 12;
+                drawNormalHand(true);
+                break;
+
+            case 13:
+            case 14:
+            case 15:
+                Game.counter = Game.prevCounter;
+                break;
+
+            default: 
+                alert("It's not a bug, it's an easter egg.");
+                break;
+        }
     }
 
     function showPlayAgain()
@@ -276,6 +395,7 @@ function Poker()
             resetHand(Game.CPUHand);
             Game.deck.cards.forEach(card => { card.selected = false; });
             Game.lastTimedEvent = 0;
+            Game.prevCounter = null;
         }
         canvasObjs[2].hoverCallback = function()
         {
@@ -288,6 +408,7 @@ function Poker()
     {
         // canvasObjs[0] (Menu button) is still there so start from 1
 
+        // PLAY chip
         canvasObjs[1] = new CanvasObject(75, DEFAULT_CANVAS_SIZE - 75, 0, 0, CHIP_RADIUS);
         canvasObjs[1].clickCallback = function()
         {
@@ -405,13 +526,16 @@ function Poker()
     {
         canvasObjs[0].isHovered ? canvasObjs[0].hoverCallback() : drawMenu();
 
-        if (Game.handValue > 0)
+        if (Game.counter !== 421)
         {
-            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'DISCARD', '#AA0000');
-        }
-        else
-        {
-            canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'PLAY', '#AA0000');
+            if (Game.handValue > 0)
+            {
+                canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'DISCARD', '#AA0000');
+            }
+            else
+            {
+                canvasObjs[1].isHovered ? canvasObjs[1].hoverCallback() : drawChip(75, DEFAULT_CANVAS_SIZE - 75, 'PLAY', '#AA0000');
+            }
         }
     }
 
@@ -425,6 +549,11 @@ function Poker()
 
         if (Game.frameCounter === Game.lastTimedEvent + 60)
         {
+            for (let i = 0; i < Game.userHand.cards.length; i++)
+            {
+                Game.userHand.cards[i].selected = false;
+            }
+
             drawNormalHand();
             Game.counter++;
         }
@@ -463,12 +592,13 @@ function Poker()
 
             if (discard)
             {
+                // Will not draw selected cards (to be discarded)
                 if (!card.selected)
                 {
-                    card.drawCard(x, y);
+                    if (card != null) card.drawCard(x, y);
                 }
             }
-            else card.drawCard(x, y);
+            else if (card != null) card.drawCard(x, y);
         }
     }
 

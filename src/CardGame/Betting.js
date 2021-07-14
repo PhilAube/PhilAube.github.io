@@ -82,12 +82,12 @@ function createBettingEvents()
                 {
                     if (Game.counter < 14)
                     {
-                        titleScreen = confirm("Are you sure you want to return to the menu? \n" +
-                        "If you already placed a bet, you will lose your chips!");
+                        /*titleScreen = confirm("Are you sure you want to return to the menu? \n" +
+                        "If you already placed a bet, you will lose your chips!");*/
 
-                        /*Game.prevCounter = Game.counter;
+                        Game.prevCounter = Game.counter;
                         Game.counter = 420;
-                        titleScreen = false;*/
+                        titleScreen = false;
                     }
                     else if (Game.counter === 421) titleScreen = false;
                 }
