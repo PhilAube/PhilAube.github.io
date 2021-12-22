@@ -51,7 +51,7 @@ body
     font-weight: 100;
 }
 
-#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody, #timewasterbody
+#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody, #timewasterbody, #mtlsimbody
 {
     width: 100%;
     min-height: 500px;
@@ -376,6 +376,12 @@ textarea
 #timewaster
 {
     background-color: var(--PureBlack);
+}
+
+#mtlsimcontainer
+{
+    margin: 5%;
+    margin-top: 200px;
 }
 
 /* TABLET */

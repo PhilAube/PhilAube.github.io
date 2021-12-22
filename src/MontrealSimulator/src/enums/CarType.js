@@ -1,0 +1,28 @@
+const CarType = {
+    BlueSedan: 0,
+    RedSedan: 1,
+    YellowSedan: 2,
+    WeirdSedan: 3,
+    SilverSedan: 4,
+    WhiteSports: 5,
+    StrawSports: 6,
+    AquaSports: 7,
+    BurgundySports: 8,
+    RedSports: 9,
+    WhiteSuper: 10,
+    OrangeSuper: 11,
+    BlueSuper: 12,
+    GoldSuper: 13,
+    MagentaSuper: 14,
+    BlackPickup: 15,
+    WhitePickup: 16,
+    RedPickup: 17,
+    BluePickup: 18,
+    GrassPickup: 19,
+    Amberlamps: 20,
+    Cops: 21,
+    TireFruck: 22,
+    Van: 23,
+};
+
+export default CarType;
