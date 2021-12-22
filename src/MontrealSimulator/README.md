@@ -1,4 +1,4 @@
-# Game Programming F21 Project - Montreal Simulator
+# Montreal Simulator
 
 ## ✒️ Description
 

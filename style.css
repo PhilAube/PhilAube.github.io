@@ -73,9 +73,23 @@ nav
     z-index: 9999;
 }
 
+#navhead
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navitem
+{
+    display: none;
+}
+
 nav h1
 {
     padding: 25px 0;
+    text-align: center;
 }
 
 nav h1 a
@@ -84,8 +98,10 @@ nav h1 a
     letter-spacing: 0.25em;
     text-decoration: none;
     font-weight: 100;
-    padding: 25px 50px;
+    padding: 10px;
     color: var(--OffWhite);
+    text-align: center;
+    padding-left: 15px;
 }
 
 nav a 
@@ -114,8 +130,8 @@ nav ul
 
 #burger
 {
-    display: none;
-    padding: 25px;
+    /*display: none;*/
+    padding: 10px;
     align-self: center;
 }
 
@@ -472,7 +488,7 @@ textarea
 
     /* NAVBAR */
 
-    nav ul
+    /*nav ul
     {
         flex-direction: column;
     }
@@ -485,7 +501,7 @@ textarea
     nav li 
     {
         display: none;   
-    }
+    }*/
 
     /* PROJECTS */
 
