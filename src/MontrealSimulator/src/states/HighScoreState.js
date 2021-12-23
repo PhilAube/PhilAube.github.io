@@ -2,7 +2,7 @@ import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
 import GameStateName from "../enums/GameStateName.js";
 import SoundName from "../enums/SoundName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, settings, sounds, stateMachine } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, sounds, stateMachine } from "../globals.js";
 import Level from "../objects/Level.js";
 
 export default class HighScoreState extends State
@@ -18,21 +18,27 @@ export default class HighScoreState extends State
     constructor() 
 	{
 		super();
+        this.holding = false;
 	}
 
     enter()
     {
+        this.holding = true;
         settings.checkCorruption(); // Refresh settings to check for corruption
     }
 
     update(dt)
     {
-        if (keys.Enter)
+        if (!this.holding)
         {
-            keys.Enter = false;
-            if (!settings.muteSound) sounds.play(SoundName.Poutine);
-            stateMachine.change(GameStateName.TitleScreen, { playMusic: false, fade: false });
+            if (keys.Enter)
+            {
+                if (!settings.muteSound) sounds.play(SoundName.Poutine);
+                stateMachine.change(GameStateName.TitleScreen, { playMusic: false, fade: false });
+            }
+            else this.handleGamepadInput();
         }
+        else if (!keys.Enter) this.holding = false;
     }
 
     render()
@@ -63,5 +69,23 @@ export default class HighScoreState extends State
 
         context.textAlign = 'center';
         context.fillText("PRESS ENTER TO RETURN", CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50);
+    }
+
+    handleGamepadInput()
+    {
+        let oldState = {};
+        Object.assign(oldState, gamepad);
+        let newState = gamepad.getCurrentState();
+
+        if (newState === undefined) return;
+        
+        if (!oldState.enter)
+        {
+            if (newState.enter)
+            {
+                if (!settings.muteSound) sounds.play(SoundName.Poutine);
+                stateMachine.change(GameStateName.TitleScreen, { playMusic: false, fade: false });
+            }
+        } 
     }
 }

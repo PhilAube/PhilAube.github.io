@@ -23,6 +23,8 @@ export default class PlayState extends State {
 		this.alpha = 1; // Black rectangle alpha
 
         this.statsPanel;
+
+		this.holding = false;
 	}
 
 	enter(params)
@@ -31,7 +33,8 @@ export default class PlayState extends State {
 
 		const WAIT_TIME = 2; // In seconds
 
-		keys.Enter = false;
+		this.holding = true;
+
 		this.player = params.player;
 		this.level = params.level;
 		this.level.player = this.player;
@@ -70,19 +73,22 @@ export default class PlayState extends State {
 
 		if (!this.isTweening)
 		{
-			if (keys.Enter)
+			if (!this.holding)
 			{
-				if (!settings.muteMusic) sounds.pause(SoundName.GameMusic);
-				if (!settings.muteSound) sounds.play(SoundName.Poutine);
-				keys.Enter = false;
-
-				if (this.player.isSlipping)
+				if (keys.Enter)
 				{
-					if (!settings.muteSound) sounds.pause(SoundName.Tires);
+					if (!settings.muteMusic) sounds.pause(SoundName.GameMusic);
+					if (!settings.muteSound) sounds.play(SoundName.Poutine);
+	
+					if (this.player.isSlipping)
+					{
+						if (!settings.muteSound) sounds.pause(SoundName.Tires);
+					}
+					
+					stateMachine.change(GameStateName.PauseScreen, { player: this.player, level: this.level });
 				}
-				
-				stateMachine.change(GameStateName.PauseScreen, { player: this.player, level: this.level });
 			}
+			else if (!keys.Enter) this.holding = false;
 
 			this.level.update(dt);
 			this.player.update(dt);

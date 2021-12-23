@@ -1,7 +1,7 @@
 import EventName from "../../enums/EventName.js";
 import FontName from "../../enums/FontName.js";
 import GameStateName from "../../enums/GameStateName.js";
-import { canvas, CANVAS_WIDTH, context, settings, stateMachine } from "../../globals.js";
+import { canvas, CANVAS_WIDTH, context, keys, settings } from "../../globals.js";
 import Menu from "./Menu.js";
 
 export default class ConfirmMenu extends Menu
@@ -35,18 +35,30 @@ export default class ConfirmMenu extends Menu
             
             this.cursor = 0;
             this.outerMenu.state = GameStateName.SettingsMenu;
+            this.outerMenu.holding = true;
+            this.holding = true;
         });
 
         canvas.addEventListener(EventName.ConfirmNo, () =>
         {
             this.cursor = 0;
             this.outerMenu.state = GameStateName.SettingsMenu;
+            this.outerMenu.holding = true;
+            this.holding = true;
         });
     }
 
     update(dt)
     {
-        super.update(dt);
+        if (!this.holding)
+        {
+            super.update(dt);
+        }
+        else if (!keys.Enter && !keys.ArrowUp && !keys.ArrowDown)
+        {
+            this.outerMenu.holding = false;
+            this.holding = false;
+        } 
     }
 
     render()

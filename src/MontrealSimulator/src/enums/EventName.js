@@ -16,7 +16,9 @@ const EventName =
     ConfirmNo: "confirm-no",
     KeyUp: "keyup",
     KeyDown: "keydown",
-    VisibilityChange: "visibilitychange"
+    VisibilityChange: "visibilitychange",
+    GamepadConnected: "gamepadconnected",
+    GamepadDisconnected: "gamepaddisconnected"
 };
 
 export default EventName;

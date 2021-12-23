@@ -99,6 +99,22 @@ fetch('./src/MontrealSimulator/src/config.json').then((response) => response.jso
 		keys[event.key] = false;
 	});
 
+	window.addEventListener(EventName.GamepadConnected, (event) => {
+		if (DEBUG)
+		{
+			console.log("Gamepad connected:");
+			console.log(event.gamepad);
+		}
+	});
+	  
+	window.addEventListener(EventName.GamepadDisconnected, (event) => {
+		if (DEBUG)
+		{
+			console.log("Gamepad disconnected:");
+			console.log(event.gamepad);
+		}
+	});
+
 	document.addEventListener(EventName.VisibilityChange, Visibility.handleVisibilityChange, false);
 
 	const game = new Game(stateMachine, context, canvas.width, canvas.height);

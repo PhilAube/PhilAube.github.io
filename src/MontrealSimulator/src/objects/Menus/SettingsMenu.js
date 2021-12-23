@@ -54,8 +54,14 @@ export default class SettingsMenu extends Menu
 
     update(dt)
     {
-        if (this.state === GameStateName.SettingsMenu) super.update(dt);
-		else if (this.state === GameStateName.SettingsConfirm) this.confirmMenu.update(dt);
+        if (this.state === GameStateName.SettingsMenu) 
+		{
+			if (!this.holding) super.update(dt);
+		}
+		else if (this.state === GameStateName.SettingsConfirm) 
+		{
+			if (!this.holding) this.confirmMenu.update(dt);
+		}
     }
 
     render()

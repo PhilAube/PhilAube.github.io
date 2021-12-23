@@ -2,7 +2,7 @@ import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
 import SoundName from "../enums/SoundName.js";
 import GameStateName from "../enums/GameStateName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, sounds, stateMachine, settings, timer } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, sounds, stateMachine, settings, timer, gamepad } from "../globals.js";
 import CarFactory from "../services/CarFactory.js";
 import StatsPanel from "../objects/StatsPanel.js";
 import Car from "../entities/Car.js";
@@ -56,7 +56,13 @@ export default class CarSelectState extends State {
 		timer.update(dt);
 
 		// No input allowed while swapping cars
-		if (!this.isTweening) this.handleInput();
+		if (!this.isTweening) 
+		{
+			if (!this.handleKeyInput())
+			{
+				this.handleGamepadInput();
+			}
+		}
 	}
 
 	render()
@@ -162,50 +168,81 @@ export default class CarSelectState extends State {
 		});
 	}
 
-	handleInput()
+	handleKeyInput()
 	{
 		if (keys.ArrowLeft)
 		{
-			if (!settings.muteSound) sounds.play(SoundName.Select);
 			keys.ArrowLeft = false;
-			this.tweenCarAndPanelLeft();
+			this.left();
+			return true;
 		}
 		else if (keys.ArrowRight)
 		{
-			if (!settings.muteSound) sounds.play(SoundName.Select);
 			keys.ArrowRight = false;
-			this.tweenCarAndPanelRight();
+			this.right();
+			return true;
 		}
 		else if (keys.Enter)
 		{
-			if (this.cars[this.selectedCar].isLocked) 
-			{
-				keys.Enter = false;
-				if (!settings.muteSound) sounds.play(SoundName.Nope);
-			}
-			else
-			{
-				if (!settings.muteMusic) sounds.stop(SoundName.MenuMusic);
-				if (!settings.muteSound) sounds.play(SoundName.Poutine);
-				keys.Enter = false;
+			this.start();
+			return true;
+		}
+	}
 
-				this.isTweening = true;
+	handleGamepadInput()
+    {
+        let newState = gamepad.getCurrentState();
 
-				timer.tween(this, ['alpha'], [1], 1, () =>
+        if (newState === undefined) return;
+
+		if (gamepad.left) this.left();
+
+        if (gamepad.right) this.right();
+		
+		if (gamepad.enter) this.start();
+    }
+
+	left()
+	{
+		if (!settings.muteSound) sounds.play(SoundName.Select);
+		this.tweenCarAndPanelLeft();
+	}
+
+	right()
+	{
+		if (!settings.muteSound) sounds.play(SoundName.Select);
+		this.tweenCarAndPanelRight();
+	}
+
+	start()
+	{
+		if (this.cars[this.selectedCar].isLocked) 
+		{
+			if (keys.Enter) keys.Enter = false;
+			if (!settings.muteSound) sounds.play(SoundName.Nope);
+		}
+		else
+		{
+			if (!settings.muteMusic) sounds.stop(SoundName.MenuMusic);
+			if (!settings.muteSound) sounds.play(SoundName.Poutine);
+			if (keys.Enter) keys.Enter = false;
+
+			this.isTweening = true;
+
+			timer.tween(this, ['alpha'], [1], 1, () =>
+			{
+				this.alpha = 0;
+
+				let newPlayer = new Player(this.cars[this.selectedCar].type);
+				let newLevel = new Level(newPlayer, settings.currentLevel);
+
+				stateMachine.change(GameStateName.Play, 
 				{
-					this.alpha = 0;
-
-					let newPlayer = new Player(this.cars[this.selectedCar].type);
-					let newLevel = new Level(newPlayer, settings.currentLevel);
-
-					stateMachine.change(GameStateName.Play, 
-					{
-						player: newPlayer, 
-						level: newLevel,
-						fade: true
-					});
+					player: newPlayer, 
+					level: newLevel,
+					fade: true
 				});
-			}
+			});
 		}
 	}
 }

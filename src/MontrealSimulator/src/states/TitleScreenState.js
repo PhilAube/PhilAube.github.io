@@ -47,6 +47,8 @@ export default class TitleScreenState extends State {
 	{
 		settings.checkCorruption(); // Refresh settings to check for corruption
 
+		this.menu.holding = true;
+
 		if (params.fade)
 		{
 			this.isTweening = true;
@@ -65,7 +67,14 @@ export default class TitleScreenState extends State {
 		timer.update(dt);
 		this.colorTimer += dt;
 
-		if (!this.isTweening) this.menu.update(dt);
+		if (!this.isTweening) 
+		{
+			if (!this.menu.holding)
+			{
+				this.menu.update(dt);
+			}
+			else if (!keys.Enter && !keys.ArrowUp && !keys.ArrowDown) this.menu.holding = false;
+		}
 	}
 
 	render()
@@ -98,7 +107,7 @@ export default class TitleScreenState extends State {
 
 		context.fillStyle = 'white';
 		context.font = `${TitleScreenState.SUBTITLE_SIZE}px ${FontName.Joystix}`;
-		context.fillText("1.0", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y - 20);
+		context.fillText("1.05", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y - 20);
 		context.fillText("DEVELOPED BY PHIL AUBE", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y + 40);
 	}
 }

@@ -73,6 +73,8 @@ export default class PauseState extends State
         this.player = params.player;
         this.level = params.level;
 
+        this.pausePanel.holding = true;
+
         this.pausePanel.position = { x: PauseState.OFFSCREEN_POS.x, y: PauseState.OFFSCREEN_POS.y };
         this.isTweening = true;
         timer.tween(this.pausePanel.position, ['y'], [PauseMenu.POS.y], 0.25, () =>

@@ -1,6 +1,6 @@
 import EventName from "../../enums/EventName.js";
 import FontName from "../../enums/FontName.js";
-import { canvas, CANVAS_WIDTH, context } from "../../globals.js";
+import { canvas, CANVAS_WIDTH, context, keys } from "../../globals.js";
 import Menu from "./Menu.js";
 
 export default class PauseMenu extends Menu
@@ -25,7 +25,17 @@ export default class PauseMenu extends Menu
     update(dt)
     {
         // Only allow input when done tweening
-        if (this.position.x === PauseMenu.POS.x && this.position.y === PauseMenu.POS.y) super.update(dt);
+        if (this.position.x === PauseMenu.POS.x && this.position.y === PauseMenu.POS.y)
+        {
+            if (!this.holding)
+            {
+                super.update(dt);
+            }
+            else if (!keys.Enter && !keys.ArrowUp && !keys.ArrowDown)
+            {
+                this.holding = false;
+            } 
+        }
     }
 
     render()

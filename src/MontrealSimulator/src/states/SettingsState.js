@@ -1,6 +1,6 @@
 import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, settings } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, settings } from "../globals.js";
 import SettingsMenu from "../objects/Menus/SettingsMenu.js";
 
 export default class SettingsState extends State {
@@ -16,12 +16,18 @@ export default class SettingsState extends State {
 
 	enter()
 	{
+		this.menu.holding = true;
+
 		settings.checkCorruption(); // Refresh settings to check for corruption
 	}
 
 	update(dt)
 	{
-		this.menu.update(dt);
+		if (!this.menu.holding)
+		{
+			this.menu.update(dt);
+		}
+		else if (!keys.Enter && !keys.ArrowUp && !keys.ArrowDown) this.menu.holding = false;
 	}
 
 	render()
