@@ -2,7 +2,7 @@ import State from "../../lib/State.js";
 import EventName from "../enums/EventName.js";
 import GameStateName from "../enums/GameStateName.js";
 import SoundName from "../enums/SoundName.js";
-import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, settings, sounds, stateMachine, timer } from "../globals.js";
+import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, settings, sounds, stateMachine, timer } from "../globals.js";
 import PauseMenu from "../objects/Menus/PauseMenu.js";
 
 export default class PauseState extends State
@@ -102,5 +102,7 @@ export default class PauseState extends State
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
     }
 }

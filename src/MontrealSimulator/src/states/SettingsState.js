@@ -1,6 +1,6 @@
 import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, settings } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, timer } from "../globals.js";
 import SettingsMenu from "../objects/Menus/SettingsMenu.js";
 
 export default class SettingsState extends State {
@@ -23,6 +23,8 @@ export default class SettingsState extends State {
 
 	update(dt)
 	{
+		timer.update(dt);
+		
 		if (!this.menu.holding)
 		{
 			this.menu.update(dt);
@@ -40,5 +42,7 @@ export default class SettingsState extends State {
 		context.fillStyle = 'white';
 		context.font = `${SettingsState.HEADER_TEXT_SIZE}px ${FontName.Joystix}`;
 		context.fillText("SETTINGS", CANVAS_WIDTH / 2, SettingsState.HEADER_Y);
+
+		gamepad.notificationBox.render();
 	}
 }

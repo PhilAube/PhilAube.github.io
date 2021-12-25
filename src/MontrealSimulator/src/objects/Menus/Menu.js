@@ -75,7 +75,7 @@ export default class Menu extends CanvasObject
 		}
         else if (keys.Enter)
         {
-            this.enter();
+            this.start();
             this.holding = true;
             return true;
         }
@@ -100,9 +100,9 @@ export default class Menu extends CanvasObject
             if (newState.down) this.down();
         }
         
-        if (!oldState.enter)
+        if (!oldState.start)
         {
-            if (newState.enter) this.enter();
+            if (newState.start) this.start();
         } 
     }
 
@@ -119,7 +119,7 @@ export default class Menu extends CanvasObject
         this.cursor = this.cursor % this.menuOptions.length;
     }
 
-    enter()
+    start()
     {
         this.menuOptions[this.cursor]();
 	    if (!settings.muteSound) sounds.play(SoundName.Poutine);

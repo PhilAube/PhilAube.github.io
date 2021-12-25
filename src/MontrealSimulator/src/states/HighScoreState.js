@@ -2,7 +2,7 @@ import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
 import GameStateName from "../enums/GameStateName.js";
 import SoundName from "../enums/SoundName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, sounds, stateMachine } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, sounds, stateMachine, timer } from "../globals.js";
 import Level from "../objects/Level.js";
 
 export default class HighScoreState extends State
@@ -29,6 +29,8 @@ export default class HighScoreState extends State
 
     update(dt)
     {
+		timer.update(dt);
+
         if (!this.holding)
         {
             if (keys.Enter)
@@ -69,6 +71,8 @@ export default class HighScoreState extends State
 
         context.textAlign = 'center';
         context.fillText("PRESS ENTER TO RETURN", CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50);
+
+		gamepad.notificationBox.render();
     }
 
     handleGamepadInput()
@@ -79,9 +83,9 @@ export default class HighScoreState extends State
 
         if (newState === undefined) return;
         
-        if (!oldState.enter)
+        if (!oldState.start)
         {
-            if (newState.enter)
+            if (newState.start)
             {
                 if (!settings.muteSound) sounds.play(SoundName.Poutine);
                 stateMachine.change(GameStateName.TitleScreen, { playMusic: false, fade: false });

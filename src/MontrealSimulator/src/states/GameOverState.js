@@ -1,5 +1,5 @@
 import State from "../../lib/State.js";
-import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, settings, stateMachine, timer } from "../globals.js";
+import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, settings, stateMachine, timer } from "../globals.js";
 import GameStateName from "../enums/GameStateName.js";
 import Fire from "../objects/Fire.js";
 import GameOverMenu from "../objects/Menus/GameOverMenu.js";
@@ -107,5 +107,7 @@ export default class GameOverState extends State
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
 	}
 }

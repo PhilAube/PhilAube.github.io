@@ -1,6 +1,6 @@
 import State from "../../lib/State.js";
 import FontName from "../enums/FontName.js";
-import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, settings, sounds, stateMachine, timer } from "../globals.js";
+import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, sounds, stateMachine, timer } from "../globals.js";
 import TitleScreenMenu from "../objects/Menus/TitleScreenMenu.js";
 import EventName from "../enums/EventName.js";
 import GameStateName from "../enums/GameStateName.js";
@@ -90,6 +90,8 @@ export default class TitleScreenState extends State {
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
 	}
 
 	renderTitle()
@@ -107,7 +109,7 @@ export default class TitleScreenState extends State {
 
 		context.fillStyle = 'white';
 		context.font = `${TitleScreenState.SUBTITLE_SIZE}px ${FontName.Joystix}`;
-		context.fillText("1.05", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y - 20);
+		context.fillText("1.1", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y - 20);
 		context.fillText("DEVELOPED BY PHIL AUBE", CANVAS_WIDTH / 2, TitleScreenState.TITLE_Y + 40);
 	}
 }

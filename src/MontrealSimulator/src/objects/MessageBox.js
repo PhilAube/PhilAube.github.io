@@ -1,3 +1,4 @@
+import FontName from "../enums/FontName.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH, context } from "../globals.js";
 import CanvasObject from "./CanvasObject.js";
 
@@ -5,8 +6,8 @@ import CanvasObject from "./CanvasObject.js";
 export default class MessageBox extends CanvasObject
 {
     static HEIGHT = 50;
-    static POS_Y = CANVAS_HEIGHT - 50;
-    static OFFSCREEN_Y = CANVAS_HEIGHT + 10;
+    static POS_Y = 700; // CANVAS_HEIGHT - 50;
+    static OFFSCREEN_Y = 760; // CANVAS_HEIGHT + 10;
 
     constructor(text, dimensions = { x: CANVAS_WIDTH / 2 + 100, y: MessageBox.HEIGHT })
     {
@@ -17,6 +18,7 @@ export default class MessageBox extends CanvasObject
 
     render()
     {
+        context.font = `25px ${FontName.Joystix}`;
         context.fillStyle = 'black';
         context.fillRect(this.position.x, this.position.y, this.dimensions.x, this.dimensions.y);
 

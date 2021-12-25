@@ -2,31 +2,59 @@
 
 ## ✒️ Description
 
-In this side-scroller driving game, players assume the role of a driver and navigate their car in the hazardous streets of Montreal. They will meet several obstacles along the way, which can have various effects on the player's vehicle.
+In this side-scroller driving game, you navigate their car in the hazardous streets of Montreal. 
 
-## 🕹️ Gameplay
+You will meet several obstacles along the way, which can have various effects on your vehicle.
 
-Players can accelerate, brake and switch lanes using the **ARROW KEYS**.
+## 🎲 Gameplay
 
-They can also honk their horn with the **SPACEBAR**.
+Your score is calculated based on your speed (faster = better).
 
-The game can be paused by pressing **ENTER**.
+To win each level, you have to reach a specific target distance.
 
-The player has a score which is calculated based on their speed (faster = better).
+The game gradually adds 1KM to the target every time you win a level.
 
-To win each level, the player has to reach a specific target score.
-
-The level system gradually increases that target as the player progresses in the game.
-
-As they progress, the player can unlock new vehicles with better stats.
+As you progress, you can unlock up to 3 new vehicles with better stats.
 
 Vehicles have 3 stats: 
+
 - Health
 - Acceleration
 - Top Speed
 
-Potholes and cones lower the vehicle's health and slow the vehicle down.
+On the road:
 
-Oil slicks spin the player out, briefly brief causing a loss of control. 
+- **Potholes** and **cones** lower your vehicle's health and slow it down.
 
-Poutines  restore vehicle health.
+- **Oil slicks** spin your vehicle out, briefly brief causing a loss of control. 
+
+- **Poutines** restore your vehicle's health.
+
+## 🕹️ Controls
+
+### Keyboard Controls
+
+- **ACCELERATE:** Right Arrow Key
+- **BRAKE:** Left Arrow Key
+- **STEER:** Up / Down Arrow Keys
+- **HONK HORN:** Spacebar
+- **PAUSE MENU:** Enter
+- **MENU SELECTION:** Enter
+
+### Gamepad Controls
+
+![Controls](/images/Gamepad.png)
+
+Gamepad base image sourced from [gamepad-tester.com](https://gamepad-tester.com/)
+
+## 🔧 Setup
+
+If you wish to play this game with a gamepad/controller, simply connect it to your device via Bluetooth or cable.
+
+Once that is done, go to the game's browser window and try pressing some buttons on the gamepad/controller.
+
+If you set things up correctly, you should see a connection confirmation appear from the bottom.
+
+If that worked, you're ready to play the game! If not, I'd suggest [this website](https://gamepad-tester.com/) for troubleshooting.
+
+Otherwise, if you think you've found a bug or some other issue, please let me know [here](https://philaube.github.io/contact.html)!

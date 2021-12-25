@@ -1,5 +1,5 @@
 import State from "../../lib/State.js";
-import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, settings, stateMachine, timer } from "../globals.js";
+import { canvas, CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, settings, stateMachine, timer } from "../globals.js";
 import GameStateName from "../enums/GameStateName.js";
 import VictoryMenu from "../objects/Menus/VictoryMenu.js";
 import EventName from "../enums/EventName.js";
@@ -127,5 +127,7 @@ export default class VictoryState extends State
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
 	}
 }

@@ -93,6 +93,8 @@ export default class CarSelectState extends State {
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
 	}
 
 	tweenCarAndPanelLeft()
@@ -199,7 +201,7 @@ export default class CarSelectState extends State {
 
         if (gamepad.right) this.right();
 		
-		if (gamepad.enter) this.start();
+		if (gamepad.start) this.start();
     }
 
 	left()

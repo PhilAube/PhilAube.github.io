@@ -2,7 +2,7 @@ import State from "../../lib/State.js";
 import GameStateName from "../enums/GameStateName.js";
 import SoundName from "../enums/SoundName.js";
 import FontName from "../enums/FontName.js";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, context, keys, settings, sounds, stateMachine, timer } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, context, gamepad, keys, settings, sounds, stateMachine, timer } from "../globals.js";
 import StatsPanel from "../objects/StatsPanel.js";
 import MessageBox from "../objects/MessageBox.js";
 import Visibility from "../services/Visibility.js";
@@ -69,13 +69,15 @@ export default class PlayState extends State {
 
 	update(dt)
 	{
+		let newState = gamepad.getCurrentState();
+
 		timer.update(dt);
 
 		if (!this.isTweening)
 		{
 			if (!this.holding)
 			{
-				if (keys.Enter)
+				if (keys.Enter || newState?.start)
 				{
 					if (!settings.muteMusic) sounds.pause(SoundName.GameMusic);
 					if (!settings.muteSound) sounds.play(SoundName.Poutine);
@@ -88,7 +90,7 @@ export default class PlayState extends State {
 					stateMachine.change(GameStateName.PauseScreen, { player: this.player, level: this.level });
 				}
 			}
-			else if (!keys.Enter) this.holding = false;
+			else if (!keys.Enter && !newState?.start) this.holding = false;
 
 			this.level.update(dt);
 			this.player.update(dt);
@@ -112,6 +114,8 @@ export default class PlayState extends State {
 		context.fillStyle = 'black';
 		context.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		context.restore();
+
+		gamepad.notificationBox.render();
 	}
 
 	renderHUD()

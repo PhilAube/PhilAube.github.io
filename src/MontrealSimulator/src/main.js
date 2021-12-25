@@ -40,7 +40,9 @@ import Game from "../lib/Game.js";
 import {
 	canvas,
 	context,
+	DEBUG,
 	fonts,
+	gamepad,
 	images,
 	keys,
 	settings,
@@ -88,18 +90,19 @@ fetch('./src/MontrealSimulator/src/config.json').then((response) => response.jso
 
 	// Add event listeners for player input.
 	document.addEventListener(EventName.KeyDown, event => {
-		// Prevent automatic scrolling of up/down arrows
-		if (event.key === "ArrowUp" || event.key === "ArrowDown") event.preventDefault();
+		// Prevent automatic scrolling of up/down arrows or space
+		if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === ' ') event.preventDefault();
 		keys[event.key] = true;
 	});
 
 	document.addEventListener(EventName.KeyUp, event => {
-		// Prevent automatic scrolling of up/down arrows
-		if (event.key === "ArrowUp" || event.key === "ArrowDown") event.preventDefault();
+		// Prevent automatic scrolling of up/down arrows or space
+		if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === ' ') event.preventDefault();
 		keys[event.key] = false;
 	});
 
 	window.addEventListener(EventName.GamepadConnected, (event) => {
+		gamepad.notifyUser(true);
 		if (DEBUG)
 		{
 			console.log("Gamepad connected:");
@@ -108,6 +111,7 @@ fetch('./src/MontrealSimulator/src/config.json').then((response) => response.jso
 	});
 	  
 	window.addEventListener(EventName.GamepadDisconnected, (event) => {
+		gamepad.notifyUser(false);
 		if (DEBUG)
 		{
 			console.log("Gamepad disconnected:");
