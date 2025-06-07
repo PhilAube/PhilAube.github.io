@@ -11,16 +11,16 @@
             let body = document.getElementById("emailMessage").value;
         
             let msg = "Hey there! \n\n" + 
-            "This is a just a dummy form meant to show off my graphic design skills (or lack thereof, if you reckon so). ";
+            "This is a just a dummy form (GitHub Pages doesn't support any back-end). ";
 
             if (body !== "") 
             {
-                msg += "If you are genuinely interested in contacting me, I'll open up your email client for you, " +
+                msg += "If you are interested in contacting me, I'll open up your email client for you, " +
                 "and I'll even paste your message into the text box to save you the trouble of copy-pasting."
             }
             else 
             {
-                msg += "If you are genuinely interested in contacting me, I'll open up your email client for you.";
+                msg += "If you are interested in contacting me, I'll open up your email client for you.";
             }
 
             alert(msg);
@@ -51,49 +51,10 @@
         <div class = "textbox">
             <h1>CONTACT</h1>
             <form>
-                <label for="name">Your name</label>
-                <input type="text" name="name">
-
-                <label for="email">E-Mail Address</label>
-                <input type="email" name="email">
-
-                <label for="phone">Phone</label>
-                <input type="tel" name="phone">
-                
-                <br>
-                <div id = "radio">
-                    <label id = "label" for = "Method">Preferred Method of Communication</label>
-                    <label for="Phone">Phone</label>
-                    <input type="radio" name="Method" value = "Phone">
-                    <label for="Email">Email</label>
-                    <input type="radio" name="Method" value = "Email">
-                </div>
-
-                <label for="provinces">Select your province</label>
-                <select id="provinces" name="provinces">
-                    <option value="Quebec">Quebec</option>
-                    <option value="Ontario">Ontario</option>
-                    <option value="Nova Scotia">Nova Scotia</option>
-                    <option value="New Brunswick">New Brunswick</option>
-                    <option value="Manitoba">Manitoba</option>
-                    <option value="British Columbia">British Columbia</option>
-                    <option value="Prince Edward Island">Prince Edward Island</option>
-                    <option value="Saskatchewan">Saskatchewan</option>
-                    <option value="Alberta">Alberta</option>
-                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                </select>
-
-                <label for="message">Message</label>
                 <textarea name="message" id="emailMessage"></textarea>
-
-                <br>
                 <button onclick="beUserFriendly()">Submit</button>
-              </form>
+            </form>
         </div>
     </div>
-    
-    <footer>
-        <p>This website was designed from scratch by yours truly.</p>
-    </footer>
 </body>
 </html>
