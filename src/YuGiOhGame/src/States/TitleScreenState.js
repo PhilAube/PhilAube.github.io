@@ -1,6 +1,8 @@
 import Card from "../Core/Card.js";
 import State from "../Core/State.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from "../globals.js";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../Core/RenderSytem.js";
+import TitleScreenMenu from "../Menus/TitleScreenMenu.js";
+import { renderer } from "../globals.js";
 
 /** State for title screen which cycles through card artwork each second. */
 export default class TitleScreenState extends State {
@@ -11,10 +13,11 @@ export default class TitleScreenState extends State {
         super(stateMachine);
         this.currentCard = this.getRandomCard();
         this.timer = 0;
+        this.menu = new TitleScreenMenu();
     }
 
+    /** Updates random card artwork once per second. */
     update(dt) {
-        // Change the artwork once every second.
         const TICKER = 1;
 
         if (this.timer > TICKER) {
@@ -22,10 +25,13 @@ export default class TitleScreenState extends State {
             this.timer = 0;
         }
         else this.timer += dt;
+
+        this.menu.update();
     }
 
+    /** Renders menu, title and card artwork. */
     render() {
-        this.renderer.background("black");
+        this.menu.render();
         this.renderText();
         this.renderCardSprite();
     }
@@ -49,16 +55,12 @@ export default class TitleScreenState extends State {
         const x = (CANVAS_WIDTH - drawSize) / 2;
         const y = (CANVAS_HEIGHT - drawSize) / 2;
 
-        this.renderer.card.renderSprite(this.currentCard, x, y, drawSize);
+        renderer.card.renderSprite(this.currentCard, x, y, drawSize);
     }
 
     /** Renders the title. */
     renderText() {
         const TITLE_TEXT = "Not Yu-Gi-Oh! The Sacred Cards";
-        this.renderer.headerText(TITLE_TEXT, 100);
-
-        // TODO: Implement this helper and a card viewer for the trunk/deck.
-        // TODO: Implement a Menu superclass and TitleScreenMenu subclass.
-        // this.renderer.mediumText("CARDS", 400);
+        renderer.headerText(TITLE_TEXT, 100);
     }
 }

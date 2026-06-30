@@ -1,10 +1,15 @@
 import cards from "../assets/data/cards.json" with { type: "json" }
-
-export const canvas = document.getElementById("gameCanvas");
-export const ctx = canvas.getContext("2d");
-
-export const CANVAS_WIDTH = canvas.width;
-export const CANVAS_HEIGHT = canvas.height;
+import RenderSystem from "./Core/RenderSytem.js";
+import InputManager from "./Core/Input/InputManager.js";
 
 export const spriteSheetPaths = ["./src/YuGiOhGame/assets/img/CardSpritesheet.png"];
 export const cardData = cards;
+
+/** Enum for each menu option in the game. */
+export const MenuOptions = {
+    CARDS : "CARDS",
+    SETTINGS: "SETTINGS"
+};
+
+export const renderer = new RenderSystem(spriteSheetPaths);
+export const input = new InputManager();

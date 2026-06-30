@@ -5,19 +5,14 @@ export default class State {
      */
     constructor(stateMachine) {
         this.stateMachine = stateMachine;
-        this.renderer = stateMachine.renderer;
     }
 
     /**
      * Called once per frame by the state machine to update game logic.
      * @param {Number} dt How much time has elapsed since the last time this was called.
      */
-    update(dt) {
-
-    }
+    update(dt) { }
 
     /** Called once per frame by the state machine to update the canvas. */
-    render() {
-
-    }
+    render() { }
 }
