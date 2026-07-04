@@ -1,3 +1,4 @@
+import { THEMES } from "../themes.js";
 import CardRenderer from "./CardRenderer.js";
 
 const canvas = document.getElementById("gameCanvas");
@@ -9,7 +10,7 @@ export const CANVAS_HEIGHT = canvas.height;
 /** Encapsulates rendering logic. */
 export default class RenderSystem {
     /**
-     * @param {Array} spriteSheetPaths}
+     * @param {Array} spriteSheetPaths The relative paths to the sprite sheets.
      */
     constructor(spriteSheetPaths) {
         this.assetsLoaded = 0;
@@ -32,7 +33,11 @@ export default class RenderSystem {
         this.card = new CardRenderer(canvas, ctx, this.spriteSheets[0]);
     }
 
-    /** Loads the sprite sheets and emits a ready signal when all assets are loaded. */
+    /**
+     * Loads the sprite sheets and emits a ready signal when all assets are loaded.
+     * @param {Array} paths Relative paths to the spritesheets.
+     * @returns An array of images, which are loaded when this.ready is true.
+     */
     loadSpriteSheets(paths) {
         let spriteSheets = [];
 
@@ -58,50 +63,106 @@ export default class RenderSystem {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
-    /** Sets the canvas to a specified background color. */
+    /**
+     * Sets the canvas to a specified background color.
+     * @param {String} color The color to set the canvas to (hex values defined in themes.js).
+     */
     background(color) {
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
-    /** Draws a horizontal line at a specified width and x,y position */
+    /**
+     * Draws a horizontal line at a specified position and width.
+     * @param {Number} x The x coordinate to begin the line at.
+     * @param {Number} y The y coordinate to draw the line at.
+     * @param {Number} width The length of the line in pixels.
+     */
     line(x, y, width) {
         ctx.beginPath();
 
-        // 3. Configure the stroke styles (Optional)
-        ctx.strokeStyle = "white"; // Sets line color to red
-        ctx.lineWidth = 5;           // Sets line thickness to 5 pixels
+        ctx.strokeStyle = THEMES.Colors.White;
+        ctx.lineWidth = 5;
 
-        // 4. Define the line geometry
-        ctx.moveTo(x, y);          // Move the virtual pen to starting (x, y)
-        ctx.lineTo(x + width, y);        // Draw a digital path to target (x, y)
+        ctx.moveTo(x, y); // Move the virtual pen to starting (x, y)
+        ctx.lineTo(x + width, y); // Draw a digital path to target (x, y)
         ctx.stroke();
     }
 
-    /** Draws large centered text at a specified y position, in white by default. */
-    headerText(text, y, color = "white") {
+    /**
+     * Draws large centered text at a specified height.
+     * @param {String} text The text to display.
+     * @param {Number} y The height or y coordinate where the text will display.
+     * @param {String} color The color to draw the text, white by default.
+     */
+    headerText(text, y, color = THEMES.Colors.White) {
         ctx.fillStyle = color;
-        ctx.font = "30px Times New Roman";
+        ctx.font = `${THEMES.LargeFont}px ${THEMES.Font}`;
         ctx.fillText(text, CANVAS_WIDTH / 2, y, CANVAS_WIDTH);
     }
 
-    /** Draws a menu option at its specified position. */
-    menuOption(menuOption, xOffset = 0, yOffset = 0) {
-        ctx.fillStyle = "white";
-        ctx.font = "20px Times New Roman";
-        let x = menuOption.position.x + xOffset;
-        let y = menuOption.position.y + yOffset;
-        ctx.fillText(menuOption.id, x, y, CANVAS_WIDTH);
+    /**
+     * Draws regular (medium-sized) text at a specified position.
+     * @param {String} text The text to display.
+     * @param {Number} x The x coordinate to draw the text at.
+     * @param {Number} y The y coordinate to draw the text at.
+     */
+    text(text, x, y) {
+        ctx.font = `${THEMES.MediumFont}px ${THEMES.Font}`;
+        ctx.fillStyle = THEMES.Colors.White;
+        ctx.fillText(text, x, y);
     }
 
-    /** Draws a box at specified position and dimensions, with border by default. */
+    /**
+     * Measures the pixel size of the given text string.
+     * @param {String} text The text to be measured.
+     * @returns An object containing width and height properties of that string.
+     */
+    measureText(text, fontSize) {
+        ctx.font = `${fontSize}px ${THEMES.Font}`;
+        const m = this.ctx.measureText(text);
+        return {
+            width: m.width,
+            height: m.actualBoundingBoxAscent + m.actualBoundingBoxDescent
+        }
+    }
+
+    /**
+     * Draws a box at specified position and dimensions, with border by default.
+     * @param {Vector} position The x and y coordinates of the box to draw.
+     * @param {Vector} dimensions The height and width of the box to draw.
+     * @param {Boolean} border Whether a white border should be drawn around the box, true by default.
+     */
     box(position, dimensions, border = true) {
-        ctx.fillStyle = "#1F1F1F";
+        ctx.fillStyle = THEMES.Colors.Black;
         ctx.fillRect(position.x, position.y, dimensions.x, dimensions.y);
 
         if (border) {
-            ctx.strokeStyle = "#FAFAFA";
+            ctx.strokeStyle = THEMES.Colors.White;
             ctx.strokeRect(position.x, position.y, dimensions.x, dimensions.y);
+        }
+    }
+
+    /**
+     * Draws a rounded box at specified position and dimensions, without border by default.
+     * @param {String} color The color of the fill inside the box.
+     * @param {Vector} position The x and y coordinates of the box to draw.
+     * @param {Vector} dimensions The height and width of the box to draw.
+     * @param {Boolean} border Whether a white border should be drawn around the box.
+     */
+    roundedBox(color, position, dimensions, border) {
+        const RADIUS = 5;
+
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.roundRect(position.x, position.y, dimensions.x, dimensions.y, RADIUS);
+        ctx.fill();
+
+        if (border) {
+            ctx.fillStyle = THEMES.Colors.White;
+            ctx.beginPath();
+            ctx.roundRect(position.x, position.y, dimensions.x, dimensions.y, RADIUS);
+            ctx.stroke();
         }
     }
 }

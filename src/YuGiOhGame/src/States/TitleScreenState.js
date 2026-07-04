@@ -16,7 +16,10 @@ export default class TitleScreenState extends State {
         this.menu = new TitleScreenMenu();
     }
 
-    /** Updates random card artwork once per second. */
+    /**
+     * Updates random card artwork once per second.
+     * @param {Number} dt How much time has elapsed since the last time this was called.
+     */
     update(dt) {
         const TICKER = 1;
 

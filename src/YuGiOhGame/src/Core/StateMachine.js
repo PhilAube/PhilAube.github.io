@@ -1,7 +1,7 @@
 import LoadingState from "../States/LoadingState.js";
 import { renderer, input } from "../globals.js";
 
-/** Basic state machine which tracks the current game state and owns the rendering system. */
+/** Basic state machine which updates input and tracks, renders and updates the current game state. */
 export default class StateMachine {
 	constructor() {
         this.currentState = new LoadingState(this);

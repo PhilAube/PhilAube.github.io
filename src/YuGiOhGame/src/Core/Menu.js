@@ -16,7 +16,10 @@ export default class Menu extends CanvasObject {
         this.cursorPosition = 0;
     }
 
-    /** Handles menu-specific input. */
+    /**
+     * Handles menu-specific input.
+     * @param {Number} dt Delta Time, or the time passed since the last frame.
+     */
     update(dt) {
         let index = this.cursorPosition;
         let states = Object.entries(input.get());
@@ -28,11 +31,11 @@ export default class Menu extends CanvasObject {
                 switch (state[0]) {
                     case InputHandler.ACTIONS.Up:
                         index = (index - 1 + length) % length;
-                        this.cursorPosition = index;
+                        this.updateCursor(index);
                         break;
                     case InputHandler.ACTIONS.Down:
                         index = (index + 1 + length) % length;
-                        this.cursorPosition = index;
+                        this.updateCursor(index);
                         break;
                 }
             }
@@ -42,34 +45,32 @@ export default class Menu extends CanvasObject {
     /** Renders the menu options and cursor. */
     render() {
         this.renderBackground();
-        this.renderText();
-        this.renderCursor();
+        this.renderMenuOptions();
     }
 
     /** Renders the menu option text. */ 
-    renderText() {
+    renderMenuOptions() {
         let xOffset = this.position.x;
         let yOffset = this.position.y;
 
         // Render each menu option.
         this.menuOptions.forEach(option => {
-            renderer.menuOption(option, xOffset, yOffset);
+            option.render(xOffset, yOffset);
         });
-    }
-
-    /** Renders a cursor line under the currently selected option. */
-    renderCursor() {
-        let xOffset = this.position.x;
-        let yOffset = this.position.y;
-        let currentChoice = this.menuOptions[this.cursorPosition];
-        let x = currentChoice.position.x + xOffset;
-        let y = currentChoice.position.y + yOffset;
-        let width = renderer.ctx.measureText(currentChoice.id).width;
-        renderer.line(x - (width / 2), y + 10, width);
     }
 
     /** Renders the box containing the menu options. */
     renderBackground() {
         renderer.box(this.position, this.dimensions);
+    }
+
+    /**
+     * Updates the menu cursor position and sets isSelected on menu options.
+     * @param {Number} index The new menu cursor position to be set.
+     */
+    updateCursor(index) {
+        this.menuOptions[this.cursorPosition].isSelected = false;
+        this.cursorPosition = index;
+        this.menuOptions[index].isSelected = true;
     }
 }

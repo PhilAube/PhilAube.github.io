@@ -2,8 +2,8 @@
 export default class CardRenderer {
 
     /**
-     * @param {HTMLCanvasElement} canvas
-     * @param {CanvasRenderingContext2D} ctx
+     * @param {HTMLCanvasElement} canvas The game canvas.
+     * @param {CanvasRenderingContext2D} ctx The rendering context of the game canvas.
      * @param {Image} spriteSheet The loaded card art sprite sheet.
      */
     constructor(canvas, ctx, spriteSheet) {

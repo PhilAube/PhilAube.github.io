@@ -25,7 +25,7 @@ export default class TitleScreenMenu extends Menu {
 
     /**
      * Gets the callback and canvas position of a menu option from an ID.
-     * @param {Number} name The enum representing the menu option.
+     * @param {String} id The enum representing the menu option.
      * @returns A new MenuOption with a populated task and canvas position.
      */
     getMenuOption(id) {
@@ -34,7 +34,8 @@ export default class TitleScreenMenu extends Menu {
                 return new MenuOption(
                     MenuOptions.CARDS,
                     this.cardsHandler,
-                    new Vector(CANVAS_WIDTH / 2, 400)
+                    new Vector(CANVAS_WIDTH / 2, 400),
+                    true
                 );
             case MenuOptions.SETTINGS:
                 return new MenuOption(
