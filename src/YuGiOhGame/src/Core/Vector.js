@@ -18,4 +18,6 @@ export default class Vector {
 		this.x += vector.x * dt;
 		this.y += vector.y * dt;
 	}
+
+	static Empty = new Vector();
 }

@@ -30,7 +30,7 @@ export default class RenderSystem {
 
         this.spriteSheets = this.loadSpriteSheets(spriteSheetPaths);
 
-        this.card = new CardRenderer(canvas, ctx, this.spriteSheets[0]);
+        this.card = new CardRenderer(canvas, ctx, this.spriteSheets);
     }
 
     /**

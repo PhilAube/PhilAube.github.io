@@ -3,24 +3,21 @@ import MenuOption from "../Core/MenuOption.js";
 import Vector from "../Core/Vector.js";
 import { MenuOptions } from "../globals.js";
 import { CANVAS_WIDTH } from "../Core/RenderSytem.js"
+import CardViewerState from "../States/CardViewerState.js";
 
 /** Extends the Menu base class for the title screen. */
 export default class TitleScreenMenu extends Menu {
-    constructor(position, dimensions) {
+    /**
+     * @param {TitleScreenState} state The parent title screen state owning this menu.
+     * @param {Vector} position The position of the title screen menu.
+     * @param {Vector} dimensions The dimensions of the title screen menu.
+     */
+    constructor(state, position, dimensions) {
         super(position, dimensions);
         const CARDS = this.getMenuOption(MenuOptions.CARDS);
         const SETTINGS = this.getMenuOption(MenuOptions.SETTINGS);
         super.menuOptions = [CARDS, SETTINGS];
-    }
-
-    /** Changes the game state to a card viewer. */
-    cardsHandler() {
-        console.log("TODO");
-    }
-
-    /** Changes the game state to a settings menu. */
-    settingsHandler() {
-        console.log("TODO");
+        this.state = state;
     }
 
     /**
@@ -33,18 +30,28 @@ export default class TitleScreenMenu extends Menu {
             case MenuOptions.CARDS:
                 return new MenuOption(
                     MenuOptions.CARDS,
-                    this.cardsHandler,
+                    this.cardsHandler.bind(this),
                     new Vector(CANVAS_WIDTH / 2, 400),
                     true
                 );
             case MenuOptions.SETTINGS:
                 return new MenuOption(
                     MenuOptions.SETTINGS,
-                    this.settingsHandler,
+                    this.settingsHandler.bind(this),
                     new Vector(CANVAS_WIDTH / 2, 450)
                 );
             default:
                 break;
         }
+    }
+
+    /** Changes the game state to a card viewer. */
+    cardsHandler() {
+        this.state.onCardsSelected();
+    }
+
+    /** Changes the game state to a settings menu. */
+    settingsHandler() {
+        this.state.onSettingsSelected();
     }
 }

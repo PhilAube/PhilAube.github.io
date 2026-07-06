@@ -37,6 +37,9 @@ export default class Menu extends CanvasObject {
                         index = (index + 1 + length) % length;
                         this.updateCursor(index);
                         break;
+                    case InputHandler.ACTIONS.A:
+                        this.menuOptions[this.cursorPosition].task();
+                        break;
                 }
             }
         }); 
