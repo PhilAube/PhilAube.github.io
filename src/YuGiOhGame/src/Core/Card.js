@@ -28,6 +28,7 @@ export default class Card extends CanvasObject{
             ? data.frameType[0].toUpperCase() + data.frameType.slice(1)
             : null; // Handles blank cards until they are all populated.
 
+        this.rarity = data.rarity;
         this.description = data.desc;
     }
 

@@ -29,7 +29,7 @@ export default class LoadingState extends State {
             }
         }
 
-        this.displayMsg = `LOADING IMAGE ASSETS ${renderer.assetsLoaded} / ${renderer.assetsTotal}`;
+        this.displayMsg = `LOADING ASSETS ${renderer.assetsLoaded} / ${renderer.assetsTotal}`;
 	}
 
     /** Displays the number of assets loaded. */

@@ -1,6 +1,5 @@
 import Menu from "../Core/Menu.js";
 import MenuOption from "../Core/MenuOption.js";
-import { CANVAS_WIDTH } from "../Core/RenderSytem.js";
 import Vector from "../Core/Vector.js";
 import { MenuOptions } from "../globals.js";
 
@@ -29,7 +28,7 @@ export default class CardViewerMenu extends Menu {
                 return new MenuOption(
                     MenuOptions.CVBACK,
                     this.backHandler.bind(this),
-                    new Vector(CANVAS_WIDTH / 2, 475),
+                    new Vector(460, 475),
                     true
                 );
             default:

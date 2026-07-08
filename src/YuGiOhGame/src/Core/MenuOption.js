@@ -41,7 +41,7 @@ export default class MenuOption extends CanvasObject {
 
     /** Initializes the dimensions of the menu option based on the text. */
     setDimensions() {
-        const measure = renderer.measureText(this.id, THEMES.MediumFont);
+        const measure = renderer.measureText(this.id, THEMES.FontSizes.Medium);
         return new Vector(measure.width, measure.height);
     }
 }

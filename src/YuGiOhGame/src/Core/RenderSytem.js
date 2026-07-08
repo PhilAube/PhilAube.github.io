@@ -1,5 +1,6 @@
 import { THEMES } from "../themes.js";
 import CardRenderer from "./CardRenderer.js";
+import { fontPaths } from "../globals.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -14,7 +15,7 @@ export default class RenderSystem {
      */
     constructor(spriteSheetPaths) {
         this.assetsLoaded = 0;
-        this.assetsTotal = spriteSheetPaths.length;
+        this.assetsTotal = spriteSheetPaths.length + Object.keys(fontPaths).length;
         this.ready = false;
         this.ctx = ctx;
         this.canvas = canvas;
@@ -30,11 +31,13 @@ export default class RenderSystem {
 
         this.spriteSheets = this.loadSpriteSheets(spriteSheetPaths);
 
+        this.fonts = this.loadFonts(fontPaths);
+
         this.card = new CardRenderer(canvas, ctx, this.spriteSheets);
     }
 
     /**
-     * Loads the sprite sheets and emits a ready signal when all assets are loaded.
+     * Loads the sprite sheets and emits a ready signal if all assets are loaded.
      * @param {Array} paths Relative paths to the spritesheets.
      * @returns An array of images, which are loaded when this.ready is true.
      */
@@ -57,6 +60,32 @@ export default class RenderSystem {
         
         return spriteSheets;
     }
+
+    /**
+     * Loads the fonts and adds them to the document, emitting a ready signal if all assets are loaded.
+     * @param {Array} fontPaths Relative paths to the font files.
+     * @returns The array of loaded fonts.
+     */
+    loadFonts(fontPaths) {
+        let fonts = {}
+        
+        for (const [name, path] of Object.entries(fontPaths)) {
+            const font = new FontFace(
+                name,
+                `url(${path})`
+            );
+
+            fonts[name] = font;
+
+            font.load().then(font => {
+				document.fonts.add(font);
+                this.assetsLoaded++;
+                this.ready = (this.assetsLoaded === this.assetsTotal);
+			});
+        };
+
+        return fonts;
+	}
 
     /** Clears the canvas. */
     clear() {
@@ -97,7 +126,7 @@ export default class RenderSystem {
      */
     headerText(text, y, color = THEMES.Colors.White) {
         ctx.fillStyle = color;
-        ctx.font = `${THEMES.LargeFont}px ${THEMES.Font}`;
+        ctx.font = `${THEMES.FontSizes.Large}px ${THEMES.Fonts.CardName}`;
         ctx.fillText(text, CANVAS_WIDTH / 2, y, CANVAS_WIDTH);
     }
 
@@ -108,7 +137,7 @@ export default class RenderSystem {
      * @param {Number} y The y coordinate to draw the text at.
      */
     text(text, x, y) {
-        ctx.font = `${THEMES.MediumFont}px ${THEMES.Font}`;
+        ctx.font = `${THEMES.FontSizes.Medium}px ${THEMES.Fonts.Default}`;
         ctx.fillStyle = THEMES.Colors.White;
         ctx.fillText(text, x, y);
     }
@@ -116,10 +145,12 @@ export default class RenderSystem {
     /**
      * Measures the pixel size of the given text string.
      * @param {String} text The text to be measured.
+     * @param {Number} fontSize The size of the font to be measured.
+     * @param {String} fontFace The name of the FontFace to be measured.
      * @returns An object containing width and height properties of that string.
      */
-    measureText(text, fontSize) {
-        ctx.font = `${fontSize}px ${THEMES.Font}`;
+    measureText(text, fontSize, fontFace = THEMES.Fonts.Default) {
+        ctx.font = `${fontSize}px ${fontFace}`;
         const m = this.ctx.measureText(text);
         return {
             width: m.width,

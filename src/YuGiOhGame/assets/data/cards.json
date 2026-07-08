@@ -10,6 +10,7 @@
     "level": 8,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale."
   },
   {
@@ -205,6 +206,7 @@
     "level": 2,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Once per turn: You can toss a coin and call it. If you call it right, destroy all monsters your opponent controls. If you call it wrong, destroy as many monsters you control as possible, and if you do, take damage equal to half the total ATK those destroyed monsters had while face-up on the field."
   },
   {
@@ -218,6 +220,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "A forbidden right leg sealed by magic. Whosoever breaks this seal will know infinite power."
   },
   {
@@ -231,6 +234,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "A forbidden left leg sealed by magic. Whosoever breaks this seal will know infinite power."
   },
   {
@@ -244,6 +248,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "A forbidden right arm sealed by magic. Whosoever breaks this seal will know infinite power."
   },
   {
@@ -257,6 +262,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "A forbidden left arm sealed by magic. Whosoever breaks this seal will know infinite power."
   },
   {
@@ -270,6 +276,7 @@
     "level": 3,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "If you have \"Right Leg of the Forbidden One\", \"Left Leg of the Forbidden One\", \"Right Arm of the Forbidden One\" and \"Left Arm of the Forbidden One\" in addition to this card in your hand, you win the Duel."
   },
   {
@@ -283,6 +290,7 @@
     "level": 6,
     "race": "Fiend",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "A fiend with dark powers for confusing the enemy. Among the Fiend-Type monsters, this monster boasts considerable force.\n\n(This card is always treated as an \"Archfiend\" card.)"
   },
   {
@@ -452,6 +460,7 @@
     "level": 7,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "''The ultimate wizard in terms of attack and defense.''"
   },
   {
@@ -478,6 +487,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "secret",
     "desc": "\"Gaia The Fierce Knight\" + \"Curse of Dragon\""
   },
   {
@@ -491,6 +501,7 @@
     "level": 7,
     "race": "Warrior",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "''A knight whose horse travels faster than the wind. His battle-charge is a force to be reckoned with.''"
   },
   {
@@ -868,6 +879,7 @@
     "level": 8,
     "race": "Insect",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 \"Petit Moth\" on your 6th turn or later after it was equipped with \"Cocoon of Evolution\"."
   },
   {
@@ -894,6 +906,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "secret",
     "desc": "\"Time Wizard\" + \"Baby Dragon\""
   },
   {
@@ -1063,6 +1076,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "''A ferocious dragon with a deadly attack.''"
   },
   {
@@ -2818,6 +2832,7 @@
     "level": 9,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "secret",
     "desc": "\"Summoned Skull\" + \"Red-Eyes Black Dragon\"\r\n\r\n\r\n\r\n(This card is always treated as an \"Archfiend\" card.)"
   },
   {
@@ -3949,6 +3964,7 @@
     "level": null,
     "race": "Equip",
     "frameType": "spell",
+    "rarity": "ultra",
     "desc": "(This card is always treated as an \"Archfiend\" card.)\nThe equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on the top of your Deck."
   },
   {
@@ -4534,6 +4550,7 @@
     "level": null,
     "race": "Continuous",
     "frameType": "trap",
+    "rarity": "ultra",
     "desc": "Activate this card by targeting 1 monster your opponent controls; it cannot attack or change its battle position. When that monster is destroyed, destroy this card."
   },
   {
@@ -4651,6 +4668,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "A mystical dragon that burns away the unworthy with its mystic flames."
   },
   {
@@ -4703,6 +4721,7 @@
     "level": 5,
     "race": "Warrior",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "A famous shield said to belong to an ancient Egyptian Pharaoh. Legends tell of its power to block any strong attack."
   },
   {
@@ -4859,6 +4878,7 @@
     "level": 11,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 \"Sanga of the Thunder\", \"Kazejin\", and \"Suijin\"."
   },
   {
@@ -4937,6 +4957,7 @@
     "level": 12,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "secret",
     "desc": "\"Blue-Eyes White Dragon\" + \"Blue-Eyes White Dragon\" + \"Blue-Eyes White Dragon\""
   },
   {
@@ -5015,6 +5036,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Gains 300 ATK/DEF for each \"Harpie Lady\" on the field."
   },
   {
@@ -6913,6 +6935,7 @@
     "level": 4,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "Elf twins that alternate their attacks."
   },
   {
@@ -7576,6 +7599,7 @@
     "level": null,
     "race": "Continuous",
     "frameType": "trap",
+    "rarity": "ultra",
     "desc": "When this card and all 4 \"Spirit Message\" cards with different names are placed on your field, you win the Duel. Once per turn, during your opponent's End Phase: Place 1 \"Spirit Message\" card from your hand or Deck in your Spell & Trap Zone face-up, in the proper order of \"I\", \"N\", \"A\", and \"L\". When any \"Spirit Message\" card or \"Destiny Board\" you control leaves the field, send all \"Spirit Message\" cards and \"Destiny Board\" you control to the Graveyard."
   },
   {
@@ -8499,6 +8523,7 @@
     "level": null,
     "race": "Equip",
     "frameType": "spell",
+    "rarity": "secret",
     "desc": "Equip only to a FIRE monster. It gains 700 ATK."
   },
   {
@@ -8538,6 +8563,7 @@
     "level": null,
     "race": "Equip",
     "frameType": "spell",
+    "rarity": "ultra",
     "desc": "While your LP is lower than your opponent's, the equipped monster's ATK becomes double its original ATK. While your LP is higher, the equipped monster's ATK becomes half its original ATK."
   },
   {
@@ -8551,6 +8577,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "trap",
+    "rarity": "secret",
     "desc": "Target 1 face-up monster on the field; equip this card to that target. It gains 300 ATK/DEF. If it attacks, it gains ATK equal to half the ATK of the attack target, during damage calculation only."
   },
   {
@@ -8902,6 +8929,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "trap",
+    "rarity": "secret",
     "desc": "Target 1 face-down Defense Position monster on the field; flip it face-up, then destroy it if its DEF is 2000 or less, or return it face-down if its DEF is more than 2000."
   },
   {
@@ -8915,6 +8943,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "trap",
+    "rarity": "secret",
     "desc": "When an opponent's monster declares an attack: Destroy the Attack Position monster your opponent controls with the highest ATK (your choice, if tied)."
   },
   {
@@ -9162,6 +9191,7 @@
     "level": 8,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "An unworthy dragon with three sharp horns sprouting from its head."
   },
   {
@@ -9175,6 +9205,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "A dragon created from the soul of a wicked knight."
   },
   {
@@ -9201,6 +9232,7 @@
     "level": 8,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "Queen of the galaxies and mistress of the stars."
   },
   {
@@ -9461,6 +9493,7 @@
     "level": 4,
     "race": "Aqua",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand), while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
   },
   {
@@ -9474,6 +9507,7 @@
     "level": 6,
     "race": "Fiend",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "(This card is always treated as an \"Archfiend\" card.)\nCannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
   },
   {
@@ -9500,6 +9534,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "ritual",
+    "rarity": "ultra",
     "desc": "You can Ritual Summon this card with \"Black Illusion Ritual\". Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card's ATK/DEF become equal to that equipped monster's. If this card would be destroyed by battle, destroy that equipped monster instead. While equipped with that monster, any battle damage you take from battles involving this card inflicts equal effect damage to your opponent."
   },
   {
@@ -9539,6 +9574,7 @@
     "level": 1,
     "race": "Spellcaster",
     "frameType": "fusion",
+    "rarity": "ultra",
     "desc": "\"Relinquished\" + \"Thousand-Eyes Idol\"\r\nOther monsters on the field cannot change their battle positions or attack. Once per turn: You can target 1 monster your opponent controls; equip that target to this card (max. 1). This card's ATK/DEF become equal to that equipped monster's. If this card would be destroyed by battle, destroy that equipped monster instead."
   },
   {
@@ -9591,6 +9627,7 @@
     "level": 4,
     "race": "Rock",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "''Alpha, Beta, and Gamma meld as one to form a powerful monster.''"
   },
   {
@@ -9630,6 +9667,7 @@
     "level": 4,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Neither player can target Dragon monsters on the field with card effects."
   },
   {
@@ -9643,6 +9681,7 @@
     "level": 8,
     "race": "Machine",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your Deck) by Tributing \"Red-Eyes B. Dragon\" equipped with \"Metalmorph\"."
   },
   {
@@ -9656,6 +9695,7 @@
     "level": 7,
     "race": "Machine",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Once per turn: You can target 1 monster your opponent controls; toss a coin 3 times and destroy it if at least 2 of the results are heads."
   },
   {
@@ -9682,6 +9722,7 @@
     "level": 4,
     "race": "Beast-Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "This card cannot declare an attack unless you Tribute 1 monster."
   },
   {
@@ -9773,6 +9814,7 @@
     "level": 6,
     "race": "Machine",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Trap Cards, and their effects on the field, cannot be activated. Negate all Trap effects on the field."
   },
   {
@@ -9812,6 +9854,7 @@
     "level": 6,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "If your opponent controls at least 2 more monsters than you do, you can Special Summon this card (from your hand)."
   },
   {
@@ -9838,6 +9881,7 @@
     "level": 4,
     "race": "Rock",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "''Alpha, Beta, and Gamma meld as one to form a powerful monster.''"
   },
   {
@@ -9877,6 +9921,7 @@
     "level": 6,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Gains 300 ATK for every \"Dark Magician\" or \"Magician of Black Chaos\" in the GY."
   },
   {
@@ -9903,6 +9948,7 @@
     "level": 7,
     "race": "Insect",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "This card gains 200 ATK for each Insect monster on the field. Cannot declare an attack unless you Tribute 1 monster. Once per turn, during the End Phase, if this card destroyed an opponent's monster by battle this turn: Special Summon 1 \"Insect Monster Token\" (Insect/EARTH/Level 1/ATK 100/DEF 100) in Attack Position."
   },
   {
@@ -9968,6 +10014,7 @@
     "level": 8,
     "race": "Dragon",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
   },
   {
@@ -10189,6 +10236,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "spell",
+    "rarity": "ultra",
     "desc": "Target 1 monster your opponent controls; take control of it until the End Phase."
   },
   {
@@ -10319,6 +10367,7 @@
     "level": 7,
     "race": "Warrior",
     "frameType": "fusion",
+    "rarity": "ultra",
     "desc": "\"Zombyra the Dark\" + \"Maryokutai\"\nIf this card is Special Summoned: Destroy all other monsters you control. Neither player can Summon monsters."
   },
   {
@@ -10358,6 +10407,7 @@
     "level": 6,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "This card is changed to Defense Position when it is Normal Summoned or Flip Summoned successfully. This card can attack while it is in Defense Position. If this card attacks while in Defense Position, apply the ATK of this card for damage calculation."
   },
   {
@@ -10371,6 +10421,7 @@
     "level": 6,
     "race": "Fiend",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "Only the master of the sword among Fiend-Type monsters is permitted to hold the Talwar.\n\n\n(This card is always treated as an \"Archfiend\" card.)"
   },
   {
@@ -10475,6 +10526,7 @@
     "level": 4,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "If either player equips an Equip Card(s) to this card: Destroy that Equip Card(s)."
   },
   {
@@ -10540,6 +10592,7 @@
     "level": 7,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Gains 500 ATK for each Dragon monster your opponent controls or is in their GY."
   },
   {
@@ -10553,6 +10606,7 @@
     "level": 8,
     "race": "Fiend",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by banishing 3 Fiend monsters from your GY. During the End Phase, if this card is in your GY because it was destroyed in your Monster Zone by an opponent's card and sent there this turn: Target 1 face-up monster your opponent controls; equip this card to that target. While this card is equipped to a monster by this effect, take control of that monster."
   },
   {
@@ -10813,6 +10867,7 @@
     "level": 10,
     "race": "Divine-Beast",
     "frameType": "obelisk",
+    "rarity": "secret",
     "desc": "Requires 3 Tributes to Normal Summon (cannot be Normal Set). This card's Normal Summon cannot be negated. When Normal Summoned, cards and effects cannot be activated. Neither player can target this card with card effects. Once per turn, during the End Phase, if this card was Special Summoned: Send it to the GY. You can Tribute 2 monsters; destroy all monsters your opponent controls. This card cannot declare an attack the turn this effect is activated."
   },
   {
@@ -10826,6 +10881,7 @@
     "level": 10,
     "race": "Divine-Beast",
     "frameType": "slifer",
+    "rarity": "secret",
     "desc": "Requires 3 Tributes to Normal Summon (cannot be Normal Set). This card's Normal Summon cannot be negated. When Normal Summoned, cards and effects cannot be activated. Once per turn, during the End Phase, if this card was Special Summoned: Send it to the GY. Gains 1000 ATK/DEF for each card in your hand. If a monster(s) is Normal or Special Summoned to your opponent's field in Attack Position: That monster(s) loses 2000 ATK, then if its ATK has been reduced to 0 as a result, destroy it."
   },
   {
@@ -10839,6 +10895,7 @@
     "level": 10,
     "race": "Divine-Beast",
     "frameType": "ra",
+    "rarity": "secret",
     "desc": "Cannot be Special Summoned. Requires 3 Tributes to Normal Summon (cannot be Normal Set). This card's Normal Summon cannot be negated. When Normal Summoned, other cards and effects cannot be activated. When this card is Normal Summoned: You can pay LP so that you only have 100 left; this card gains ATK/DEF equal to the amount of LP paid. You can pay 1000 LP, then target 1 monster on the field; destroy that target."
   },
   {
@@ -10891,6 +10948,7 @@
     "level": 4,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "During your Battle Phase, this card cannot be destroyed by battle and you take no battle damage from attacks involving this card. If this card attacks a monster, after damage calculation: That attack target loses 500 ATK until the end of this turn."
   },
   {
@@ -10917,6 +10975,7 @@
     "level": 5,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "While \"Umi\" is on the field, this card is unaffected by Spell effects and cannot be targeted for attacks, but does not prevent your opponent from attacking you directly."
   },
   {
@@ -10943,6 +11002,7 @@
     "level": 4,
     "race": "Beast-Warrior",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "This wicked Beast-Warrior does every horrid thing imaginable, and loves it! His axe bears the marks of his countless victims."
   },
   {
@@ -11047,6 +11107,7 @@
     "level": 4,
     "race": "Rock",
     "frameType": "normal",
+    "rarity": "secret",
     "desc": "Alpha, Beta, and Gamma meld as one to form a powerful monster."
   },
   {
@@ -11099,6 +11160,7 @@
     "level": 8,
     "race": "Fiend",
     "frameType": "ritual",
+    "rarity": "ultra",
     "desc": "You can Ritual Summon this card with \"Curse of the Masked Beast\"."
   },
   {
@@ -11203,6 +11265,7 @@
     "level": 4,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "When this card is destroyed by battle and sent to the GY: You can pay 1500 LP; look at your opponent's hand, then add 1 monster from their hand to your hand."
   },
   {
@@ -11229,6 +11292,7 @@
     "level": 3,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "If this card attacks or is attacked, during damage calculation (in either player's turn): You can pay 2000 LP once per battle; this card gains 3000 ATK during that damage calculation only."
   },
   {
@@ -11242,6 +11306,7 @@
     "level": 7,
     "race": "Spellcaster",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "''The ultimate wizard in terms of attack and defense.''"
   },
   {
@@ -11255,6 +11320,7 @@
     "level": 12,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "ultra",
     "desc": "\"Blue-Eyes White Dragon\" + \"Blue-Eyes White Dragon\" + \"Blue-Eyes White Dragon\""
   },
   {
@@ -11294,6 +11360,7 @@
     "level": 4,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Your opponent takes any battle damage you would have taken from battles involving this card instead."
   },
   {
@@ -11333,6 +11400,7 @@
     "level": 6,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks. Gains 300 ATK for every \"Dark Magician\" or \"Magician of Black Chaos\" in either player's GY."
   },
   {
@@ -11346,6 +11414,7 @@
     "level": 8,
     "race": "Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "You can Tribute 3 monsters to Tribute Summon (but not Set) this card. If Summoned this way: Destroy all monsters your opponent controls."
   },
   {
@@ -11372,6 +11441,7 @@
     "level": 4,
     "race": "Winged Beast",
     "frameType": "effect",
+    "rarity": "ultra",
     "desc": "(This card's name is always treated as \"Harpie Lady\".)"
   },
   {
@@ -11398,6 +11468,7 @@
     "level": 4,
     "race": "Beast-Warrior",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "During your Battle Step, if this card attacks a Defense Position monster: You can make this card lose exactly 400 ATK, and if it does, it will inflict piercing battle damage. These effects last until the end of this turn."
   },
   {
@@ -11476,6 +11547,7 @@
     "level": 8,
     "race": "Rock",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 \"Alpha The Magnet Warrior\", \"Beta The Magnet Warrior\", and \"Gamma The Magnet Warrior\" from your hand and/or field. You can Tribute this card, then target 1 \"Alpha The Magnet Warrior\", \"Beta The Magnet Warrior\", and \"Gamma The Magnet Warrior\" in your Graveyard; Special Summon them."
   },
   {
@@ -11489,6 +11561,7 @@
     "level": 8,
     "race": "Machine",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your Deck) by Tributing \"Red-Eyes B. Dragon\" equipped with \"Metalmorph\"."
   },
   {
@@ -11502,6 +11575,7 @@
     "level": 7,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "''A ferocious dragon with a deadly attack.''"
   },
   {
@@ -11528,6 +11602,7 @@
     "level": 8,
     "race": "Dragon",
     "frameType": "normal",
+    "rarity": "ultra",
     "desc": "This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale."
   },
   {
@@ -11541,6 +11616,7 @@
     "level": 9,
     "race": "Spellcaster",
     "frameType": "effect",
+    "rarity": "secret",
     "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand or Deck) by Tributing 1 \"Dark Magician\" immediately after applying the effect of \"Time Wizard\" in which you called the coin toss right. When Special Summoned this way: Add 1 Spell Card from your Deck to your hand."
   },
   {
@@ -11554,6 +11630,7 @@
     "level": 12,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "ultra",
     "desc": "5 Dragon monsters\r\nMust be Fusion Summoned. Cannot be destroyed by battle with a DARK, EARTH, WATER, FIRE, or WIND monster."
   },
   {
@@ -11567,6 +11644,7 @@
     "level": 12,
     "race": "Dragon",
     "frameType": "fusion",
+    "rarity": "ultra",
     "desc": "\"Black Luster Soldier\" + \"Blue-Eyes Ultimate Dragon\"\r\nMust be Fusion Summoned. This card gains 500 ATK for each Dragon monster you control, except this card."
   },
   {
@@ -11632,6 +11710,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "spell",
+    "rarity": "ultra",
     "desc": "Target 1 monster in either GY; Special Summon it."
   },
   {
@@ -11658,6 +11737,7 @@
     "level": null,
     "race": "Normal",
     "frameType": "trap",
+    "rarity": "ultra",
     "desc": "When a monster(s) is Summoned: Destroy all monsters on the field."
   },
   {

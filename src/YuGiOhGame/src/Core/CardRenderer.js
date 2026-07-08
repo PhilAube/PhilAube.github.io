@@ -1,3 +1,4 @@
+import { THEMES } from "../themes.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./RenderSytem.js";
 import Vector from "./Vector.js";
 
@@ -29,16 +30,16 @@ export default class CardRenderer {
 		Obelisk: 8
 	}
 
-	/**
-	 * @param {HTMLCanvasElement} canvas The game canvas.
-	 * @param {CanvasRenderingContext2D} ctx The rendering context of the game canvas.
-	 * @param {Image} spriteSheet The loaded card art sprite sheet.
-	 */
-	constructor(canvas, ctx, spriteSheets) {
-		this.canvas = canvas;
-		this.ctx = ctx;
-		this.spriteSheets = spriteSheets;
-	}
+    /**
+     * @param {HTMLCanvasElement} canvas The game canvas.
+     * @param {CanvasRenderingContext2D} ctx The rendering context of the game canvas.
+     * @param {Image} spriteSheet The loaded card art sprite sheet.
+     */
+    constructor(canvas, ctx, spriteSheets) {
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.spriteSheets = spriteSheets;
+    }
 
 	/**
 	 * Draws a full card positioned and scaled based on its properties.
@@ -56,16 +57,18 @@ export default class CardRenderer {
 		const xOffset = 44 * card.size;
 		const yOffset = 104 * card.size;
 		this.renderSprite(card.id, card.position.x + xOffset, card.position.y + yOffset, drawSize);
+
+		this.renderCardText(card);
 	}
 
-	/**
-	 * Draws a card sprite from a 30x30 grid of 100x100 sprites.
-	 * @param {Card} card The card whose art should be drawn.
-	 * @param {Number} x The x offset where the sprite will be drawn.
-	 * @param {Number} y The y offset where the sprite will be drawn.
-	 * @param {Number} size Size in pixels in case scaling is required. Default is 100.
-	 */
-	renderSprite(id, x, y, size = CardRenderer.SPRITESIZE) {
+    /**
+     * Draws a card sprite from a 30x30 grid of 100x100 sprites.
+     * @param {Card} card The card whose art should be drawn.
+     * @param {Number} x The x offset where the sprite will be drawn.
+     * @param {Number} y The y offset where the sprite will be drawn.
+     * @param {Number} size Size in pixels in case scaling is required. Default is 100.
+     */
+    renderSprite(id, x, y, size = CardRenderer.SPRITESIZE) {
 		const sprite = this.getSpriteFromGrid(id);
 
 		this.ctx.drawImage(
@@ -75,14 +78,14 @@ export default class CardRenderer {
 			x, y,
 			size, size
 		);
-	}
+    }
 
 	/**
 	 * Draws the surrounding card template.
 	 * @param {Card} card The card to render.
 	 * @param {Number} size The CardRenderer.Size for scaling.
 	 */
-	renderTemplate(card, size) {
+    renderTemplate(card, size) {
 		const frameType = CardRenderer.Templates[card.type];
 
 		// The grid position of the required frame to render.
@@ -95,7 +98,7 @@ export default class CardRenderer {
 			card.position.x, card.position.y,
 			card.dimensions.x, card.dimensions.y
 		)
-	}
+    }
 
 	/**
 	 * Gets the sprite of a given card from the sprite sheet grid.
@@ -130,5 +133,80 @@ export default class CardRenderer {
 		// This 100x100 source sample can be scaled to any size without any artifacts.
 		// Prevents scaled card art from showing pixels from surrounding rows or columns.
 		return tempCanvas;
+	}
+
+	/**
+	 * Draws all of the text on a card.
+	 * @param {Card} card The card whose text must be rendered.
+	 */
+	renderCardText(card) {
+		this.renderName(card);
+	}
+
+	/**
+	 * Draws the name of a card with the color based on its rarity or type.
+	 * @param {Card} card The card whose name must be rendered.
+	 */
+	renderName(card) {
+		const Templates = CardRenderer.Templates;
+		const TemplateNames = Object.keys(CardRenderer.Templates);
+		const name = String(card.name).replaceAll('"', '');
+
+		switch (card.rarity) {
+			case "ultra":
+				this.ctx.fillStyle = this.getUltraRareGradient();
+				break;
+			case "secret":
+				this.ctx.fillStyle = this.getSecretRareGradient();
+				break;
+			default:
+				switch (card.type) {
+					case TemplateNames[Templates.Trap]:
+					case TemplateNames[Templates.Spell]:
+						this.ctx.fillStyle = THEMES.Colors.White;
+						break;
+					default:
+						this.ctx.fillStyle = THEMES.Colors.Black;
+						break;
+				}
+		}
+
+		// Scale the text dimensions and position by the card size
+		const x = (36 * card.size) + card.position.x;
+		const y = (56 * card.size) + card.position.y;
+		const maxWidth = 240 * card.size;
+
+		this.ctx.font = `${THEMES.FontSizes.CardName * card.size}px ${THEMES.Fonts.CardName}`;
+		this.ctx.textAlign = "left";
+		this.ctx.fillText(name, x, y, maxWidth);
+		this.ctx.textAlign = "center";
+	}
+
+	/**
+	 * Gets the gradient colors for the ultra rare card name text.
+	 * @returns A gradient that can be used as a fillStyle.
+	 */
+	getUltraRareGradient() {
+		const gradient = this.ctx.createLinearGradient(0, 0, 1000, 0);
+
+		for (const [stop, colorName] of THEMES.Gradients.UltraRare) {
+			gradient.addColorStop(stop, THEMES.Colors[colorName]);
+		}
+
+		return gradient;
+	}
+
+	/**
+	 * Gets the gradient colors for the secret rare card name text.
+	 * @returns A gradient that can be used as a fillStyle.
+	 */
+	getSecretRareGradient() {
+		const gradient = this.ctx.createLinearGradient(0, 0, 50, 250);
+
+		for (const [stop, colorName] of THEMES.Gradients.SecretRare) {
+			gradient.addColorStop(stop, THEMES.Colors[colorName]);
+		}
+
+		return gradient;
 	}
 }

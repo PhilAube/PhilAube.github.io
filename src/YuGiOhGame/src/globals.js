@@ -6,6 +6,19 @@ export const spriteSheetPaths = [
     "./src/YuGiOhGame/assets/img/CardSpritesheet.png",
     "./src/YuGiOhGame/assets/img/TemplateSpritesheet.png"
 ];
+
+// Source: https://yugipedia.com/wiki/Card_layout#OCG/TCG_typefaces
+export const fontPaths = {
+    CardName: "/src/YuGiOhGame/assets/fonts/MatrixSmallCapsRegular.ttf",
+    SpellTrap: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifBold.ttf",
+    SetNumber: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifRegular.ttf",
+    Type: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifSmallCapsBold.ttf",
+    NormalText: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifItalic.ttf",
+    EffectText: "/src/YuGiOhGame/assets/fonts/MatrixRegular.ttf",
+    ATKDEF: "/src/YuGiOhGame/assets/fonts/MatrixSmallCapsRegular.ttf",
+    Password: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifRegular.ttf"
+}
+
 export const cardData = cards;
 
 /** Enum for each menu option in the game. */
