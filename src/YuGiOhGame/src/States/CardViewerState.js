@@ -65,15 +65,8 @@ export default class CardViewerState extends State {
 
     /** Renders the menu and the current card. */
     render() {
-        const textX = 460;
-        const textY = 50;
-
         this.menu.render();
-        renderer.card.render(this.currentCard, CardRenderer.Size.Medium);
-
-        const name = this.currentCard.name.replaceAll('"', '');
-        const id = String(this.currentCard.id).padStart(3,'0');
-        renderer.text(`#${id}`, textX, textY);
+        renderer.card.render(this.currentCard);
     }
 
     /** Updates the game's current state back to the title screen. */

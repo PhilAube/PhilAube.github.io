@@ -3,6 +3,8 @@ export const THEMES = {
         Medium: 20,
         Large: 40,
         CardName: 38,
+        SpellTrap: 17,
+        Small: 9
     },
     Fonts: {
         Default: "Times New Roman",

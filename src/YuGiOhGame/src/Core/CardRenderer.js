@@ -9,7 +9,11 @@ export default class CardRenderer {
 	static Scale = 1.25; // Scales source width/height so that a full card fits a 500x500 canvas with no cutoff.
 	static CARDSIZE = new Vector(this.TemplateWidth / this.Scale, this.TemplateHeight / this.Scale); // Vector wrapper
 	static SPRITESIZE = 100; // Each card art sprite is 100x100px
-	
+	static AttributeWidth = 40; // Source image full size width
+	static AttributeHeight = 42; // Source image full size height
+	static ATTRIBUTESIZE = new Vector(this.AttributeWidth / this.Scale, this.AttributeHeight / this.Scale); // Vector wrapper
+	static ICONSIZE = 27; // Each card icon sprite is 27x27px
+
 	/** The different sizes a card can be rendered at. */
 	static Size = {
 		"Full": 1, // (419x611px full card template size) / 1.25 * 1
@@ -17,7 +21,7 @@ export default class CardRenderer {
 		"Small": 0.35 // For Duels (419x611) / 1.25 * 0.35
 	}
 
-	/** The various card frames along their offset in the spritesheet. */
+	/** The various card frames along with their offset in the spritesheet. */
 	static Templates = {
 		Normal: 0,
 		Effect: 1,
@@ -29,11 +33,35 @@ export default class CardRenderer {
 		Ra: 7,
 		Obelisk: 8
 	}
+	
+	/** The various attribute icons along with their offset in the spritesheet. */
+	static Attributes = {
+		SPELL: 0,
+		TRAP: 1,
+		EARTH: 2,
+		WIND: 3,
+		WATER: 4,
+		FIRE: 5,
+		DARK: 6,
+		LIGHT: 7,
+		DIVINE: 8
+	}
+
+	/** The various icons which can appear under the card name, along with their offset in the spritesheet. */
+	static Icons = {
+		Star: 0,
+		Continuous: 1,
+		Counter: 2,
+		Equip: 3,
+		Field: 4,
+		QuickPlay: 5,
+		Ritual: 6,
+	}
 
     /**
      * @param {HTMLCanvasElement} canvas The game canvas.
      * @param {CanvasRenderingContext2D} ctx The rendering context of the game canvas.
-     * @param {Image} spriteSheet The loaded card art sprite sheet.
+     * @param {Image} spriteSheets The loaded card art sprite sheet.
      */
     constructor(canvas, ctx, spriteSheets) {
         this.canvas = canvas;
@@ -51,12 +79,20 @@ export default class CardRenderer {
 		// Scales the sprite size based on the CardRenderer.Size.
 		const drawSize = SPRITESIZE * card.size;
 
-		this.renderTemplate(card, card.size);
+		this.renderTemplate(card);
 
 		// Art position relative to the card template.
 		const xOffset = 44 * card.size;
 		const yOffset = 104 * card.size;
 		this.renderSprite(card.id, card.position.x + xOffset, card.position.y + yOffset, drawSize);
+
+		this.renderAttribute(card);
+
+		this.renderIcons(card);
+
+		this.renderSet(card);
+
+		this.renderPassword(card);
 
 		this.renderCardText(card);
 	}
@@ -83,9 +119,8 @@ export default class CardRenderer {
 	/**
 	 * Draws the surrounding card template.
 	 * @param {Card} card The card to render.
-	 * @param {Number} size The CardRenderer.Size for scaling.
 	 */
-    renderTemplate(card, size) {
+    renderTemplate(card) {
 		const frameType = CardRenderer.Templates[card.type];
 
 		// The grid position of the required frame to render.
@@ -174,7 +209,7 @@ export default class CardRenderer {
 		// Scale the text dimensions and position by the card size
 		const x = (36 * card.size) + card.position.x;
 		const y = (56 * card.size) + card.position.y;
-		const maxWidth = 240 * card.size;
+		const maxWidth = 230 * card.size;
 
 		this.ctx.font = `${THEMES.FontSizes.CardName * card.size}px ${THEMES.Fonts.CardName}`;
 		this.ctx.textAlign = "left";
@@ -208,5 +243,144 @@ export default class CardRenderer {
 		}
 
 		return gradient;
+	}
+
+	/**
+	 * Draws the card's attribute icon in the top right corner.
+	 * @param {Card} card The card to render.
+	 */
+    renderAttribute(card) {
+		const attribute = CardRenderer.Attributes[card.attribute];
+
+		// The grid position of the required attribute to render.
+		let xOffset = CardRenderer.AttributeWidth * attribute;
+
+		// Draw dimensions scaled to card size.
+		let drawWidth = CardRenderer.ATTRIBUTESIZE.x * card.size;
+		let drawHeight = CardRenderer.ATTRIBUTESIZE.y * card.size;
+
+		// Position relative to the card template, scaled to card size.
+		const x = 270 * card.size;
+		const y = 29 * card.size;
+
+		this.ctx.drawImage(
+			this.spriteSheets[2],
+			xOffset, 0,
+			CardRenderer.AttributeWidth, CardRenderer.AttributeHeight,
+			card.position.x + x, card.position.y + y,
+			drawWidth, drawHeight
+		)
+    }
+
+	/**
+	 * Draws all icons below the card name (stars or spell/trap race).
+	 * @param {Card} card The card whose icons must be rendered.
+	 */
+	renderIcons(card) {
+		const Attributes = CardRenderer.Attributes;
+		const attribute = Attributes[card.attribute];
+
+		if (attribute === Attributes.SPELL || attribute === Attributes.TRAP) {
+			this.renderSpellTrapCardRace(card);
+		} else {
+			this.renderLevel(card);
+		}
+	}
+
+	/**
+	 * Draws the [Spell/Trap Card] text under the card name, with race icon if applicable.
+	 * @param {Card} card The spell/trap card whose race must be rendered.
+	 */
+	renderSpellTrapCardRace(card) {
+		let gap = "";
+		const textX = card.position.x + (295  * card.size);
+		const textY = card.position.y + (89 * card.size);
+
+		const iconX = 269 * card.size;
+		const iconY = 74 * card.size;
+
+		if (card.race !== null) { 
+			gap = "   "; 
+
+			// Position within the sprite sheet
+			const xOffset = CardRenderer.Icons[card.race] * CardRenderer.ICONSIZE;
+			// Spell/Trap race icons are scaled down by a factor of 1.5 and then by the card size.
+			const scaledIconSize = (CardRenderer.ICONSIZE / 1.5) * card.size;
+			
+			this.ctx.drawImage(
+				this.spriteSheets[3],
+				xOffset, 0,
+				CardRenderer.ICONSIZE, CardRenderer.ICONSIZE,
+				card.position.x + iconX, card.position.y + iconY,
+				scaledIconSize, scaledIconSize
+			);
+		}
+
+		const text = `[ ${card.attribute} CARD ${gap}]`;
+		
+		this.ctx.textAlign = "right";
+		this.ctx.font = `${THEMES.FontSizes.SpellTrap * card.size}px ${THEMES.Fonts.SpellTrap}`;
+		this.ctx.fillStyle = THEMES.Colors.Black;
+		this.ctx.fillText(text, textX, textY);
+		this.ctx.textAlign = "center";
+	}
+
+	/**
+	 * Draws the stars for a monster's level.
+	 * @param {Card} card The monster card whose level must be rendered.
+	 */
+	renderLevel(card) {
+		const xOffset = CardRenderer.Icons.Star * CardRenderer.ICONSIZE;
+		const scaledIconSize = (CardRenderer.ICONSIZE / CardRenderer.Scale) * card.size;
+		
+		// Position for level stars (top right area of the card)
+		const baseX = 275 * card.size;
+		const baseY = 72 * card.size;
+		const spacing = card.level === 12 
+			? scaledIconSize // No gap between stars for LV12 monsters
+			: scaledIconSize + 1 // Small gap between stars
+		
+		// Draw stars from right to left
+		for (let i = 0; i < card.level; i++) {
+			const x = baseX - (i * spacing);
+			
+			this.ctx.drawImage(
+				this.spriteSheets[3],
+				xOffset, 0,
+				CardRenderer.ICONSIZE, CardRenderer.ICONSIZE,
+				card.position.x + x, card.position.y + baseY,
+				scaledIconSize, scaledIconSize
+			);
+		}
+	}
+
+	/**
+	 * Renders the set id (E.G TSC-001) under the card art.
+	 * @param {Card} card The card whose set ID must be rendered.
+	 */
+	renderSet(card) {
+		const id = String(card.id).padStart(3,'0');
+		const text = `TSC-${id}`;
+		const x = card.position.x + (278 * card.size);
+		const y = card.position.y + (367 * card.size);
+
+		this.ctx.font = `${THEMES.FontSizes.Small * card.size}px ${THEMES.Fonts.SetNumber}`;
+		this.ctx.fillStyle = THEMES.Colors.Black;
+		this.ctx.fillText(text, x, y);
+	}
+
+	/**
+	 * Draws the password/id in the bottom left corner of the card (if not null).
+	 * @param {Card} card The card whose password/id must be rendered.
+	 */
+	renderPassword(card) {
+		if (card.password !== null) {
+			const x = card.position.x + (35 * card.size);
+			const y = card.position.y + (476 * card.size);
+
+			this.ctx.font = `${THEMES.FontSizes.Small * card.size}px ${THEMES.Fonts.Password}`;
+			this.ctx.fillStyle = THEMES.Colors.Black;
+			this.ctx.fillText(card.password, x, y);
+		}
 	}
 }

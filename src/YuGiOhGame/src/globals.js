@@ -4,7 +4,9 @@ import InputManager from "./Core/Input/InputManager.js";
 
 export const spriteSheetPaths = [
     "./src/YuGiOhGame/assets/img/CardSpritesheet.png",
-    "./src/YuGiOhGame/assets/img/TemplateSpritesheet.png"
+    "./src/YuGiOhGame/assets/img/TemplateSpritesheet.png",
+    "./src/YuGiOhGame/assets/img/AttributeSpritesheet.png",
+    "./src/YuGiOhGame/assets/img/IconSpritesheet.png"
 ];
 
 // Source: https://yugipedia.com/wiki/Card_layout#OCG/TCG_typefaces
