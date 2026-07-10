@@ -94,7 +94,11 @@ export default class CardRenderer {
 
 		this.renderPassword(card);
 
-		this.renderCardText(card);
+		this.renderName(card);
+
+		this.renderAtkDef(card);
+
+		this.renderMonsterType(card);
 	}
 
     /**
@@ -168,14 +172,6 @@ export default class CardRenderer {
 		// This 100x100 source sample can be scaled to any size without any artifacts.
 		// Prevents scaled card art from showing pixels from surrounding rows or columns.
 		return tempCanvas;
-	}
-
-	/**
-	 * Draws all of the text on a card.
-	 * @param {Card} card The card whose text must be rendered.
-	 */
-	renderCardText(card) {
-		this.renderName(card);
 	}
 
 	/**
@@ -381,6 +377,51 @@ export default class CardRenderer {
 			this.ctx.font = `${THEMES.FontSizes.Small * card.size}px ${THEMES.Fonts.Password}`;
 			this.ctx.fillStyle = THEMES.Colors.Black;
 			this.ctx.fillText(card.password, x, y);
+		}
+	}
+
+	/**
+	 * Draws the attack and defense points of a monster card.
+	 * @param {Card} card The monster card whose ATK/DEF must be rendered.
+	 */
+	renderAtkDef(card) {
+		if (card.atk !== null && card.def !== null) {
+			// Medium looks too high, so this corrects that.
+			const correction = card.size === CardRenderer.Size.Medium ? 1 : 0;
+
+			const atkX = card.position.x + (237 * card.size);
+			const defX = card.position.x + (300 * card.size);
+			const Y = card.position.y + (458 * card.size) + correction;
+
+			this.ctx.textAlign = "right";
+			this.ctx.font = `${THEMES.FontSizes.ATKDEF * card.size}px ${THEMES.Fonts.ATKDEF}`;
+			this.ctx.fillStyle = THEMES.Colors.Black;
+			this.ctx.fillText(card.atk, atkX, Y);
+			this.ctx.fillText(card.def, defX, Y);
+			this.ctx.textAlign = "center";
+		}
+	}
+
+	/**
+	 * Draws the full race/type of a monster card, including toon/ritual/effect/fusion.
+	 * @param {Card} card The monster card whose race must be rendered.
+	 */
+	renderMonsterType(card) {
+		const Attributes = CardRenderer.Attributes;
+		const notSpell = Attributes[card.attribute] !== Attributes.SPELL;
+		const notTrap = Attributes[card.attribute] !== Attributes.TRAP;
+
+		if (notSpell && notTrap && card.race !== null) {
+			const x = card.position.x + (34 * card.size);
+			const y = card.position.y + (386 * card.size);
+
+			const typeLine = `[${card.race.join('/')}]`;
+
+			this.ctx.textAlign = "left";
+			this.ctx.font = `${THEMES.FontSizes.Type * card.size}px ${THEMES.Fonts.Type}`;
+			this.ctx.fillStyle = THEMES.Colors.Black;
+			this.ctx.fillText(typeLine, x, y);
+			this.ctx.textAlign = "center";
 		}
 	}
 }

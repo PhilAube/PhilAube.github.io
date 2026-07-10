@@ -4,7 +4,9 @@ export const THEMES = {
         Large: 40,
         CardName: 38,
         SpellTrap: 17,
-        Small: 9
+        Small: 9,
+        ATKDEF: 18,
+        Type: 12
     },
     Fonts: {
         Default: "Times New Roman",
