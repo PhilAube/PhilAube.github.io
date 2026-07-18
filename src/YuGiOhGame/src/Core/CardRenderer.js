@@ -74,31 +74,50 @@ export default class CardRenderer {
 	 * @param {Card} card The card to display.
 	 */
 	render(card) {
-		// Size of the sprite in px when CardRenderer.Size.Full.
-		const SPRITESIZE = 247;
-		// Scales the sprite size based on the CardRenderer.Size.
-		const drawSize = SPRITESIZE * card.size;
+		// First draw to temporary canvas.
+		if (card.cachedImage === null) {
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = CardRenderer.CARDSIZE.x;
+			tempCanvas.height = CardRenderer.CARDSIZE.y;
+			const tempCtx = tempCanvas.getContext("2d");
+			tempCtx.imageSmoothingEnabled = false;
+			tempCtx.textAlign = "center";
 
-		this.renderTemplate(card);
+			// Size of the art sprite in px.
+			const SPRITESIZE = 247;
 
-		// Art position relative to the card template.
-		const xOffset = 44 * card.size;
-		const yOffset = 104 * card.size;
-		this.renderSprite(card.id, card.position.x + xOffset, card.position.y + yOffset, drawSize);
+			this.renderTemplate(card, tempCtx);
 
-		this.renderAttribute(card);
+			// Art position relative to the card template.
+			const xOffset = 44;
+			const yOffset = 104;
+			this.renderSprite(card.id, xOffset, yOffset, SPRITESIZE, tempCtx);
 
-		this.renderIcons(card);
+			this.renderAttribute(card, tempCtx);
 
-		this.renderSet(card);
+			this.renderIcons(card, tempCtx);
 
-		this.renderPassword(card);
+			this.renderSet(card, tempCtx);
 
-		this.renderName(card);
+			this.renderPassword(card, tempCtx);
 
-		this.renderAtkDef(card);
+			this.renderName(card, tempCtx);
 
-		this.renderMonsterType(card);
+			this.renderAtkDef(card, tempCtx);
+
+			this.renderMonsterType(card, tempCtx);
+
+			card.cachedImage = tempCanvas;
+		}
+		
+		// Draws cached image
+		this.ctx.drawImage(
+			card.cachedImage, 
+			0, 0, 
+			CardRenderer.CARDSIZE.x, CardRenderer.CARDSIZE.y,
+			card.position.x, card.position.y,
+			card.dimensions.x, card.dimensions.y
+		);
 	}
 
     /**
@@ -107,11 +126,12 @@ export default class CardRenderer {
      * @param {Number} x The x offset where the sprite will be drawn.
      * @param {Number} y The y offset where the sprite will be drawn.
      * @param {Number} size Size in pixels in case scaling is required. Default is 100.
+	 * @param {CanvasRenderingContext2D} The optional temporary canvas context to render to.
      */
-    renderSprite(id, x, y, size = CardRenderer.SPRITESIZE) {
+    renderSprite(id, x, y, size = CardRenderer.SPRITESIZE, ctx = this.ctx) {
 		const sprite = this.getSpriteFromGrid(id);
 
-		this.ctx.drawImage(
+		ctx.drawImage(
 			sprite,
 			0, 0,
 			CardRenderer.SPRITESIZE, CardRenderer.SPRITESIZE,
@@ -123,20 +143,21 @@ export default class CardRenderer {
 	/**
 	 * Draws the surrounding card template.
 	 * @param {Card} card The card to render.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-    renderTemplate(card) {
+    renderTemplate(card, ctx) {
 		const frameType = CardRenderer.Templates[card.type];
 
 		// The grid position of the required frame to render.
 		let xOffset = CardRenderer.TemplateWidth * frameType;
 
-		this.ctx.drawImage(
+		ctx.drawImage(
 			this.spriteSheets[1],
 			xOffset, 0,
 			CardRenderer.TemplateWidth, CardRenderer.TemplateHeight,
-			card.position.x, card.position.y,
-			card.dimensions.x, card.dimensions.y
-		)
+			0, 0,
+			CardRenderer.CARDSIZE.x, CardRenderer.CARDSIZE.y
+		);
     }
 
 	/**
@@ -177,40 +198,41 @@ export default class CardRenderer {
 	/**
 	 * Draws the name of a card with the color based on its rarity or type.
 	 * @param {Card} card The card whose name must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderName(card) {
+	renderName(card, ctx) {
 		const Templates = CardRenderer.Templates;
 		const TemplateNames = Object.keys(CardRenderer.Templates);
 		const name = String(card.name).replaceAll('"', '');
 
 		switch (card.rarity) {
 			case "ultra":
-				this.ctx.fillStyle = this.getUltraRareGradient();
+				ctx.fillStyle = this.getUltraRareGradient();
 				break;
 			case "secret":
-				this.ctx.fillStyle = this.getSecretRareGradient();
+				ctx.fillStyle = this.getSecretRareGradient();
 				break;
 			default:
 				switch (card.type) {
 					case TemplateNames[Templates.Trap]:
 					case TemplateNames[Templates.Spell]:
-						this.ctx.fillStyle = THEMES.Colors.White;
+						ctx.fillStyle = THEMES.Colors.White;
 						break;
 					default:
-						this.ctx.fillStyle = THEMES.Colors.Black;
+						ctx.fillStyle = THEMES.Colors.Black;
 						break;
 				}
 		}
 
-		// Scale the text dimensions and position by the card size
-		const x = (36 * card.size) + card.position.x;
-		const y = (56 * card.size) + card.position.y;
-		const maxWidth = 230 * card.size;
+		// The position and maximum vertical size of the text.
+		const x = 36;
+		const y = 56;
+		const maxWidth = 230;
 
-		this.ctx.font = `${THEMES.FontSizes.CardName * card.size}px ${THEMES.Fonts.CardName}`;
-		this.ctx.textAlign = "left";
-		this.ctx.fillText(name, x, y, maxWidth);
-		this.ctx.textAlign = "center";
+		ctx.font = `${THEMES.FontSizes.CardName}px ${THEMES.Fonts.CardName}`;
+		ctx.textAlign = "left";
+		ctx.fillText(name, x, y, maxWidth);
+		ctx.textAlign = "center";
 	}
 
 	/**
@@ -244,26 +266,27 @@ export default class CardRenderer {
 	/**
 	 * Draws the card's attribute icon in the top right corner.
 	 * @param {Card} card The card to render.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-    renderAttribute(card) {
+    renderAttribute(card, ctx) {
 		const attribute = CardRenderer.Attributes[card.attribute];
 
 		// The grid position of the required attribute to render.
 		let xOffset = CardRenderer.AttributeWidth * attribute;
 
-		// Draw dimensions scaled to card size.
-		let drawWidth = CardRenderer.ATTRIBUTESIZE.x * card.size;
-		let drawHeight = CardRenderer.ATTRIBUTESIZE.y * card.size;
+		// Draw dimensions.
+		let drawWidth = CardRenderer.ATTRIBUTESIZE.x;
+		let drawHeight = CardRenderer.ATTRIBUTESIZE.y;
 
-		// Position relative to the card template, scaled to card size.
-		const x = 270 * card.size;
-		const y = 29 * card.size;
+		// Position relative to the card template.
+		const x = 270;
+		const y = 29;
 
-		this.ctx.drawImage(
+		ctx.drawImage(
 			this.spriteSheets[2],
 			xOffset, 0,
 			CardRenderer.AttributeWidth, CardRenderer.AttributeHeight,
-			card.position.x + x, card.position.y + y,
+			x, y,
 			drawWidth, drawHeight
 		)
     }
@@ -271,67 +294,70 @@ export default class CardRenderer {
 	/**
 	 * Draws all icons below the card name (stars or spell/trap race).
 	 * @param {Card} card The card whose icons must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderIcons(card) {
+	renderIcons(card, ctx) {
 		const Attributes = CardRenderer.Attributes;
 		const attribute = Attributes[card.attribute];
 
 		if (attribute === Attributes.SPELL || attribute === Attributes.TRAP) {
-			this.renderSpellTrapCardRace(card);
+			this.renderSpellTrapCardRace(card, ctx);
 		} else {
-			this.renderLevel(card);
+			this.renderLevel(card, ctx);
 		}
 	}
 
 	/**
 	 * Draws the [Spell/Trap Card] text under the card name, with race icon if applicable.
 	 * @param {Card} card The spell/trap card whose race must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderSpellTrapCardRace(card) {
+	renderSpellTrapCardRace(card, ctx) {
 		let gap = "";
-		const textX = card.position.x + (295  * card.size);
-		const textY = card.position.y + (89 * card.size);
+		const textX = 295;
+		const textY = 89;
 
-		const iconX = 269 * card.size;
-		const iconY = 74 * card.size;
+		const iconX = 269;
+		const iconY = 74;
 
 		if (card.race !== null) { 
 			gap = "   "; 
 
 			// Position within the sprite sheet
 			const xOffset = CardRenderer.Icons[card.race] * CardRenderer.ICONSIZE;
-			// Spell/Trap race icons are scaled down by a factor of 1.5 and then by the card size.
-			const scaledIconSize = (CardRenderer.ICONSIZE / 1.5) * card.size;
+			// Spell/Trap race icons are scaled down by a factor of 1.5.
+			const scaledIconSize = (CardRenderer.ICONSIZE / 1.5);
 			
-			this.ctx.drawImage(
+			ctx.drawImage(
 				this.spriteSheets[3],
 				xOffset, 0,
 				CardRenderer.ICONSIZE, CardRenderer.ICONSIZE,
-				card.position.x + iconX, card.position.y + iconY,
+				iconX, iconY,
 				scaledIconSize, scaledIconSize
 			);
 		}
 
 		const text = `[ ${card.attribute} CARD ${gap}]`;
 		
-		this.ctx.textAlign = "right";
-		this.ctx.font = `${THEMES.FontSizes.SpellTrap * card.size}px ${THEMES.Fonts.SpellTrap}`;
-		this.ctx.fillStyle = THEMES.Colors.Black;
-		this.ctx.fillText(text, textX, textY);
-		this.ctx.textAlign = "center";
+		ctx.textAlign = "right";
+		ctx.font = `${THEMES.FontSizes.SpellTrap}px ${THEMES.Fonts.SpellTrap}`;
+		ctx.fillStyle = THEMES.Colors.Black;
+		ctx.fillText(text, textX, textY);
+		ctx.textAlign = "center";
 	}
 
 	/**
 	 * Draws the stars for a monster's level.
 	 * @param {Card} card The monster card whose level must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderLevel(card) {
+	renderLevel(card, ctx) {
 		const xOffset = CardRenderer.Icons.Star * CardRenderer.ICONSIZE;
-		const scaledIconSize = (CardRenderer.ICONSIZE / CardRenderer.Scale) * card.size;
+		const scaledIconSize = (CardRenderer.ICONSIZE / CardRenderer.Scale);
 		
 		// Position for level stars (top right area of the card)
-		const baseX = 275 * card.size;
-		const baseY = 72 * card.size;
+		const baseX = 275;
+		const baseY = 72;
 		const spacing = card.level === 12 
 			? scaledIconSize // No gap between stars for LV12 monsters
 			: scaledIconSize + 1 // Small gap between stars
@@ -340,11 +366,11 @@ export default class CardRenderer {
 		for (let i = 0; i < card.level; i++) {
 			const x = baseX - (i * spacing);
 			
-			this.ctx.drawImage(
+			ctx.drawImage(
 				this.spriteSheets[3],
 				xOffset, 0,
 				CardRenderer.ICONSIZE, CardRenderer.ICONSIZE,
-				card.position.x + x, card.position.y + baseY,
+				x, baseY,
 				scaledIconSize, scaledIconSize
 			);
 		}
@@ -353,75 +379,76 @@ export default class CardRenderer {
 	/**
 	 * Renders the set id (E.G TSC-001) under the card art.
 	 * @param {Card} card The card whose set ID must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderSet(card) {
+	renderSet(card, ctx) {
 		const id = String(card.id).padStart(3,'0');
 		const text = `TSC-${id}`;
-		const x = card.position.x + (278 * card.size);
-		const y = card.position.y + (367 * card.size);
+		const x = 278;
+		const y = 367;
 
-		this.ctx.font = `${THEMES.FontSizes.Small * card.size}px ${THEMES.Fonts.SetNumber}`;
-		this.ctx.fillStyle = THEMES.Colors.Black;
-		this.ctx.fillText(text, x, y);
+		ctx.font = `${THEMES.FontSizes.Small}px ${THEMES.Fonts.SetNumber}`;
+		ctx.fillStyle = THEMES.Colors.Black;
+		ctx.fillText(text, x, y);
 	}
 
 	/**
 	 * Draws the password/id in the bottom left corner of the card (if not null).
 	 * @param {Card} card The card whose password/id must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderPassword(card) {
+	renderPassword(card, ctx) {
 		if (card.password !== null) {
-			const x = card.position.x + (35 * card.size);
-			const y = card.position.y + (476 * card.size);
+			const x = 35;
+			const y = 476;
 
-			this.ctx.font = `${THEMES.FontSizes.Small * card.size}px ${THEMES.Fonts.Password}`;
-			this.ctx.fillStyle = THEMES.Colors.Black;
-			this.ctx.fillText(card.password, x, y);
+			ctx.font = `${THEMES.FontSizes.Small}px ${THEMES.Fonts.Password}`;
+			ctx.fillStyle = THEMES.Colors.Black;
+			ctx.fillText(card.password, x, y);
 		}
 	}
 
 	/**
 	 * Draws the attack and defense points of a monster card.
 	 * @param {Card} card The monster card whose ATK/DEF must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderAtkDef(card) {
+	renderAtkDef(card, ctx) {
 		if (card.atk !== null && card.def !== null) {
-			// Medium looks too high, so this corrects that.
-			const correction = card.size === CardRenderer.Size.Medium ? 1 : 0;
+			const atkX = 237;
+			const defX = 300;
+			const Y = 459;
 
-			const atkX = card.position.x + (237 * card.size);
-			const defX = card.position.x + (300 * card.size);
-			const Y = card.position.y + (458 * card.size) + correction;
-
-			this.ctx.textAlign = "right";
-			this.ctx.font = `${THEMES.FontSizes.ATKDEF * card.size}px ${THEMES.Fonts.ATKDEF}`;
-			this.ctx.fillStyle = THEMES.Colors.Black;
-			this.ctx.fillText(card.atk, atkX, Y);
-			this.ctx.fillText(card.def, defX, Y);
-			this.ctx.textAlign = "center";
+			ctx.textAlign = "right";
+			ctx.font = `${THEMES.FontSizes.ATKDEF}px ${THEMES.Fonts.ATKDEF}`;
+			ctx.fillStyle = THEMES.Colors.Black;
+			ctx.fillText(card.atk, atkX, Y);
+			ctx.fillText(card.def, defX, Y);
+			ctx.textAlign = "center";
 		}
 	}
 
 	/**
 	 * Draws the full race/type of a monster card, including toon/ritual/effect/fusion.
 	 * @param {Card} card The monster card whose race must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
 	 */
-	renderMonsterType(card) {
+	renderMonsterType(card, ctx) {
 		const Attributes = CardRenderer.Attributes;
 		const notSpell = Attributes[card.attribute] !== Attributes.SPELL;
 		const notTrap = Attributes[card.attribute] !== Attributes.TRAP;
 
 		if (notSpell && notTrap && card.race !== null) {
-			const x = card.position.x + (34 * card.size);
-			const y = card.position.y + (386 * card.size);
+			const x = 34;
+			const y = 386;
 
 			const typeLine = `[${card.race.join('/')}]`;
 
-			this.ctx.textAlign = "left";
-			this.ctx.font = `${THEMES.FontSizes.Type * card.size}px ${THEMES.Fonts.Type}`;
-			this.ctx.fillStyle = THEMES.Colors.Black;
-			this.ctx.fillText(typeLine, x, y);
-			this.ctx.textAlign = "center";
+			ctx.textAlign = "left";
+			ctx.font = `${THEMES.FontSizes.Type}px ${THEMES.Fonts.Type}`;
+			ctx.fillStyle = THEMES.Colors.Black;
+			ctx.fillText(typeLine, x, y);
+			ctx.textAlign = "center";
 		}
 	}
 }

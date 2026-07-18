@@ -30,6 +30,7 @@ export default class Card extends CanvasObject{
 
         this.rarity = data.rarity;
         this.description = data.desc;
+        this.cachedImage = null;
     }
 
     /**
