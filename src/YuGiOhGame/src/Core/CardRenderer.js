@@ -62,11 +62,13 @@ export default class CardRenderer {
      * @param {HTMLCanvasElement} canvas The game canvas.
      * @param {CanvasRenderingContext2D} ctx The rendering context of the game canvas.
      * @param {Image} spriteSheets The loaded card art sprite sheet.
+	 * @param {RenderSystem} The parent render system of this card renderer.
      */
-    constructor(canvas, ctx, spriteSheets) {
+    constructor(canvas, ctx, spriteSheets, renderSystem) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.spriteSheets = spriteSheets;
+        this.renderSystem = renderSystem;
     }
 
 	/**
@@ -106,6 +108,8 @@ export default class CardRenderer {
 			this.renderAtkDef(card, tempCtx);
 
 			this.renderMonsterType(card, tempCtx);
+
+			this.renderTextBox(card, tempCtx);
 
 			card.cachedImage = tempCanvas;
 		}
@@ -450,5 +454,43 @@ export default class CardRenderer {
 			ctx.fillText(typeLine, x, y);
 			ctx.textAlign = "center";
 		}
+	}
+
+	/**
+	 * Draws all of the text in the text box, scaled to fit.
+	 * @param {Card} card The card whose text box contents must be rendered.
+	 * @param {CanvasRenderingContext2D} The temporary canvas context to render to.
+	 */
+	renderTextBox(card, ctx) {
+		const isSpellTrap = CardRenderer.Attributes[card.attribute] === CardRenderer.Attributes.SPELL
+			|| CardRenderer.Attributes[card.attribute] === CardRenderer.Attributes.TRAP;
+
+		const baseBounds = isSpellTrap ? {
+			position: new Vector(34, 385),
+			size: new Vector(268, 80),
+		} : {
+			position: new Vector(34, 396),
+			size: new Vector(268, 55),
+		};
+
+		const fontFace = card.type === "Normal"
+			? THEMES.Fonts.NormalText
+			: THEMES.Fonts.EffectText;
+
+		const fontSize = card.type === "Normal"
+			? THEMES.FontSizes.NormalTextBox
+			: isSpellTrap ? THEMES.FontSizes.SpellTrapTextBox
+			: THEMES.FontSizes.EffectTextBox;
+
+		const lineHeight = fontFace === THEMES.Fonts.EffectText ? 0.85 : 1;
+		const layout = this.renderSystem.buildTextLayout(
+			card.description ?? "",
+			baseBounds,
+			fontFace,
+			fontSize,
+			lineHeight
+		);
+
+		this.renderSystem.drawLayout(layout, ctx);
 	}
 }

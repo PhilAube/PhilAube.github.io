@@ -339,7 +339,7 @@
     ],
     "frameType": "normal",
     "rarity": "secret",
-    "desc": "A fiend with dark powers for confusing the enemy. Among the Fiend-Type monsters, this monster boasts considerable force.\n\n(This card is always treated as an \"Archfiend\" card.)"
+    "desc": "A fiend with dark powers for confusing the enemy. Among the Fiend-Type monsters, this monster boasts considerable force."
   },
   {
     "tsc_id": 23,
@@ -385,7 +385,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A small fiend that dwells in the dark, its single horn makes it a formidable opponent.''"
+    "desc": "A small fiend that dwells in the dark, its single horn makes it a formidable opponent."
   },
   {
     "tsc_id": 26,
@@ -537,7 +537,7 @@
     ],
     "frameType": "normal",
     "rarity": "ultra",
-    "desc": "''The ultimate wizard in terms of attack and defense.''"
+    "desc": "The ultimate wizard in terms of attack and defense."
   },
   {
     "tsc_id": 36,
@@ -585,7 +585,7 @@
     ],
     "frameType": "normal",
     "rarity": "ultra",
-    "desc": "''A knight whose horse travels faster than the wind. His battle-charge is a force to be reckoned with.''"
+    "desc": "A knight whose horse travels faster than the wind. His battle-charge is a force to be reckoned with."
   },
   {
     "tsc_id": 39,
@@ -722,7 +722,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''Although a poor defender, this monster's sharp horn gives it an edge when attacking.''"
+    "desc": "Although a poor defender, this monster's sharp horn gives it an edge when attacking."
   },
   {
     "tsc_id": 48,
@@ -1152,7 +1152,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A meat-eating plant that is attractive to the eye but dangerous when approached.''"
+    "desc": "A meat-eating plant that is attractive to the eye but dangerous when approached."
   },
   {
     "tsc_id": 76,
@@ -1167,7 +1167,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''A vicious crocodile with great intelligence.''"
+    "desc": "A vicious crocodile with great intelligence."
   },
   {
     "tsc_id": 77,
@@ -1258,7 +1258,7 @@
     ],
     "frameType": "normal",
     "rarity": "secret",
-    "desc": "''A ferocious dragon with a deadly attack.''"
+    "desc": "A ferocious dragon with a deadly attack."
   },
   {
     "tsc_id": 83,
@@ -1336,7 +1336,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A fire-breathing monster that dwells in the netherworld.''"
+    "desc": "A fire-breathing monster that dwells in the netherworld."
   },
   {
     "tsc_id": 88,
@@ -1428,7 +1428,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''His swiftly drawn blade delivers quick and fatal damage.''"
+    "desc": "His swiftly drawn blade delivers quick and fatal damage."
   },
   {
     "tsc_id": 94,
@@ -1581,7 +1581,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A wicked mirror that blocks off the damaging effects of an attack.''"
+    "desc": "A wicked mirror that blocks off the damaging effects of an attack."
   },
   {
     "tsc_id": 104,
@@ -1626,7 +1626,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A spirit of the wind that calls up a storm when it's in a bad mood.''"
+    "desc": "A spirit of the wind that calls up a storm when it's in a bad mood."
   },
   {
     "tsc_id": 107,
@@ -1656,7 +1656,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A graveyard that serves as a power source for zombies.''"
+    "desc": "A graveyard that serves as a power source for zombies."
   },
   {
     "tsc_id": 109,
@@ -1779,7 +1779,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A creature that generates nightmares to haunt an opponent, it attacks with four poisonous tails.''"
+    "desc": "A creature that generates nightmares to haunt an opponent, it attacks with four poisonous tails."
   },
   {
     "tsc_id": 117,
@@ -1809,7 +1809,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''A cute little elf that hides in the shadows and provides spiritual support.''"
+    "desc": "A cute little elf that hides in the shadows and provides spiritual support."
   },
   {
     "tsc_id": 119,
@@ -1870,7 +1870,7 @@
       "Dragon"
     ],
     "frameType": "normal",
-    "desc": "''A dragon conjured from the very scroll in which it was depicted.''"
+    "desc": "A dragon conjured from the very scroll in which it was depicted."
   },
   {
     "tsc_id": 123,
@@ -1885,7 +1885,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''This mutant flower draws its power from pollutants and the dark forces.''"
+    "desc": "This mutant flower draws its power from pollutants and the dark forces."
   },
   {
     "tsc_id": 124,
@@ -1930,7 +1930,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''None have lived to tell tales of this powerful battle fairy.''"
+    "desc": "None have lived to tell tales of this powerful battle fairy."
   },
   {
     "tsc_id": 127,
@@ -1960,7 +1960,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A sorcerer that draws its powers from the lunar landscape.''"
+    "desc": "A sorcerer that draws its powers from the lunar landscape."
   },
   {
     "tsc_id": 129,
@@ -1990,7 +1990,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''This creature controls weather and is often the cause of mountain storms.''"
+    "desc": "This creature controls weather and is often the cause of mountain storms."
   },
   {
     "tsc_id": 131,
@@ -2051,7 +2051,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''A mystical chain that binds enemies, rendering them immobile.''"
+    "desc": "A mystical chain that binds enemies, rendering them immobile."
   },
   {
     "tsc_id": 135,
@@ -2066,7 +2066,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''Arms that reach out from the Swamp of Chaos to drag down the unwary.''"
+    "desc": "Arms that reach out from the Swamp of Chaos to drag down the unwary."
   },
   {
     "tsc_id": 136,
@@ -2096,7 +2096,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''This monster twists reality and reaches between dimensions to attack its enemies.''"
+    "desc": "This monster twists reality and reaches between dimensions to attack its enemies."
   },
   {
     "tsc_id": 138,
@@ -2111,7 +2111,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''A stone warrior with the heart of a dragon.''"
+    "desc": "A stone warrior with the heart of a dragon."
   },
   {
     "tsc_id": 139,
@@ -2141,7 +2141,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A hermit frog that has been in existence for thousands of years, it attacks with tadpoles.''"
+    "desc": "A hermit frog that has been in existence for thousands of years, it attacks with tadpoles."
   },
   {
     "tsc_id": 141,
@@ -2156,7 +2156,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A very fast, bipedal snail with a pair of lethal arms.''"
+    "desc": "A very fast, bipedal snail with a pair of lethal arms."
   },
   {
     "tsc_id": 142,
@@ -2201,7 +2201,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''This creature generates gale-force winds and tornadoes to blow its enemies away.''"
+    "desc": "This creature generates gale-force winds and tornadoes to blow its enemies away."
   },
   {
     "tsc_id": 145,
@@ -2216,7 +2216,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''An elegant thief with a black cloak that charms its enemies.''"
+    "desc": "An elegant thief with a black cloak that charms its enemies."
   },
   {
     "tsc_id": 146,
@@ -2291,7 +2291,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''This strange creature hides in the deep, dark corners of the seven seas.''"
+    "desc": "This strange creature hides in the deep, dark corners of the seven seas."
   },
   {
     "tsc_id": 151,
@@ -2321,7 +2321,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''This monster melts away to materialize under its enemies, taking them by surprise.''"
+    "desc": "This monster melts away to materialize under its enemies, taking them by surprise."
   },
   {
     "tsc_id": 153,
@@ -2336,7 +2336,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A messenger of doom that steals a soul with a single blow.''"
+    "desc": "A messenger of doom that steals a soul with a single blow."
   },
   {
     "tsc_id": 154,
@@ -2487,7 +2487,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''A creature with sapphire eyes that mesmerizes and confuses enemies.''"
+    "desc": "A creature with sapphire eyes that mesmerizes and confuses enemies."
   },
   {
     "tsc_id": 164,
@@ -2502,7 +2502,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A wicked entity that manipulates enemies towards a path of destruction.''"
+    "desc": "A wicked entity that manipulates enemies towards a path of destruction."
   },
   {
     "tsc_id": 165,
@@ -2548,7 +2548,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''A very fragile jar that contains something ancient and dangerous.''"
+    "desc": "A very fragile jar that contains something ancient and dangerous."
   },
   {
     "tsc_id": 168,
@@ -2655,7 +2655,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A tornado that ravages the wastelands with sharp winds that can cut to the bone.''"
+    "desc": "A tornado that ravages the wastelands with sharp winds that can cut to the bone."
   },
   {
     "tsc_id": 175,
@@ -2685,7 +2685,7 @@
       "Pyro"
     ],
     "frameType": "normal",
-    "desc": "''An eye engulfed in flames that flaps its wings to create hot blasts of air.''"
+    "desc": "An eye engulfed in flames that flaps its wings to create hot blasts of air."
   },
   {
     "tsc_id": 177,
@@ -2700,7 +2700,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''Protected by a spiked shell, this turtle has a very nasty disposition.''"
+    "desc": "Protected by a spiked shell, this turtle has a very nasty disposition."
   },
   {
     "tsc_id": 178,
@@ -2730,7 +2730,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A sorcerer that can paralyze an enemy with a single curse.''"
+    "desc": "A sorcerer that can paralyze an enemy with a single curse."
   },
   {
     "tsc_id": 180,
@@ -2745,7 +2745,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A lady monster dwelling in a flower, she sprinkles the air with poisonous pollen.''"
+    "desc": "A lady monster dwelling in a flower, she sprinkles the air with poisonous pollen."
   },
   {
     "tsc_id": 181,
@@ -2760,7 +2760,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A crystal monster that unleashes a brilliant light to blind enemies.''"
+    "desc": "A crystal monster that unleashes a brilliant light to blind enemies."
   },
   {
     "tsc_id": 182,
@@ -2775,7 +2775,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This warrior's fatal dance is performed with a lethal sickle.''"
+    "desc": "This warrior's fatal dance is performed with a lethal sickle."
   },
   {
     "tsc_id": 183,
@@ -2805,7 +2805,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A creature that defeats its enemies using sleight-of-hand.''"
+    "desc": "A creature that defeats its enemies using sleight-of-hand."
   },
   {
     "tsc_id": 185,
@@ -2820,7 +2820,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This warrior transforms into various creatures to confuse enemies in battle.''"
+    "desc": "This warrior transforms into various creatures to confuse enemies in battle."
   },
   {
     "tsc_id": 186,
@@ -2850,7 +2850,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''This weird monster has a portal in its belly that brings reinforcements from the farthest reaches of the netherworld.''"
+    "desc": "This weird monster has a portal in its belly that brings reinforcements from the farthest reaches of the netherworld."
   },
   {
     "tsc_id": 188,
@@ -2865,7 +2865,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''This two-headed creature spits laser blasts at its enemies.''"
+    "desc": "This two-headed creature spits laser blasts at its enemies."
   },
   {
     "tsc_id": 189,
@@ -2896,7 +2896,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A sorcerer who utters spells that render monsters unconscious.''"
+    "desc": "A sorcerer who utters spells that render monsters unconscious."
   },
   {
     "tsc_id": 191,
@@ -2911,7 +2911,7 @@
       "Thunder"
     ],
     "frameType": "normal",
-    "desc": "''An electric cloud creature, its acid rain makes it very dangerous.''"
+    "desc": "An electric cloud creature, its acid rain makes it very dangerous."
   },
   {
     "tsc_id": 192,
@@ -2971,7 +2971,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This monster splits in two and attacks from opposite sides.''"
+    "desc": "This monster splits in two and attacks from opposite sides."
   },
   {
     "tsc_id": 196,
@@ -2986,7 +2986,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''An ammonite warrior that has protected the seas throughout history.''"
+    "desc": "An ammonite warrior that has protected the seas throughout history."
   },
   {
     "tsc_id": 197,
@@ -3001,7 +3001,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''This creature attacks by launching missile-like arms.''"
+    "desc": "This creature attacks by launching missile-like arms."
   },
   {
     "tsc_id": 198,
@@ -3092,7 +3092,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A vengeful spirit made up of many restless souls.''"
+    "desc": "A vengeful spirit made up of many restless souls."
   },
   {
     "tsc_id": 204,
@@ -3107,7 +3107,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''This cannon-like creature fires eyeballs so fast they can't be seen.''"
+    "desc": "This cannon-like creature fires eyeballs so fast they can't be seen."
   },
   {
     "tsc_id": 205,
@@ -3122,7 +3122,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''This ugly monster emits a highly poisonous gas.''"
+    "desc": "This ugly monster emits a highly poisonous gas."
   },
   {
     "tsc_id": 206,
@@ -3288,7 +3288,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A spirit of the forest powered by the surrounding trees and wildlife.''"
+    "desc": "A spirit of the forest powered by the surrounding trees and wildlife."
   },
   {
     "tsc_id": 217,
@@ -3305,7 +3305,7 @@
     ],
     "frameType": "fusion",
     "rarity": "secret",
-    "desc": "\"Summoned Skull\" + \"Red-Eyes Black Dragon\"\r\n\r\n\r\n\r\n(This card is always treated as an \"Archfiend\" card.)"
+    "desc": "\"Summoned Skull\" + \"Red-Eyes Black Dragon\""
   },
   {
     "tsc_id": 218,
@@ -3335,7 +3335,7 @@
       "Beast-Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This beast-warrior swings a massive scythe that feeds on the souls of the slain.''"
+    "desc": "This beast-warrior swings a massive scythe that feeds on the souls of the slain."
   },
   {
     "tsc_id": 220,
@@ -3381,7 +3381,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''This monster only appears when a midnight tribute is made.''"
+    "desc": "This monster only appears when a midnight tribute is made."
   },
   {
     "tsc_id": 223,
@@ -3428,7 +3428,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''Whoever resists the curse of this blade will gain untold power.''"
+    "desc": "Whoever resists the curse of this blade will gain untold power."
   },
   {
     "tsc_id": 226,
@@ -3458,7 +3458,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A rabid starfish that spits a lethal acid that can melt almost anything.''"
+    "desc": "A rabid starfish that spits a lethal acid that can melt almost anything."
   },
   {
     "tsc_id": 228,
@@ -3473,7 +3473,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A living corpse of wood re-animated by the power of darkness.''"
+    "desc": "A living corpse of wood re-animated by the power of darkness."
   },
   {
     "tsc_id": 229,
@@ -3519,7 +3519,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''A creature with a wicked smile and a lethal sickle.''"
+    "desc": "A creature with a wicked smile and a lethal sickle."
   },
   {
     "tsc_id": 232,
@@ -3534,7 +3534,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A living weapon that spits projectiles.''"
+    "desc": "A living weapon that spits projectiles."
   },
   {
     "tsc_id": 233,
@@ -3625,7 +3625,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''An intelligent palm tree that drops a hail of rock-hard coconuts on its enemies.''"
+    "desc": "An intelligent palm tree that drops a hail of rock-hard coconuts on its enemies."
   },
   {
     "tsc_id": 239,
@@ -3640,7 +3640,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This lady warrior with unquenchable bloodlust serves the forces of darkness.''"
+    "desc": "This lady warrior with unquenchable bloodlust serves the forces of darkness."
   },
   {
     "tsc_id": 240,
@@ -3655,7 +3655,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A bipedal eyeball that seldom misses an enemy with its lethal talons.''"
+    "desc": "A bipedal eyeball that seldom misses an enemy with its lethal talons."
   },
   {
     "tsc_id": 241,
@@ -3700,7 +3700,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A sea-dwelling spirit that takes away sight by clouding the area in fog.''"
+    "desc": "A sea-dwelling spirit that takes away sight by clouding the area in fog."
   },
   {
     "tsc_id": 244,
@@ -3745,7 +3745,7 @@
       "Beast-Warrior"
     ],
     "frameType": "normal",
-    "desc": "''This dangerous creature brandishes a soul-sucking sword.''"
+    "desc": "This dangerous creature brandishes a soul-sucking sword."
   },
   {
     "tsc_id": 247,
@@ -3805,7 +3805,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''None can survive the cold touch of this sub-zero warrior.''"
+    "desc": "None can survive the cold touch of this sub-zero warrior."
   },
   {
     "tsc_id": 251,
@@ -3865,7 +3865,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''An imperfect monster with a belly vortex that sucks in opponents of any size.''"
+    "desc": "An imperfect monster with a belly vortex that sucks in opponents of any size."
   },
   {
     "tsc_id": 255,
@@ -3942,7 +3942,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''Armed with an array of magic wands, this creature is capable of multiple attacks.''"
+    "desc": "Armed with an array of magic wands, this creature is capable of multiple attacks."
   },
   {
     "tsc_id": 260,
@@ -3957,7 +3957,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''A lovely creature guarded by the moon. Her lunar curtain can block just about any attack.''"
+    "desc": "A lovely creature guarded by the moon. Her lunar curtain can block just about any attack."
   },
   {
     "tsc_id": 261,
@@ -3972,7 +3972,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A wicked mirror that hypnotizes enemies, diverting attacks from their intended targets.''"
+    "desc": "A wicked mirror that hypnotizes enemies, diverting attacks from their intended targets."
   },
   {
     "tsc_id": 262,
@@ -4018,7 +4018,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''This fairy in an eggshell uses massive wings to blow back almost any projectile attack.''"
+    "desc": "This fairy in an eggshell uses massive wings to blow back almost any projectile attack."
   },
   {
     "tsc_id": 265,
@@ -4125,7 +4125,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''The fatal beams from the eyes of this monster result in grim destruction.''"
+    "desc": "The fatal beams from the eyes of this monster result in grim destruction."
   },
   {
     "tsc_id": 272,
@@ -4156,7 +4156,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''This ancient arbor uses its extensive knowledge to avoid the damage of enemy attacks.''"
+    "desc": "This ancient arbor uses its extensive knowledge to avoid the damage of enemy attacks."
   },
   {
     "tsc_id": 274,
@@ -4216,7 +4216,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''The gorgon egg's massive eyes are said to reflect the fate of its enemies.''"
+    "desc": "The gorgon egg's massive eyes are said to reflect the fate of its enemies."
   },
   {
     "tsc_id": 278,
@@ -4306,7 +4306,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''This machine generates illusions that leave an enemy wide open to attacks.''"
+    "desc": "This machine generates illusions that leave an enemy wide open to attacks."
   },
   {
     "tsc_id": 284,
@@ -4321,7 +4321,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''Master of Yin and Yang, this wizard handles a delicate balance of spells and counter spells.''"
+    "desc": "Master of Yin and Yang, this wizard handles a delicate balance of spells and counter spells."
   },
   {
     "tsc_id": 285,
@@ -4336,7 +4336,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''A snake with a single eye that blows an icy breath to freeze its opponents.''"
+    "desc": "A snake with a single eye that blows an icy breath to freeze its opponents."
   },
   {
     "tsc_id": 286,
@@ -4488,7 +4488,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A monster created from a major accident in an underground lab.''"
+    "desc": "A monster created from a major accident in an underground lab."
   },
   {
     "tsc_id": 296,
@@ -4533,7 +4533,7 @@
       "Dragon"
     ],
     "frameType": "normal",
-    "desc": "''A two-headed dragon with a pair of jaws that can tear an enemy to shreds.''"
+    "desc": "A two-headed dragon with a pair of jaws that can tear an enemy to shreds."
   },
   {
     "tsc_id": 299,
@@ -4616,7 +4616,7 @@
     "race": "Equip",
     "frameType": "spell",
     "rarity": "ultra",
-    "desc": "(This card is always treated as an \"Archfiend\" card.)\nThe equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on the top of your Deck."
+    "desc": "The equipped monster gains 1000 ATK. When this card is sent from the field to the Graveyard: You can Tribute 1 monster; place this card on the top of your Deck."
   },
   {
     "tsc_id": 305,
@@ -5993,7 +5993,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''A reptilian monster that sprays fire in every direction.''"
+    "desc": "A reptilian monster that sprays fire in every direction."
   },
   {
     "tsc_id": 401,
@@ -6054,7 +6054,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''A bizarre monster with the torso of a horse and a fish's tail. It gallops through the sea as if it were the wind.''"
+    "desc": "A bizarre monster with the torso of a horse and a fish's tail. It gallops through the sea as if it were the wind."
   },
   {
     "tsc_id": 405,
@@ -6162,7 +6162,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''A mechanical bat that drops blasts from its wings.''"
+    "desc": "A mechanical bat that drops blasts from its wings."
   },
   {
     "tsc_id": 412,
@@ -6192,7 +6192,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''Guardian of the Machine King, it crushes opposition by rolling over them.''"
+    "desc": "Guardian of the Machine King, it crushes opposition by rolling over them."
   },
   {
     "tsc_id": 414,
@@ -6314,7 +6314,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''A strike force equipped with rocket launchers and bazookas.''"
+    "desc": "A strike force equipped with rocket launchers and bazookas."
   },
   {
     "tsc_id": 422,
@@ -6345,7 +6345,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''An armadillo monster that rolls up to form a dice-like shape.''"
+    "desc": "An armadillo monster that rolls up to form a dice-like shape."
   },
   {
     "tsc_id": 424,
@@ -6469,7 +6469,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A very aggressive mermaid that attacks enemies with the spikes growing from its body.''"
+    "desc": "A very aggressive mermaid that attacks enemies with the spikes growing from its body."
   },
   {
     "tsc_id": 432,
@@ -6484,7 +6484,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A water fairy that is said to be able to summon a giant sea serpent.''"
+    "desc": "A water fairy that is said to be able to summon a giant sea serpent."
   },
   {
     "tsc_id": 433,
@@ -6514,7 +6514,7 @@
       "Warrior"
     ],
     "frameType": "normal",
-    "desc": "''A rare female beast-master with a very dangerous whip.''"
+    "desc": "A rare female beast-master with a very dangerous whip."
   },
   {
     "tsc_id": 435,
@@ -6529,7 +6529,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A lovely lady who can launch water projectiles that turn into lethal ice spikes before they reach an opponent.''"
+    "desc": "A lovely lady who can launch water projectiles that turn into lethal ice spikes before they reach an opponent."
   },
   {
     "tsc_id": 436,
@@ -6544,7 +6544,7 @@
       "Fish"
     ],
     "frameType": "normal",
-    "desc": "''A white dolphin with a horn that summons huge tidal waves.''"
+    "desc": "A white dolphin with a horn that summons huge tidal waves."
   },
   {
     "tsc_id": 437,
@@ -6620,7 +6620,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''This monster carries a devastating plasma cannon on its powerful back.''"
+    "desc": "This monster carries a devastating plasma cannon on its powerful back."
   },
   {
     "tsc_id": 442,
@@ -6651,7 +6651,7 @@
       "Sea Serpent"
     ],
     "frameType": "normal",
-    "desc": "''Protected by a tough shell, this master of the sea attacks its enemies with toxic bubbles.''"
+    "desc": "Protected by a tough shell, this master of the sea attacks its enemies with toxic bubbles."
   },
   {
     "tsc_id": 444,
@@ -6696,7 +6696,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''This monster hypnotizes an opponent with the ball on its tail and draws them to a watery doom.''"
+    "desc": "This monster hypnotizes an opponent with the ball on its tail and draws them to a watery doom."
   },
   {
     "tsc_id": 447,
@@ -6741,7 +6741,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A huge turtle that has existed for over 30,000 years.''"
+    "desc": "A huge turtle that has existed for over 30,000 years."
   },
   {
     "tsc_id": 450,
@@ -6756,7 +6756,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''An amphibian that sold his soul for unlimited power to avenge his late friend.''"
+    "desc": "An amphibian that sold his soul for unlimited power to avenge his late friend."
   },
   {
     "tsc_id": 451,
@@ -6771,7 +6771,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A monster crab with huge claws for clipping enemies to little pieces.''"
+    "desc": "A monster crab with huge claws for clipping enemies to little pieces."
   },
   {
     "tsc_id": 452,
@@ -6786,7 +6786,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A lethal crawfish with extremely dangerous claws.''"
+    "desc": "A lethal crawfish with extremely dangerous claws."
   },
   {
     "tsc_id": 453,
@@ -6831,7 +6831,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''Shouldering a pair of machine guns, this monster is unstoppable.''"
+    "desc": "Shouldering a pair of machine guns, this monster is unstoppable."
   },
   {
     "tsc_id": 456,
@@ -6846,7 +6846,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''A rock warrior that wields a heavy blade carved from stone.''"
+    "desc": "A rock warrior that wields a heavy blade carved from stone."
   },
   {
     "tsc_id": 457,
@@ -6861,7 +6861,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''With a head that erupts when angered, this monster launches a dangerous shower of boulders.''"
+    "desc": "With a head that erupts when angered, this monster launches a dangerous shower of boulders."
   },
   {
     "tsc_id": 458,
@@ -6907,7 +6907,7 @@
       "Thunder"
     ],
     "frameType": "normal",
-    "desc": "''After rendering an opponent immobile by spitting a sticky goo, this monster closes in for the attack.''"
+    "desc": "After rendering an opponent immobile by spitting a sticky goo, this monster closes in for the attack."
   },
   {
     "tsc_id": 461,
@@ -6969,7 +6969,7 @@
       "Winged Beast"
     ],
     "frameType": "normal",
-    "desc": "''This flying creature never misses its intended target.''"
+    "desc": "This flying creature never misses its intended target."
   },
   {
     "tsc_id": 465,
@@ -7093,7 +7093,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''A monster that feeds on oxygen, suffocating any who stand near.''"
+    "desc": "A monster that feeds on oxygen, suffocating any who stand near."
   },
   {
     "tsc_id": 473,
@@ -7155,7 +7155,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A crab that binds its enemies with a sticky web and attacks them with its sharp claws.''"
+    "desc": "A crab that binds its enemies with a sticky web and attacks them with its sharp claws."
   },
   {
     "tsc_id": 477,
@@ -7263,7 +7263,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''A wicked beast that resembles a winged lion.''"
+    "desc": "A wicked beast that resembles a winged lion."
   },
   {
     "tsc_id": 484,
@@ -7294,7 +7294,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A high-powered dung beetle that can roll dung larger than itself. It crushes its foes with its massive ball of dung.''"
+    "desc": "A high-powered dung beetle that can roll dung larger than itself. It crushes its foes with its massive ball of dung."
   },
   {
     "tsc_id": 486,
@@ -7309,7 +7309,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A book-like wizard with a wealth of magic written inside.''"
+    "desc": "A book-like wizard with a wealth of magic written inside."
   },
   {
     "tsc_id": 487,
@@ -7356,7 +7356,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''This wicked flower attacks enemies with pollen projectiles.''"
+    "desc": "This wicked flower attacks enemies with pollen projectiles."
   },
   {
     "tsc_id": 490,
@@ -7434,7 +7434,7 @@
       "Fish"
     ],
     "frameType": "normal",
-    "desc": "''A reticent mermaid who appears only on very rare occasions. She emerges only when a large rainbow arches across the sky.''"
+    "desc": "A reticent mermaid who appears only on very rare occasions. She emerges only when a large rainbow arches across the sky."
   },
   {
     "tsc_id": 495,
@@ -7511,7 +7511,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''Attacks enemies by spitting thin, sticky webs.''"
+    "desc": "Attacks enemies by spitting thin, sticky webs."
   },
   {
     "tsc_id": 500,
@@ -7573,7 +7573,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A cunning raccoon protected by a solid turtle shell, it attacks with deception.''"
+    "desc": "A cunning raccoon protected by a solid turtle shell, it attacks with deception."
   },
   {
     "tsc_id": 504,
@@ -7588,7 +7588,7 @@
       "Fiend"
     ],
     "frameType": "normal",
-    "desc": "''Melts away anything that dares to stand before it.''"
+    "desc": "Melts away anything that dares to stand before it."
   },
   {
     "tsc_id": 505,
@@ -7681,7 +7681,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A flower whose laugh can confuse the minds of enemies.''"
+    "desc": "A flower whose laugh can confuse the minds of enemies."
   },
   {
     "tsc_id": 511,
@@ -7803,7 +7803,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A stone turtle that is nearly indestructible.''"
+    "desc": "A stone turtle that is nearly indestructible."
   },
   {
     "tsc_id": 519,
@@ -7864,7 +7864,7 @@
       "Winged Beast"
     ],
     "frameType": "normal",
-    "desc": "''Few have set eyes on this dive-bombing bird and lived to tell the tale.''"
+    "desc": "Few have set eyes on this dive-bombing bird and lived to tell the tale."
   },
   {
     "tsc_id": 523,
@@ -7911,7 +7911,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''An elderly magician that raises mountains with his flute.''"
+    "desc": "An elderly magician that raises mountains with his flute."
   },
   {
     "tsc_id": 526,
@@ -7957,7 +7957,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''An agile monster that rolls up to ram its opponents.''"
+    "desc": "An agile monster that rolls up to ram its opponents."
   },
   {
     "tsc_id": 529,
@@ -7987,7 +7987,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''The cane of this monster is the source of many powerful spells.''"
+    "desc": "The cane of this monster is the source of many powerful spells."
   },
   {
     "tsc_id": 531,
@@ -8066,7 +8066,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A man-shaped mantis with two razor-sharp scythes.''"
+    "desc": "A man-shaped mantis with two razor-sharp scythes."
   },
   {
     "tsc_id": 536,
@@ -8081,7 +8081,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''This monster can hide just about anywhere by adopting the colors of its surroundings.''"
+    "desc": "This monster can hide just about anywhere by adopting the colors of its surroundings."
   },
   {
     "tsc_id": 537,
@@ -8265,7 +8265,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A mouse that has returned as a zombie to seek revenge on cats.''"
+    "desc": "A mouse that has returned as a zombie to seek revenge on cats."
   },
   {
     "tsc_id": 549,
@@ -8388,7 +8388,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A monster that wanders the edges of the netherworld.''"
+    "desc": "A monster that wanders the edges of the netherworld."
   },
   {
     "tsc_id": 557,
@@ -8418,7 +8418,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''A not-so-powerful servant, he is an errand boy of a master sorcerer.''"
+    "desc": "A not-so-powerful servant, he is an errand boy of a master sorcerer."
   },
   {
     "tsc_id": 559,
@@ -8541,7 +8541,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''An extremely long snake that dwells in the world of myth.''"
+    "desc": "An extremely long snake that dwells in the world of myth."
   },
   {
     "tsc_id": 567,
@@ -8616,7 +8616,7 @@
       "Dragon"
     ],
     "frameType": "normal",
-    "desc": "''A jet-black dragon found in the deepest jungles who normally devours trees.''"
+    "desc": "A jet-black dragon found in the deepest jungles who normally devours trees."
   },
   {
     "tsc_id": 572,
@@ -8693,7 +8693,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''An extraordinary blue scorpion found in the tundra, not in the desert.''"
+    "desc": "An extraordinary blue scorpion found in the tundra, not in the desert."
   },
   {
     "tsc_id": 577,
@@ -8708,7 +8708,7 @@
       "Winged Beast"
     ],
     "frameType": "normal",
-    "desc": "''A clever long-nosed goblin, he is a force to be reckoned with.''"
+    "desc": "A clever long-nosed goblin, he is a force to be reckoned with."
   },
   {
     "tsc_id": 578,
@@ -8723,7 +8723,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A wizard with a black mantle who is actually a talking lion in disguise.''"
+    "desc": "A wizard with a black mantle who is actually a talking lion in disguise."
   },
   {
     "tsc_id": 579,
@@ -8738,7 +8738,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A rarely seen flower that blossoms quietly on the edge of darkness.''"
+    "desc": "A rarely seen flower that blossoms quietly on the edge of darkness."
   },
   {
     "tsc_id": 580,
@@ -8865,7 +8865,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A living vase that bites enemies and blinds them with a blast of pollen from its flower.''"
+    "desc": "A living vase that bites enemies and blinds them with a blast of pollen from its flower."
   },
   {
     "tsc_id": 589,
@@ -8880,7 +8880,7 @@
       "Plant"
     ],
     "frameType": "normal",
-    "desc": "''A carnivorous plant that has an outgrowth of tentacles. It attacks someone nearby by extending its tentacles.''"
+    "desc": "A carnivorous plant that has an outgrowth of tentacles. It attacks someone nearby by extending its tentacles."
   },
   {
     "tsc_id": 590,
@@ -8895,7 +8895,7 @@
       "Reptile"
     ],
     "frameType": "normal",
-    "desc": "''This monster wraps itself around an opponent and pecks away with its huge beak.''"
+    "desc": "This monster wraps itself around an opponent and pecks away with its huge beak."
   },
   {
     "tsc_id": 591,
@@ -8926,7 +8926,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''A fairy of the arts that is unbeatable on the harp.''"
+    "desc": "A fairy of the arts that is unbeatable on the harp."
   },
   {
     "tsc_id": 593,
@@ -8987,7 +8987,7 @@
       "Zombie"
     ],
     "frameType": "normal",
-    "desc": "''A monster with a heavy appetite that has never been satisfied.''"
+    "desc": "A monster with a heavy appetite that has never been satisfied."
   },
   {
     "tsc_id": 597,
@@ -9063,7 +9063,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''An adorable fairy that celebrates the gift of love.''"
+    "desc": "An adorable fairy that celebrates the gift of love."
   },
   {
     "tsc_id": 602,
@@ -9341,7 +9341,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''A fairy of boulders that looks like an earthenware statue. It is quite strong in terms of both attack and defense.''"
+    "desc": "A fairy of boulders that looks like an earthenware statue. It is quite strong in terms of both attack and defense."
   },
   {
     "tsc_id": 620,
@@ -9386,7 +9386,7 @@
       "Spellcaster"
     ],
     "frameType": "normal",
-    "desc": "''This monster blasts enemies with unexpected bursts of wind.''"
+    "desc": "This monster blasts enemies with unexpected bursts of wind."
   },
   {
     "tsc_id": 623,
@@ -9401,7 +9401,7 @@
       "Rock"
     ],
     "frameType": "normal",
-    "desc": "''This monster melts its way underground to attack enemies from below.''"
+    "desc": "This monster melts its way underground to attack enemies from below."
   },
   {
     "tsc_id": 624,
@@ -9431,7 +9431,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''This fairy protects a fountain from any who seek to muddy its waters.''"
+    "desc": "This fairy protects a fountain from any who seek to muddy its waters."
   },
   {
     "tsc_id": 626,
@@ -9492,7 +9492,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "''The fur on this monster rat is tough enough to repel swords.''"
+    "desc": "The fur on this monster rat is tough enough to repel swords."
   },
   {
     "tsc_id": 630,
@@ -9552,7 +9552,7 @@
       "Fairy"
     ],
     "frameType": "normal",
-    "desc": "''It is said to signal that life is growing in a woman's womb.''"
+    "desc": "It is said to signal that life is growing in a woman's womb."
   },
   {
     "tsc_id": 634,
@@ -9567,7 +9567,7 @@
       "Aqua"
     ],
     "frameType": "normal",
-    "desc": "''A lizard warrior protected by a hide of very tough emerald scales.''"
+    "desc": "A lizard warrior protected by a hide of very tough emerald scales."
   },
   {
     "tsc_id": 635,
@@ -9659,7 +9659,7 @@
       "Insect"
     ],
     "frameType": "normal",
-    "desc": "''A giant caterpillar that secretes an acid mist that melts anything.''"
+    "desc": "A giant caterpillar that secretes an acid mist that melts anything."
   },
   {
     "tsc_id": 641,
@@ -9736,7 +9736,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''A mechanized soldier created to protect royalty.''"
+    "desc": "A mechanized soldier created to protect royalty."
   },
   {
     "tsc_id": 646,
@@ -9781,7 +9781,7 @@
       "Machine"
     ],
     "frameType": "normal",
-    "desc": "''This machine, created to lead charges into enemy territory, mows down enemies by rushing.''"
+    "desc": "This machine, created to lead charges into enemy territory, mows down enemies by rushing."
   },
   {
     "tsc_id": 649,
@@ -10880,7 +10880,7 @@
       "Effect"
     ],
     "frameType": "effect",
-    "desc": "(This card is always treated as a \"Toon\" card.)\nCannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
+    "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 2 monsters, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
   },
   {
     "tsc_id": 728,
@@ -10916,7 +10916,7 @@
     ],
     "frameType": "effect",
     "rarity": "ultra",
-    "desc": "(This card is always treated as an \"Archfiend\" card.)\nCannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
+    "desc": "Cannot be Normal Summoned/Set. Must first be Special Summoned (from your hand) by Tributing 1 monster, while you control \"Toon World\". Cannot attack the turn it is Special Summoned. You must pay 500 LP to declare an attack with this monster. If \"Toon World\" on the field is destroyed, destroy this card. Can attack your opponent directly, unless they control a Toon monster, in which case this card must target a Toon monster for its attacks."
   },
   {
     "tsc_id": 730,
@@ -11061,7 +11061,7 @@
     ],
     "frameType": "normal",
     "rarity": "secret",
-    "desc": "''Alpha, Beta, and Gamma meld as one to form a powerful monster.''"
+    "desc": "Alpha, Beta, and Gamma meld as one to form a powerful monster."
   },
   {
     "tsc_id": 739,
@@ -11207,7 +11207,7 @@
       "Beast"
     ],
     "frameType": "normal",
-    "desc": "This monster moves so fast that it looks like an illusion to mortal eyes.\n\n\n(This card is always treated as a \"Phantom Beast\" card.)"
+    "desc": "This monster moves so fast that it looks like an illusion to mortal eyes."
   },
   {
     "tsc_id": 748,
@@ -11256,7 +11256,7 @@
       "Effect"
     ],
     "frameType": "fusion",
-    "desc": "\"Gazelle the King of Mythical Beasts\" + \"Berfomet\"\n(This card is always treated as a \"Phantom Beast\" card.)\nWhen this card is destroyed: You can target 1 \"Berfomet\" or 1 \"Gazelle the King of Mythical Beasts\" in your Graveyard; Special Summon that target."
+    "desc": "\"Gazelle the King of Mythical Beasts\" + \"Berfomet\"\nWhen this card is destroyed: You can target 1 \"Berfomet\" or 1 \"Gazelle the King of Mythical Beasts\" in your Graveyard; Special Summon that target."
   },
   {
     "tsc_id": 751,
@@ -11369,7 +11369,7 @@
     ],
     "frameType": "normal",
     "rarity": "secret",
-    "desc": "''Alpha, Beta, and Gamma meld as one to form a powerful monster.''"
+    "desc": "Alpha, Beta, and Gamma meld as one to form a powerful monster."
   },
   {
     "tsc_id": 758,
@@ -11981,7 +11981,7 @@
     ],
     "frameType": "normal",
     "rarity": "ultra",
-    "desc": "Only the master of the sword among Fiend-Type monsters is permitted to hold the Talwar.\n\n\n(This card is always treated as an \"Archfiend\" card.)"
+    "desc": "Only the master of the sword among Fiend-Type monsters is permitted to hold the Talwar."
   },
   {
     "tsc_id": 799,
@@ -13032,7 +13032,7 @@
     ],
     "frameType": "normal",
     "rarity": "ultra",
-    "desc": "''The ultimate wizard in terms of attack and defense.''"
+    "desc": "The ultimate wizard in terms of attack and defense."
   },
   {
     "tsc_id": 866,
@@ -13355,7 +13355,7 @@
     ],
     "frameType": "normal",
     "rarity": "ultra",
-    "desc": "''A ferocious dragon with a deadly attack.''"
+    "desc": "A ferocious dragon with a deadly attack."
   },
   {
     "tsc_id": 886,

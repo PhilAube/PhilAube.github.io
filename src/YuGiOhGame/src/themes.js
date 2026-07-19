@@ -6,7 +6,10 @@ export const THEMES = {
         SpellTrap: 17,
         Small: 9,
         ATKDEF: 18,
-        Type: 12
+        Type: 12,
+        SpellTrapTextBox: 12,
+        EffectTextBox: 11,
+        NormalTextBox: 10
     },
     Fonts: {
         Default: "Times New Roman",
