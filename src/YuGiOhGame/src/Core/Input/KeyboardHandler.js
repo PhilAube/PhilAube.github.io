@@ -14,7 +14,6 @@ export default class KeyboardHandler extends InputHandler {
         Enter: InputHandler.ACTIONS.A,
         " ": InputHandler.ACTIONS.A,
         Space: InputHandler.ACTIONS.A,
-        Escape: InputHandler.ACTIONS.B,
         Backspace: InputHandler.ACTIONS.B
     };
 

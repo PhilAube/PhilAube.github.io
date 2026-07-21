@@ -27,7 +27,8 @@ export const cardData = cards;
 export const MenuOptions = {
     CARDS : "CARDS",
     SETTINGS: "SETTINGS",
-    CVBACK: "BACK"
+    CVBACK: "BACK",
+    CVFULLSIZE: " "
 };
 
 export const renderer = new RenderSystem(spriteSheetPaths);

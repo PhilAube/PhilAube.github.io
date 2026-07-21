@@ -31,7 +31,8 @@ export default class CardRenderer {
 		Spell: 5,
 		Slifer: 6,
 		Ra: 7,
-		Obelisk: 8
+		Obelisk: 8,
+		FaceDown: 9
 	}
 	
 	/** The various attribute icons along with their offset in the spritesheet. */
@@ -90,26 +91,29 @@ export default class CardRenderer {
 
 			this.renderTemplate(card, tempCtx);
 
-			// Art position relative to the card template.
-			const xOffset = 44;
-			const yOffset = 104;
-			this.renderSprite(card.id, xOffset, yOffset, SPRITESIZE, tempCtx);
+			// Only render template if card is unknown.
+			if (!card.isFaceDown) {
+				// Art position relative to the card template.
+				const xOffset = 44;
+				const yOffset = 104;
+				this.renderSprite(card.id, xOffset, yOffset, SPRITESIZE, tempCtx);
 
-			this.renderAttribute(card, tempCtx);
+				this.renderAttribute(card, tempCtx);
 
-			this.renderIcons(card, tempCtx);
+				this.renderIcons(card, tempCtx);
 
-			this.renderSet(card, tempCtx);
+				this.renderSet(card, tempCtx);
 
-			this.renderPassword(card, tempCtx);
+				this.renderPassword(card, tempCtx);
 
-			this.renderName(card, tempCtx);
+				this.renderName(card, tempCtx);
 
-			this.renderAtkDef(card, tempCtx);
+				this.renderAtkDef(card, tempCtx);
 
-			this.renderMonsterType(card, tempCtx);
+				this.renderMonsterType(card, tempCtx);
 
-			this.renderTextBox(card, tempCtx);
+				this.renderTextBox(card, tempCtx);
+			}
 
 			card.cachedImage = tempCanvas;
 		}
@@ -153,7 +157,9 @@ export default class CardRenderer {
 		const frameType = CardRenderer.Templates[card.type];
 
 		// The grid position of the required frame to render.
-		let xOffset = CardRenderer.TemplateWidth * frameType;
+		let xOffset = (card.isFaceDown)
+		? CardRenderer.TemplateWidth * CardRenderer.Templates.FaceDown
+		: CardRenderer.TemplateWidth * frameType;
 
 		ctx.drawImage(
 			this.spriteSheets[1],

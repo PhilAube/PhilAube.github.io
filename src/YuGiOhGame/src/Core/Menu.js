@@ -14,6 +14,7 @@ export default class Menu extends CanvasObject {
         super(position, dimensions);
         this.menuOptions = [];
         this.cursorPosition = 0;
+        this.cancelOption = null;
     }
 
     /**
@@ -38,7 +39,12 @@ export default class Menu extends CanvasObject {
                         this.updateCursor(index);
                         break;
                     case InputHandler.ACTIONS.A:
-                        this.menuOptions[this.cursorPosition].task();
+                        this.menuOptions[this.cursorPosition].task(); // Selected menu option.
+                        break;
+                    case InputHandler.ACTIONS.B:
+                        this.cancelOption === null 
+                        ? () => {} // Run a blank function if no cancellation task is defined.
+                        : this.menuOptions[this.cancelOption].task(); // Otherwise, run the cancellation task.
                         break;
                 }
             }

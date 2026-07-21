@@ -5430,6 +5430,7 @@
       "Ritual"
     ],
     "frameType": "ritual",
+    "rarity": "ultra",
     "desc": "You can Ritual Summon this card with \"Black Luster Ritual\"."
   },
   {
@@ -12619,16 +12620,16 @@
   },
   {
     "tsc_id": 839,
-    "name": "\"(FREE) Aqua Serpent\"",
+    "name": "\"Toon World\"",
     "deckCost": 183,
-    "id": null,
+    "id": "15259703",
     "atk": null,
     "def": null,
-    "attribute": null,
+    "attribute": "SPELL",
     "level": null,
-    "race": null,
-    "frameType": null,
-    "desc": null
+    "race": "Continuous",
+    "frameType": "spell",
+    "desc": "Activate this card by paying 1000 LP."
   },
   {
     "tsc_id": 840,
@@ -13536,16 +13537,16 @@
   },
   {
     "tsc_id": 898,
-    "name": "\"(FREE) Beckon to Darkness\"",
+    "name": "\"Curse of the Masked Beast\"",
     "deckCost": 15,
-    "id": null,
+    "id": "94377247",
     "atk": null,
     "def": null,
-    "attribute": null,
+    "attribute": "SPELL",
     "level": null,
-    "race": null,
-    "frameType": null,
-    "desc": null
+    "race": "Ritual",
+    "frameType": "spell",
+    "desc": "This card is used to Ritual Summon \"The Masked Beast\". You must also Tribute monsters from your hand or field whose total Levels equal 8 or more."
   },
   {
     "tsc_id": 899,

@@ -9,7 +9,7 @@ export default class Card extends CanvasObject{
      * @param {Number} id The unique TSC_ID of the card to instantiate.
      */
     constructor(id) {
-        super(Vector.Empty, CardRenderer.CARDSIZE);
+        super(new Vector(), CardRenderer.CARDSIZE);
         this.size = CardRenderer.Size.Full;
         this.dimensions = this.getDimensions();
         this.id = id;
@@ -24,9 +24,13 @@ export default class Card extends CanvasObject{
         this.level = data.level;
         this.race = data.race;
 
-        this.type = data.frameType 
-            ? data.frameType[0].toUpperCase() + data.frameType.slice(1)
-            : null; // Handles blank cards until they are all populated.
+        if (data.frameType) {
+            this.type = data.frameType[0].toUpperCase() + data.frameType.slice(1);
+        } else {
+            // Handles blank cards until they are all populated.
+            this.type = "normal";
+            this.isFaceDown = true;
+        }
 
         this.rarity = data.rarity;
         this.description = data.desc;
