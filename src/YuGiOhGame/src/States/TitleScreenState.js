@@ -5,6 +5,8 @@ import TitleScreenMenu from "../Menus/TitleScreenMenu.js";
 import { cardData, renderer } from "../globals.js";
 import CardViewerState from "./CardViewerState.js";
 import Vector from "../Core/Vector.js";
+import SettingsState from "./SettingsState.js";
+import { THEMES } from "../themes.js";
 
 /** State for title screen which cycles through card artwork each second. */
 export default class TitleScreenState extends State {
@@ -65,7 +67,7 @@ export default class TitleScreenState extends State {
     /** Renders the title. */
     renderText() {
         const TITLE_TEXT = "Not Yu-Gi-Oh! The Sacred Cards";
-        renderer.headerText(TITLE_TEXT, 100);
+        renderer.headerText(TITLE_TEXT, 100, THEMES.Fonts.CardName);
     }
 
     /** Updates the game's current state to the card viewer. */
@@ -75,6 +77,6 @@ export default class TitleScreenState extends State {
 
     /** Updates the game's current state to the settings menu. */
     onSettingsSelected() {
-        alert("Work in progress...");
+        this.stateMachine.currentState = new SettingsState(this.stateMachine);
     }
 }

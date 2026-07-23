@@ -1,6 +1,8 @@
 import cards from "../assets/data/cards.json" with { type: "json" }
 import RenderSystem from "./Core/RenderSytem.js";
 import InputManager from "./Core/Input/InputManager.js";
+import SoundPool from "./Core/SoundPool.js";
+import LocalStorageService from "./Core/LocalStorageService.js";
 
 export const spriteSheetPaths = [
     "./src/YuGiOhGame/assets/img/CardSpritesheet.png",
@@ -21,6 +23,22 @@ export const fontPaths = {
     Password: "/src/YuGiOhGame/assets/fonts/ITCStoneSerifRegular.ttf"
 }
 
+export const soundPaths = {
+    Blip: "/src/YuGiOhGame/assets/audio/blip.mp3",
+    Cancel: "/src/YuGiOhGame/assets/audio/cancel.mp3",
+    Select: "/src/YuGiOhGame/assets/audio/select.mp3"
+}
+
+export const storageKeys = {
+    sfxEnabled : "sfxEnabled"
+}
+
+export const SOUNDS = {
+    Blip: "Blip",
+    Cancel: "Cancel",
+    Select: "Select"
+}
+
 export const cardData = cards;
 
 /** Enum for each menu option in the game. */
@@ -28,8 +46,12 @@ export const MenuOptions = {
     CARDS : "CARDS",
     SETTINGS: "SETTINGS",
     CVBACK: "BACK",
-    CVFULLSIZE: " "
+    CVFULLSIZE: " ",
+    SFXTOGGLE: "SOUND EFFECTS",
+    SBACK: "BACK"
 };
 
 export const renderer = new RenderSystem(spriteSheetPaths);
 export const input = new InputManager();
+export const storage = new LocalStorageService();
+export const sound = new SoundPool(soundPaths, storage.get(storageKeys.sfxEnabled) ?? true);

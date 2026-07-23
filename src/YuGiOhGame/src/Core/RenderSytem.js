@@ -124,9 +124,9 @@ export default class RenderSystem {
      * @param {Number} y The height or y coordinate where the text will display.
      * @param {String} color The color to draw the text, white by default.
      */
-    headerText(text, y, color = THEMES.Colors.White) {
+    headerText(text, y, font = THEMES.Fonts.Default, color = THEMES.Colors.White) {
         ctx.fillStyle = color;
-        ctx.font = `${THEMES.FontSizes.Large}px ${THEMES.Fonts.CardName}`;
+        ctx.font = `${THEMES.FontSizes.Large}px ${font}`;
         ctx.fillText(text, CANVAS_WIDTH / 2, y, CANVAS_WIDTH);
     }
 

@@ -2,7 +2,7 @@ import CardViewerMenu from "../Menus/CardViewerMenu.js";
 import State from "../Core/State.js";
 import TitleScreenState from "./TitleScreenState.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../Core/RenderSytem.js";
-import { cardData, renderer } from "../globals.js";
+import { cardData, renderer, sound, SOUNDS } from "../globals.js";
 import Card from "../Core/Card.js";
 import { input } from "../globals.js";
 import InputHandler from "../Core/Input/InputHandler.js";
@@ -86,6 +86,7 @@ export default class CardViewerState extends State {
      * @param {Number} index The new index of the card to display (ID - 1 offset).
      */
     updateCards(index) {
+        sound.play(SOUNDS.Blip);
         this.currentCard = this.setCurrentCard(index);
         this.index = index;
         this.nearbyCards = this.setNearbyCards();

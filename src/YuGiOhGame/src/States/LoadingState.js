@@ -1,7 +1,8 @@
 import TitleScreenState from "./TitleScreenState.js";
 import State from "../Core/State.js";
 import { CANVAS_HEIGHT } from "../Core/RenderSytem.js"
-import { renderer } from "../globals.js";
+import { renderer, sound } from "../globals.js";
+import { THEMES } from "../themes.js";
 
 /** State for loading screens with basic progress display. */
 export default class LoadingState extends State {
@@ -12,6 +13,7 @@ export default class LoadingState extends State {
         super(stateMachine);
         this.displayMsg = null;
         this.timer = 0;
+        this.totalAssets = renderer.assetsTotal + sound.assetsTotal;
     }
 
     /**
@@ -29,12 +31,14 @@ export default class LoadingState extends State {
             }
         }
 
-        this.displayMsg = `LOADING ASSETS ${renderer.assetsLoaded} / ${renderer.assetsTotal}`;
+        let currentAssetsLoaded = renderer.assetsLoaded + sound.actualAssetsLoaded;
+
+        this.displayMsg = `LOADING ASSETS ${currentAssetsLoaded} / ${this.totalAssets}`;
 	}
 
     /** Displays the number of assets loaded. */
     render() {
         renderer.background("black");
-        renderer.headerText(this.displayMsg, CANVAS_HEIGHT / 2);
+        renderer.headerText(this.displayMsg, CANVAS_HEIGHT / 2, THEMES.Fonts.Default);
     }
 }

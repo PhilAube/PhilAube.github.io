@@ -44,4 +44,9 @@ export default class MenuOption extends CanvasObject {
         const measure = renderer.measureText(this.id, THEMES.FontSizes.Medium);
         return new Vector(measure.width, measure.height);
     }
+
+    updateText(newText) {
+        this.id = newText;
+        this.dimensions = this.setDimensions();
+    }
 }

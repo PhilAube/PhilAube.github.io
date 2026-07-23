@@ -1,5 +1,5 @@
 import CanvasObject from "./CanvasObject.js";
-import { renderer, input } from "../globals.js";
+import { renderer, input, sound, SOUNDS } from "../globals.js";
 import InputHandler from "./Input/InputHandler.js";
 import Vector from "./Vector.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./RenderSytem.js";
@@ -33,15 +33,19 @@ export default class Menu extends CanvasObject {
                     case InputHandler.ACTIONS.Up:
                         index = (index - 1 + length) % length;
                         this.updateCursor(index);
+                        sound.play(SOUNDS.Blip);
                         break;
                     case InputHandler.ACTIONS.Down:
                         index = (index + 1 + length) % length;
                         this.updateCursor(index);
+                        sound.play(SOUNDS.Blip);
                         break;
                     case InputHandler.ACTIONS.A:
                         this.menuOptions[this.cursorPosition].task(); // Selected menu option.
+                        sound.play(SOUNDS.Select);
                         break;
                     case InputHandler.ACTIONS.B:
+                        sound.play(SOUNDS.Cancel);
                         this.cancelOption === null 
                         ? () => {} // Run a blank function if no cancellation task is defined.
                         : this.menuOptions[this.cancelOption].task(); // Otherwise, run the cancellation task.
