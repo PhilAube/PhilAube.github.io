@@ -52,7 +52,7 @@ body
     font-weight: 100;
 }
 
-#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody, #timewasterbody, #mtlsimbody
+#contact, #projects, #RNGStick, #gallery, #hero, #cardgamebody, #timewasterbody, #mtlsimbody, #notyugiohbody
 {
     width: 100%;
     background: linear-gradient(var(--Gray), var(--PureBlack));
@@ -422,6 +422,21 @@ textarea
     }
 }
 
+/* NOT YUGIOH */
+
+#notyugiohcontainer
+{
+    margin: 5%;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+#notyugioh
+{
+    width: 500px;
+    height: 500px;
+}
+
 /* TABLET */
 
 @media only screen and (max-width: 800px)
@@ -446,6 +461,12 @@ textarea
     {
         width: 90%;
         height: 90%;
+    }
+
+    #notyugioh
+    {
+        width: 80%;
+        height: 80%;
     }
 
     footer p
@@ -553,6 +574,14 @@ textarea
     /* TIMEWASTER 2 */
 
     #timewaster
+    {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* NOT YUGIOH GAME */
+
+    #notyugioh
     {
         width: 100%;
         height: 100%;

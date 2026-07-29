@@ -1,20 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    canvas {
-      border: 2px solid black;
-      image-rendering: pixelated; /* Images look blurry without this. */
-    }
-  </style>
-  <script type="module" src="./src/YuGiOhGame/src/main.js"></script>
-  <title>Yu-Gi-Oh Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="style.css">
+    <script src="src/burger.js"></script>
+<script type="module" src="./src/YuGiOhGame/src/main.js"></script>
+    <title>Not Yu-Gi-Oh!</title>
 </head>
+
 <body>
-  <canvas id="gameCanvas" width="500" height="500">
-    Your browser does not support the HTML5 canvas tag.
-  </canvas>
+    <nav>
+        <div id="navhead">
+            <h1><a href = "index.html" title = "Home">Phil Aube</a></h1>
+            <svg id = "burger" viewBox="0 0 100 80" width="40" height="40" fill = #EEE onclick = "burgerClick()" onmouseover= "change(this)" onmouseout= "revert(this)">
+                <rect width="100" height="20"></rect>
+                <rect y="30" width="100" height="20"></rect>
+                <rect y="60" width="100" height="20"></rect>
+            </svg> 
+        </div>
+
+        <li class = "navitem"><a href = "https://github.com/PhilAube" title = "My GitHub Profile">GitHub</a></li>
+        <li class = "navitem"><a href = "projects.html" title = "Projects I've worked on">Projects</a></li>
+        <li class = "navitem"><a href = "contact.html" title = "Contact Page">Contact</a></li>
+    </nav>
+
+    <div id = "notyugiohbody">
+        <div id = "notyugiohcontainer">
+            <canvas id = "notyugioh" width= "500px" height= 500px>Your browser does not support the HTML5 canvas tag.</canvas>
+        </div>
+    </div>
 </body>
 </html>

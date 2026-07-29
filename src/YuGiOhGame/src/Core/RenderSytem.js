@@ -3,7 +3,7 @@ import CardRenderer from "./CardRenderer.js";
 import { fontPaths } from "../globals.js";
 import Vector from "./Vector.js";
 
-const canvas = document.getElementById("gameCanvas");
+const canvas = document.getElementById("notyugioh");
 const ctx = canvas.getContext("2d");
 
 export const CANVAS_WIDTH = canvas.width;
