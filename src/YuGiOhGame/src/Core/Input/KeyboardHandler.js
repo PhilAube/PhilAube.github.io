@@ -31,6 +31,8 @@ export default class KeyboardHandler extends InputHandler {
         for (const key of Object.keys(this.keyStates)) {
             if (this.keyStates[key] === KEYSTATE.Down) {
                 this.keyStates[key] = KEYSTATE.Hold;
+            } else if (this.keyStates[key] === KEYSTATE.Up) {
+                this.keyStates[key] = null;
             }
         }
     }

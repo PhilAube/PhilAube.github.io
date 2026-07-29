@@ -3,6 +3,7 @@ import { renderer, input, sound, SOUNDS } from "../globals.js";
 import InputHandler from "./Input/InputHandler.js";
 import Vector from "./Vector.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./RenderSytem.js";
+import MenuOption from "./MenuOption.js";
 
 /** Generic base class for menus which handles rendering and input handling. */
 export default class Menu extends CanvasObject {
@@ -13,7 +14,7 @@ export default class Menu extends CanvasObject {
     constructor(position, dimensions = new Vector(CANVAS_HEIGHT, CANVAS_WIDTH)) {
         super(position, dimensions);
         this.menuOptions = [];
-        this.cursorPosition = 0;
+        this.cursorPosition = null;
         this.cancelOption = null;
     }
 
@@ -22,37 +23,41 @@ export default class Menu extends CanvasObject {
      * @param {Number} dt Delta Time, or the time passed since the last frame.
      */
     update(dt) {
+        // Handles tap/mouse input.
+        this.updateCursorFromPointer();
+
         let index = this.cursorPosition;
         let states = Object.entries(input.get());
         let length = this.menuOptions.length;
 
+        // Handles key input.
         states.forEach(state => {
-            // Only handle menu input on one frame to avoid repeated cursor moves.
-            if (state[1] === InputHandler.ACTIONSTATE.Down) {
-                switch (state[0]) {
-                    case InputHandler.ACTIONS.Up:
-                        index = (index - 1 + length) % length;
-                        this.updateCursor(index);
-                        sound.play(SOUNDS.Blip);
-                        break;
-                    case InputHandler.ACTIONS.Down:
-                        index = (index + 1 + length) % length;
-                        this.updateCursor(index);
-                        sound.play(SOUNDS.Blip);
-                        break;
-                    case InputHandler.ACTIONS.A:
-                        this.menuOptions[this.cursorPosition].task(); // Selected menu option.
-                        sound.play(SOUNDS.Select);
-                        break;
-                    case InputHandler.ACTIONS.B:
-                        sound.play(SOUNDS.Cancel);
-                        this.cancelOption === null 
-                        ? () => {} // Run a blank function if no cancellation task is defined.
-                        : this.menuOptions[this.cancelOption].task(); // Otherwise, run the cancellation task.
-                        break;
-                }
+            if (state[1] !== InputHandler.ACTIONSTATE.Down) return;
+
+            switch (state[0]) {
+                case InputHandler.ACTIONS.Up:
+                    index = (index === null) ? 0 : (index - 1 + length) % length;
+                    this.updateCursor(index);
+                    sound.play(SOUNDS.Blip);
+                    break;
+
+                case InputHandler.ACTIONS.Down:
+                    index = (index === null) ? length - 1 : (index + 1 + length) % length;
+                    this.updateCursor(index);
+                    sound.play(SOUNDS.Blip);
+                    break;
+
+                case InputHandler.ACTIONS.A:
+                    this.menuOptions[this.cursorPosition]?.task();
+                    if (this.cursorPosition !== null) sound.play(SOUNDS.Select);
+                    break;
+
+                case InputHandler.ACTIONS.B:
+                    sound.play(SOUNDS.Cancel);
+                    this.menuOptions[this.cancelOption]?.task();
+                    break;
             }
-        }); 
+        });
     }
 
     /** Renders the menu options and cursor. */
@@ -82,8 +87,59 @@ export default class Menu extends CanvasObject {
      * @param {Number} index The new menu cursor position to be set.
      */
     updateCursor(index) {
-        this.menuOptions[this.cursorPosition].isSelected = false;
+        if (this.cursorPosition !== null) this.menuOptions[this.cursorPosition].isSelected = false;
         this.cursorPosition = index;
         this.menuOptions[index].isSelected = true;
+    }
+
+    /** Updates the menu cursor position and sets isSelected based on pointer position.  */
+    updateCursorFromPointer() {
+        const rawPointer = input.getPointerPosition(); // Gets client coordinates based on current input (tap or mouse)
+        const pointer = renderer.getPointerPosition(rawPointer); // Gets actual canvas coordinates
+
+        if (!pointer) return; // Only update menu cursor position here if pointer is the current input.
+
+        // Get the index of the option currently hovered over (if applicable)
+        let hoveredIndex = null;
+        this.menuOptions.forEach((option, index) => {
+            if (this.isPointerOverOption(option, pointer)) hoveredIndex = index;
+        });
+
+        // Set all option's isSelected based on those findings.
+        this.menuOptions.forEach((option, index) => {
+            option.isSelected = index === hoveredIndex;
+        });
+
+        // Set the cursor menu's cursor position and play the menu sound.
+        if (hoveredIndex !== null && this.cursorPosition !== hoveredIndex) {
+            this.cursorPosition = hoveredIndex;
+            sound.play(SOUNDS.Blip);
+        }
+
+        // If nothing is hovered over, there is no cursor to display.
+        if (hoveredIndex === null) this.cursorPosition = null;
+    }
+
+    /**
+     * Determines whether an input pointer is within the hitbox bounds of a menu option.
+     * @param {MenuOption} option The menu option to determine whether the pointer is hovering over.
+     * @param {Vector} pointer The x and y coordinates of the current pointer input type.
+     * @returns {Boolean} True if the current input pointer is hovered over the menu option in canvas.
+     */
+    isPointerOverOption(option, pointer) {
+        const bounds = option.getBounds(this.position.x, this.position.y);
+
+        const width = bounds.size.x;
+        const height = bounds.size.y; 
+
+        const x = bounds.pos.x;
+        const y = bounds.pos.y;
+
+        return (
+            pointer.x >= x &&
+            pointer.x <= x + width &&
+            pointer.y >= y &&
+            pointer.y <= y + height
+        );
     }
 }

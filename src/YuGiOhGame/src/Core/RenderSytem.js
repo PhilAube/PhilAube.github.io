@@ -1,6 +1,7 @@
 import { THEMES } from "../themes.js";
 import CardRenderer from "./CardRenderer.js";
 import { fontPaths } from "../globals.js";
+import Vector from "./Vector.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -429,5 +430,23 @@ export default class RenderSystem {
             ctx.roundRect(position.x, position.y, dimensions.x, dimensions.y, RADIUS);
             ctx.stroke();
         }
+    }
+
+    /**
+     * Gets the current pointer's corrected position within the canvas.
+     * @param {Vector} position The absolute client X and Y position of the pointer.
+     * @returns {Vector} The corrected pointer coordinates relative to the canvas.
+     */
+    getPointerPosition(position) {
+        if (!position) return;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const styles = getComputedStyle(this.canvas);
+        const borderTop = parseFloat(styles.borderTopWidth);
+
+        return new Vector(
+            (position.x - rect.left) * (this.canvas.width / rect.width),
+            (position.y - rect.top + borderTop) * (this.canvas.height / rect.height)
+        );
     }
 }

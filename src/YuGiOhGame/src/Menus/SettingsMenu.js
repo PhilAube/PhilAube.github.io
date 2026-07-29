@@ -32,7 +32,6 @@ export default class SettingsMenu extends Menu {
                     this.state.getSfxToggleString(),
                     this.sfxToggleHandler.bind(this),
                     new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2),
-                    true
                 );
             case MenuOptions.SBACK:
                 return new MenuOption(

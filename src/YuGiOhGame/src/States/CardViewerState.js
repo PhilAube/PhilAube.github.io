@@ -16,8 +16,9 @@ export default class CardViewerState extends State {
     constructor(stateMachine) {
         super(stateMachine);
         this.index = 0;
-        this.currentCard = this.setCurrentCard(this.index);
         this.menu = new CardViewerMenu(this);
+        this.currentCard = null;
+        this.setCurrentCard(this.index);
         this.counter = 0;
         this.nearbyCards = this.setNearbyCards();
     }
@@ -31,6 +32,14 @@ export default class CardViewerState extends State {
         this.counter += dt;
 
         this.menu.update();
+        
+        if (this.menu.cursorPosition === null || this.menu.cursorPosition === 1) {
+            // Set card size to small when pointer not hovering or when on back.
+            this.resizeCurrentCard(CardRenderer.Size.Small);
+        } else if (this.menu.cursorPosition === 0 && this.currentCard.size == CardRenderer.Size.Small) {
+            // Set card size to medium if hovered.
+            this.resizeCurrentCard(CardRenderer.Size.Medium);
+        }
 
         let index = this.index;
         let length = cardData.length;
@@ -73,12 +82,11 @@ export default class CardViewerState extends State {
 
     /** Toggles between medium/full size when a card is selected. */
     onCardSelected() {
-        this.currentCard.size === CardRenderer.Size.Full 
-        ? this.currentCard.setSize(CardRenderer.Size.Medium)
-        : this.currentCard.setSize(CardRenderer.Size.Full);
+        const newSize = this.currentCard.size === CardRenderer.Size.Full
+        ? CardRenderer.Size.Medium
+        : CardRenderer.Size.Full;
 
-        this.currentCard.position.x = (CANVAS_WIDTH / 2) - (this.currentCard.dimensions.x / 2);
-        this.currentCard.position.y = (CANVAS_HEIGHT / 2) - (this.currentCard.dimensions.y / 2);
+        this.resizeCurrentCard(newSize);
     }
 
     /**
@@ -87,7 +95,7 @@ export default class CardViewerState extends State {
      */
     updateCards(index) {
         sound.play(SOUNDS.Blip);
-        this.currentCard = this.setCurrentCard(index);
+        this.setCurrentCard(index);
         this.index = index;
         this.nearbyCards = this.setNearbyCards();
     }
@@ -98,12 +106,10 @@ export default class CardViewerState extends State {
      * @returns A new Card with an updated ID, with size and position defined.
      */
     setCurrentCard(index) {
-        let card = new Card(index + 1);
-        card.setSize(CardRenderer.Size.Medium);
-        const x = (CANVAS_WIDTH - card.dimensions.x) / 2;
-        const y = (CANVAS_HEIGHT - card.dimensions.y) / 2;
-        card.position.set(x, y);
-        return card;
+        const isCardFocused = (this.menu.cursorPosition === 0);
+        this.currentCard = new Card(index + 1);
+        let size = isCardFocused ? CardRenderer.Size.Medium : CardRenderer.Size.Small;
+        this.resizeCurrentCard(size);
     }
 
     /**
@@ -155,5 +161,16 @@ export default class CardViewerState extends State {
         for (let i = 0; i <= (RADIUS * 2) - 1; i++) {
             renderer.card.render(this.nearbyCards[i]);
         }
+    }
+
+    /**
+     * Sets the dimensions of the card based and repositions accordingly.
+     * @param {Number} size The CardRenderer.Size (Small, Medium, Full) to resize the card to.
+     */
+    resizeCurrentCard(size) {
+        this.currentCard.setSize(size);
+        this.menu.menuOptions[0].setDimensions(this.currentCard.dimensions);
+        this.currentCard.position.x = (CANVAS_WIDTH / 2) - (this.currentCard.dimensions.x / 2);
+        this.currentCard.position.y = (CANVAS_HEIGHT / 2) - (this.currentCard.dimensions.y / 2);
     }
 }

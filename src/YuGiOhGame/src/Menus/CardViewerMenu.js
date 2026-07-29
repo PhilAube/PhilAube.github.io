@@ -1,3 +1,4 @@
+import CardRenderer from "../Core/CardRenderer.js";
 import Menu from "../Core/Menu.js";
 import MenuOption from "../Core/MenuOption.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../Core/RenderSytem.js";
@@ -26,19 +27,22 @@ export default class CardViewerMenu extends Menu {
      * @returns A new MenuOption with a populated task and canvas position.
      */
     getMenuOption(id) {
+        const scaledCardWidth = CardRenderer.CARDSIZE.x * CardRenderer.Size.Medium;
+        const scaledCardHeight = CardRenderer.CARDSIZE.y * CardRenderer.Size.Medium;
+
         switch (id) {
             case MenuOptions.CVFULLSIZE:
                 return new MenuOption(
                     MenuOptions.CVFULLSIZE,
                     this.cardSelectHandler.bind(this),
                     new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2),
-                    true
+                    new Vector(scaledCardWidth, scaledCardHeight)
                 );
             case MenuOptions.CVBACK:
                 return new MenuOption(
                     MenuOptions.CVBACK,
                     this.backHandler.bind(this),
-                    new Vector(460, 475),
+                    new Vector(460, 475)
                 );
             default:
                 break;

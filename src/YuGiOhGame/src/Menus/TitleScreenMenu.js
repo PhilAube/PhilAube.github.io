@@ -31,8 +31,7 @@ export default class TitleScreenMenu extends Menu {
                 return new MenuOption(
                     MenuOptions.CARDS,
                     this.cardsHandler.bind(this),
-                    new Vector(CANVAS_WIDTH / 2, 400),
-                    true
+                    new Vector(CANVAS_WIDTH / 2, 400)
                 );
             case MenuOptions.SETTINGS:
                 return new MenuOption(
