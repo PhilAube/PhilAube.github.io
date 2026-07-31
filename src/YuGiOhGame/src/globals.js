@@ -1,7 +1,7 @@
 import cards from "../assets/data/cards.json" with { type: "json" }
 import RenderSystem from "./Core/RenderSytem.js";
 import InputManager from "./Core/Input/InputManager.js";
-import SoundPool from "./Core/SoundPool.js";
+import SoundSystem from "./Core/SoundSystem.js";
 import LocalStorageService from "./Core/LocalStorageService.js";
 
 export const spriteSheetPaths = [
@@ -54,4 +54,4 @@ export const MenuOptions = {
 export const renderer = new RenderSystem(spriteSheetPaths);
 export const input = new InputManager();
 export const storage = new LocalStorageService();
-export const sound = new SoundPool(soundPaths, storage.get(storageKeys.sfxEnabled) ?? true);
+export const sound = new SoundSystem(soundPaths, storage.get(storageKeys.sfxEnabled) ?? true);
