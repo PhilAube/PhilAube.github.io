@@ -1,3 +1,5 @@
+import { renderer } from "../../globals.js";
+
 /** Base class for input types to implement for an abstracted input interface. */
 export default class InputHandler {
     constructor() { }
@@ -37,5 +39,21 @@ export default class InputHandler {
             states[key] = InputHandler.ACTIONSTATE.Up;
         });
         return states;
+    }
+
+    /**
+     * Determines whether the current pointer is within the bounds of the canvas.
+     * @param {Event} event The pointer event.
+     * @returns True if the pointer is within the canvas bounds.
+     */
+    pointerIsInsideCanvas(event) {
+        const rect = renderer.canvas.getBoundingClientRect();
+
+        return (
+            event.clientX >= rect.left &&
+            event.clientX < rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY < rect.bottom
+        );
     }
 }

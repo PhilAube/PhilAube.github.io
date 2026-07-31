@@ -4,6 +4,7 @@ import InputHandler from "./Input/InputHandler.js";
 import Vector from "./Vector.js";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./RenderSytem.js";
 import MenuOption from "./MenuOption.js";
+import { InputTypes } from "./Input/InputManager.js";
 
 /** Generic base class for menus which handles rendering and input handling. */
 export default class Menu extends CanvasObject {
@@ -96,6 +97,7 @@ export default class Menu extends CanvasObject {
     updateCursorFromPointer() {
         const rawPointer = input.getPointerPosition(); // Gets client coordinates based on current input (tap or mouse)
         const pointer = renderer.getPointerPosition(rawPointer); // Gets actual canvas coordinates
+        const currentInput = input.currentInput;
 
         if (!pointer) return; // Only update menu cursor position here if pointer is the current input.
 
@@ -110,14 +112,15 @@ export default class Menu extends CanvasObject {
             option.isSelected = index === hoveredIndex;
         });
 
-        // Set the cursor menu's cursor position and play the menu sound.
+        // Set the cursor menu's cursor position and play the menu sound if it changed.
         if (hoveredIndex !== null && this.cursorPosition !== hoveredIndex) {
             this.cursorPosition = hoveredIndex;
-            sound.play(SOUNDS.Blip);
+            // The blip should only be played on mouse hover, not on tap.
+            if (currentInput === InputTypes.Mouse) sound.play(SOUNDS.Blip);
+        } else if (hoveredIndex === null && this.cursorPosition !== hoveredIndex) {
+            // If nothing is hovered over, there is no cursor to display.
+            this.cursorPosition = null;
         }
-
-        // If nothing is hovered over, there is no cursor to display.
-        if (hoveredIndex === null) this.cursorPosition = null;
     }
 
     /**

@@ -1,4 +1,4 @@
-import { input, renderer } from "../../globals.js";
+import { input } from "../../globals.js";
 import Vector from "../Vector.js";
 import InputHandler from "./InputHandler.js";
 import { InputTypes } from "./InputManager.js";
@@ -63,7 +63,7 @@ export default class MouseHandler extends InputHandler {
      */
     mouseMoveHandler(event) {
         this.cursorPosition.set(event.clientX, event.clientY);
-        if (this.mouseIsInsideCanvas(event)) input.currentInput = InputTypes.Mouse;
+        if (this.pointerIsInsideCanvas(event)) input.currentInput = InputTypes.Mouse;
     }
 
     /**
@@ -112,21 +112,5 @@ export default class MouseHandler extends InputHandler {
      */
     getCursorPosition() {
         return this.cursorPosition;
-    }
-
-    /**
-     * Determines whether the current pointer is within the bounds of the canvas.
-     * @param {Event} event The pointer event.
-     * @returns True if the pointer is within the canvas bounds.
-     */
-    mouseIsInsideCanvas(event) {
-        const rect = renderer.canvas.getBoundingClientRect();
-
-        return (
-            event.clientX >= rect.left &&
-            event.clientX < rect.right &&
-            event.clientY >= rect.top &&
-            event.clientY < rect.bottom
-        );
     }
 }

@@ -435,6 +435,7 @@ textarea
 {
     width: 500px;
     height: 500px;
+    touch-action: none;
 }
 
 /* TABLET */

@@ -42,8 +42,6 @@ export default class TapHandler extends InputHandler {
      * @param {Object} event The event to be processed.
      */
     handleEvent(event) {
-        event.preventDefault();
-
         switch (event.type) {
             case 'touchstart':
                 this.touchStartHandler(event);
