@@ -103,6 +103,7 @@ export default class InputHandler {
         this.gestureState.distanceY = this.gestureState.currentPosition.y - this.gestureState.startPosition.y;
         this.gestureState.isActive = false;
         this.gestureState.justReleased = true;
+        this.gestureState.isDragging = false;
     }
 
     /**
@@ -135,10 +136,10 @@ export default class InputHandler {
 
     /** An action can only be in one of these states. */
     static ACTIONSTATE = {
-    Down: "Down", // Fired on frame N
-    Hold: "Hold", // Fired continuously from frame N+1 until release
-    Up: "Up" // Fired once on release
-};
+        Down: "Down", // Fired on frame N
+        Hold: "Hold", // Fired continuously from frame N+1 until release
+        Up: "Up" // Fired once on release
+    };
 
     /**
      * Initializes the action states for the input interface.
@@ -160,12 +161,16 @@ export default class InputHandler {
      */
     pointerIsInsideCanvas(event) {
         const rect = renderer.canvas.getBoundingClientRect();
+        const clientX = event?.clientX ?? event?.x;
+        const clientY = event?.clientY ?? event?.y;
+
+        if (typeof clientX !== "number" || typeof clientY !== "number") return false;
 
         return (
-            event.clientX >= rect.left &&
-            event.clientX < rect.right &&
-            event.clientY >= rect.top &&
-            event.clientY < rect.bottom
+            clientX >= rect.left &&
+            clientX < rect.right &&
+            clientY >= rect.top &&
+            clientY < rect.bottom
         );
     }
 }

@@ -80,6 +80,9 @@ export default class MouseHandler extends InputHandler {
     mouseDownHandler(event) {
         // Only track left mouse button
         if (event.button !== 0) return;
+        if (!this.pointerIsInsideCanvas(event)) return;
+
+        this.cursorPosition.set(event.clientX, event.clientY);
 
         const current = this.mouseStates[LEFTCLICK] ?? CLICKSTATE.Up;
 

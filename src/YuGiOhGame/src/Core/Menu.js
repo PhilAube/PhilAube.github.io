@@ -33,7 +33,7 @@ export default class Menu extends CanvasObject {
 
         // Handles key input.
         states.forEach(state => {
-            if (state[1] !== InputHandler.ACTIONSTATE.Down) return;
+            if (state[1] !== InputHandler.ACTIONSTATE.Up) return;
 
             switch (state[0]) {
                 case InputHandler.ACTIONS.Up:
@@ -100,6 +100,7 @@ export default class Menu extends CanvasObject {
         const currentInput = input.currentInput;
 
         if (!pointer) return; // Only update menu cursor position here if pointer is the current input.
+        if (input.getPointerGestureState().isActive) return; // Skip cursor update if user is mid-gesture.
 
         // Get the index of the option currently hovered over (if applicable)
         let hoveredIndex = null;

@@ -7,6 +7,7 @@ import Card from "../Core/Card.js";
 import { input } from "../globals.js";
 import InputHandler from "../Core/Input/InputHandler.js";
 import CardRenderer from "../Core/CardRenderer.js";
+import { InputTypes } from "../Core/Input/InputManager.js";
 
 /** State for card gallery to view full cards. */
 export default class CardViewerState extends State {
@@ -21,6 +22,9 @@ export default class CardViewerState extends State {
         this.setCurrentCard(this.index);
         this.counter = 0;
         this.nearbyCards = this.setNearbyCards();
+        this.lastDragStep = 0;
+        this.scrollingVelocity = 0;
+        this.scrollAccumulator = 0;
     }
 
     /**
@@ -41,6 +45,8 @@ export default class CardViewerState extends State {
             this.resizeCurrentCard(CardRenderer.Size.Medium);
         }
 
+        this.handlePointerNavigation(dt);
+
         let index = this.index;
         let length = cardData.length;
         let states = Object.entries(input.get());
@@ -54,6 +60,7 @@ export default class CardViewerState extends State {
                             this.counter = 0;
                             index = (index - 1 + length) % length;
                             this.updateCards(index);
+                            this.scrollingVelocity = 0;
                         }
                         break;
                     case InputHandler.ACTIONS.Right:
@@ -61,6 +68,7 @@ export default class CardViewerState extends State {
                             this.counter = 0;
                             index = (index + 1 + length) % length;
                             this.updateCards(index);
+                            this.scrollingVelocity = 0;
                         }
                         break;
                 }
@@ -75,6 +83,27 @@ export default class CardViewerState extends State {
         renderer.card.render(this.currentCard);
     }
 
+    /**
+     * Handles pointer-driven navigation for the card viewer.
+     * @param {Number} dt Delta time, or the time passed since the last frame.
+     */
+    handlePointerNavigation(dt) {
+        if (input.currentInput !== InputTypes.Tap && input.currentInput !== InputTypes.Mouse) return;
+
+        const gestureState = input.getPointerGestureState();
+        const absX = Math.abs(gestureState.distanceX);
+        const absY = Math.abs(gestureState.distanceY);
+        const cardSpacing = Math.max(this.nearbyCards[0].dimensions.x, 1);
+
+        if (this.gestureOriginatedOnCurrentCard(gestureState)) return;
+
+        if (this.gestureReset(gestureState)) return;
+
+        if (this.handleIntertialScroll(cardSpacing, dt)) return;
+
+        this.handleDrag(gestureState, absX, absY, cardSpacing);
+    }
+
     /** Updates the game's current state back to the title screen. */
     onBackSelected() {
         this.stateMachine.currentState = new TitleScreenState(this.stateMachine);
@@ -82,9 +111,9 @@ export default class CardViewerState extends State {
 
     /** Toggles between medium/full size when a card is selected. */
     onCardSelected() {
-        const newSize = this.currentCard.size === CardRenderer.Size.Full
-        ? CardRenderer.Size.Medium
-        : CardRenderer.Size.Full;
+        const newSize = this.currentCard.size === CardRenderer.Size.Medium
+        ? CardRenderer.Size.Full
+        : CardRenderer.Size.Medium;
 
         this.resizeCurrentCard(newSize);
     }
@@ -172,5 +201,103 @@ export default class CardViewerState extends State {
         this.menu.menuOptions[0].setDimensions(this.currentCard.dimensions);
         this.currentCard.position.x = (CANVAS_WIDTH / 2) - (this.currentCard.dimensions.x / 2);
         this.currentCard.position.y = (CANVAS_HEIGHT / 2) - (this.currentCard.dimensions.y / 2);
+    }
+
+    /**
+     * Determines whether the user's gesture began on the middle / current card.
+     * @param {Object} gestureState The current state of the user's gesture.
+     * @returns {Boolean} True if the user's gesture began on the center / current card.
+     */
+    gestureOriginatedOnCurrentCard(gestureState) {
+        if (gestureState.isActive) {
+            const rawPointer = input.getPointerPosition();
+            const pointer = rawPointer ? renderer.getPointerPosition(rawPointer) : null;
+
+            if (pointer) {
+                const startX = pointer.x - gestureState.distanceX;
+                const startY = pointer.y - gestureState.distanceY;
+
+                const currentCardBounds = {
+                    x: this.currentCard.position.x,
+                    y: this.currentCard.position.y,
+                    width: this.currentCard.dimensions.x,
+                    height: this.currentCard.dimensions.y
+                };
+
+                const originatedOnCurrentCard =
+                    startX >= currentCardBounds.x &&
+                    startX <= currentCardBounds.x + currentCardBounds.width &&
+                    startY >= currentCardBounds.y &&
+                    startY <= currentCardBounds.y + currentCardBounds.height;
+
+                if (originatedOnCurrentCard) return true;
+                else return false;
+            }
+        }
+    }
+
+    /**
+     * Resets the gesture state if it was just released.
+     * @param {Object} gestureState The current state of the user's gesture.
+     * @returns True if the gesture was just released and reset.
+     */
+    gestureReset(gestureState) {
+        if (gestureState.justReleased) {
+            const MIN_VELOCITY = 500;
+            this.scrollingVelocity = Math.abs(gestureState.velocityX) > MIN_VELOCITY ? gestureState.velocityX : 0;
+            this.lastDragStep = 0;
+            this.scrollAccumulator = 0;
+            return true;
+        } else return false;
+    }
+
+    /**
+     * Scrolls multiple for a short time after lifting pointer based on the gesture velocity.
+     * @param {Number} cardSpacing The width of the small cards used to change index.
+     * @param {Number} dt Delta time, or the time passed since the last frame.
+     * @returns True if inertial scrolling has been processed.
+     */
+    handleIntertialScroll(cardSpacing, dt) {
+        if (this.scrollingVelocity !== 0) {
+            const velocityStep = (this.scrollingVelocity * dt) / cardSpacing;
+            this.scrollAccumulator += velocityStep;
+
+            const stepCount = Math.trunc(this.scrollAccumulator);
+            if (stepCount !== 0) {
+                const nextIndex = (this.index - stepCount + cardData.length) % cardData.length;
+                this.updateCards(nextIndex);
+                this.scrollAccumulator -= stepCount;
+            }
+
+            const decayRate = 5000;
+            const velocityDelta = Math.sign(this.scrollingVelocity) * Math.min(Math.abs(this.scrollingVelocity), decayRate * dt);
+            this.scrollingVelocity -= velocityDelta;
+            
+            const minVelocity = 200;
+            if (Math.abs(this.scrollingVelocity) < minVelocity) {
+                this.scrollingVelocity = 0;
+            }
+
+            return true;
+        } else return false;
+    }
+
+    /**
+     * Scrolls individual cards left and right based on where the pointer drags from the gesture state.
+     * @param {Object} gestureState The current state of the user's gesture.
+     * @param {Number} absX The absolute X distance travelled by the gesture from its origin.
+     * @param {Number} absY The absolute Y distance travalled by the gesture from its origin.
+     */
+    handleDrag(gestureState, absX, absY, cardSpacing) {
+        if (gestureState.isDragging && absX > absY) {
+            const currentStep = Math.round(gestureState.distanceX / cardSpacing);
+            const delta = currentStep - this.lastDragStep;
+
+            if (delta !== 0) {
+                const nextIndex = (this.index - delta + cardData.length) % cardData.length;
+                this.updateCards(nextIndex);
+                this.lastDragStep = currentStep;
+            }
+        }
     }
 }

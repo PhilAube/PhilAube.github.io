@@ -65,6 +65,8 @@ export default class TapHandler extends InputHandler {
         if (event.touches.length === 0) return;
 
         const touch = event.touches[0];
+        if (!this.pointerIsInsideCanvas(touch)) return;
+
         this.touchPosition.set(touch.clientX, touch.clientY);
 
         const current = this.touchStates[TAP] ?? TAPSTATE.Up;
