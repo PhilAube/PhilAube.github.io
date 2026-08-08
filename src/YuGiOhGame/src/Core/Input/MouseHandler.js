@@ -22,7 +22,7 @@ export default class MouseHandler extends InputHandler {
      * Also updates mouse button up states to null states.
      * Ensures mouse button down/up state are only present for one frame.
      */
-    update() {
+    update(dt) {
         for (const key of Object.keys(this.mouseStates)) {
             if (this.mouseStates[key] === CLICKSTATE.Down) {
                 this.mouseStates[key] = CLICKSTATE.Hold;
@@ -30,6 +30,8 @@ export default class MouseHandler extends InputHandler {
                 this.mouseStates[key] = null;
             }
         }
+
+        this.decayGestureVelocity(dt);
     }
 
     /** Adds event listeners for mouse input. */
@@ -63,6 +65,11 @@ export default class MouseHandler extends InputHandler {
      */
     mouseMoveHandler(event) {
         this.cursorPosition.set(event.clientX, event.clientY);
+
+        if (this.gestureState.isActive) {
+            this.updateGesture(event.clientX, event.clientY, Date.now());
+        }
+
         if (this.pointerIsInsideCanvas(event)) input.currentInput = InputTypes.Mouse;
     }
 
@@ -78,7 +85,7 @@ export default class MouseHandler extends InputHandler {
 
         if (current === CLICKSTATE.Up) { 
             this.mouseStates[LEFTCLICK] = CLICKSTATE.Down;
-            console.log("Mouse down (left)");
+            this.beginGesture(event.clientX, event.clientY, Date.now());
         }
     }
 
@@ -91,7 +98,7 @@ export default class MouseHandler extends InputHandler {
         if (event.button !== 0) return;
 
         this.mouseStates[LEFTCLICK] = CLICKSTATE.Up;
-        console.log("Mouse up (left)");
+        this.finishGesture(this.cursorPosition.x, this.cursorPosition.y);
     }
 
     /** Maps the mouse inputs to standardized action states parsable by the InputManager. */

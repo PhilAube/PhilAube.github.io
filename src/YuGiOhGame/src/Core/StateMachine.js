@@ -9,8 +9,9 @@ export default class StateMachine {
 
     /** Updates the input and the current state. */
     update(dt) {
-        input.update();
+        input.update(dt);
 		this.currentState.update(dt);
+        input.clearGestureReleaseFlags();
 	}
 
     /** Renders the current state. */

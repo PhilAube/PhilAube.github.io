@@ -20,7 +20,7 @@ export default class TapHandler extends InputHandler {
      * Also updates touch up states to null states.
      * Ensures touch down/up state are only present for one frame.
      */
-    update() {
+    update(dt) {
         for (const key of Object.keys(this.touchStates)) {
             if (this.touchStates[key] === TAPSTATE.Down) {
                 this.touchStates[key] = TAPSTATE.Hold;
@@ -28,6 +28,8 @@ export default class TapHandler extends InputHandler {
                 this.touchStates[key] = null;
             }
         }
+
+        this.decayGestureVelocity(dt);
     }
 
     /** Adds event listeners for touch input. */
@@ -69,7 +71,7 @@ export default class TapHandler extends InputHandler {
 
         if (current === TAPSTATE.Up) {
             this.touchStates[TAP] = TAPSTATE.Down;
-            console.log("Touch down (tap)");
+            this.beginGesture(touch.clientX, touch.clientY, Date.now());
         }
     }
 
@@ -79,7 +81,7 @@ export default class TapHandler extends InputHandler {
      */
     touchEndHandler(event) {
         this.touchStates[TAP] = TAPSTATE.Up;
-        console.log("Touch up (tap)");
+        this.finishGesture(this.touchPosition.x, this.touchPosition.y);
     }
 
     /**
@@ -90,7 +92,9 @@ export default class TapHandler extends InputHandler {
         if (event.touches.length === 0) return;
 
         const touch = event.touches[0];
+
         this.touchPosition.set(touch.clientX, touch.clientY);
+        this.updateGesture(touch.clientX, touch.clientY, Date.now());
     }
 
     /** Maps the touch inputs to standardized action states parsable by the InputManager. */

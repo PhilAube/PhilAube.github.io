@@ -26,7 +26,7 @@ export default class InputManager {
     }
 
     /** Updates the action states based on input. */
-    update() {
+    update(dt) {
         this.actionStates = {};
 
         for (const { type, handler } of this.handlers) {
@@ -40,7 +40,16 @@ export default class InputManager {
             }
 
             // Update the input handler once everything else has been processed.
-            handler.update();
+            handler.update(dt);
+        }
+    }
+
+    /** Clears one-frame release flags after the active state has consumed them. */
+    clearGestureReleaseFlags() {
+        for (const { handler } of this.handlers) {
+            if (handler.getGestureState()) {
+                handler.getGestureState().justReleased = false;
+            }
         }
     }
 
@@ -59,6 +68,16 @@ export default class InputManager {
     getPointerPosition() {
         if (this.currentInput === InputTypes.Mouse) return this.mouse.getCursorPosition();
         else if (this.currentInput === InputTypes.Tap) return this.tap.getTouchPosition();
+        else return null;
+    }
+
+    /**
+     * Gets the current pointer gesture state from the active input handler.
+     * @returns {Object|null} Gesture information for drag/swipe logic.
+     */
+    getPointerGestureState() {
+        if (this.currentInput === InputTypes.Mouse) return this.mouse.getGestureState();
+        else if (this.currentInput === InputTypes.Tap) return this.tap.getGestureState();
         else return null;
     }
 }
